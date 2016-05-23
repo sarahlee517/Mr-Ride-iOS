@@ -13,6 +13,7 @@
 		2673869A1CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 267386981CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld */; };
 		2673869C1CF2C8D9000D53E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2673869B1CF2C8D9000D53E3 /* Assets.xcassets */; };
 		2673869F1CF2C8D9000D53E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2673869D1CF2C8D9000D53E3 /* LaunchScreen.storyboard */; };
+		267386A71CF2D18B000D53E3 /* Utilities in Resources */ = {isa = PBXBuildFile; fileRef = 267386A61CF2D18B000D53E3 /* Utilities */; };
 		26C5F787599AB326EB65A70C /* Pods_Mr_Ride.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8A82676C4E43B58C08284D /* Pods_Mr_Ride.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		2673869B1CF2C8D9000D53E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2673869E1CF2C8D9000D53E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		267386A01CF2C8D9000D53E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		267386A61CF2D18B000D53E3 /* Utilities */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Utilities; sourceTree = "<group>"; };
 		7E5AF3C427FCBD3F5E8A5DD6 /* Pods-Mr Ride.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mr Ride.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mr Ride/Pods-Mr Ride.debug.xcconfig"; sourceTree = "<group>"; };
 		90E2BFEAFCF53D325FD4BE7F /* Pods-Mr Ride.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mr Ride.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mr Ride/Pods-Mr Ride.release.xcconfig"; sourceTree = "<group>"; };
 		CD8A82676C4E43B58C08284D /* Pods_Mr_Ride.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mr_Ride.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +68,7 @@
 				267386911CF2C8D9000D53E3 /* AppDelegate.swift */,
 				267386931CF2C8D9000D53E3 /* ViewController.swift */,
 				267386951CF2C8D9000D53E3 /* Main.storyboard */,
+				267386A61CF2D18B000D53E3 /* Utilities */,
 				2673869B1CF2C8D9000D53E3 /* Assets.xcassets */,
 				2673869D1CF2C8D9000D53E3 /* LaunchScreen.storyboard */,
 				267386A01CF2C8D9000D53E3 /* Info.plist */,
@@ -154,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2673869F1CF2C8D9000D53E3 /* LaunchScreen.storyboard in Resources */,
+				267386A71CF2D18B000D53E3 /* Utilities in Resources */,
 				2673869C1CF2C8D9000D53E3 /* Assets.xcassets in Resources */,
 				267386971CF2C8D9000D53E3 /* Main.storyboard in Resources */,
 			);
