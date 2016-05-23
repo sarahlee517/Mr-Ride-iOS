@@ -8,15 +8,43 @@
 
 import UIKit
 import CoreData
+import MMDrawerController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var homePageContainer: MMDrawerController?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+//        var rootViewController = self.window!.rootViewController
+        
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let homePageViewController = mainStoryboard.instantiateViewControllerWithIdentifier("HomePageViewController")
+        
+        let sideBarPageViewController = mainStoryboard.instantiateViewControllerWithIdentifier("SideBarViewController")
+        
+        let homePageNav = UINavigationController(rootViewController: homePageViewController)
+        let sideBarNav = UINavigationController(rootViewController: sideBarPageViewController)
+        
+//        homePageNav.navigationBar.translucent = true
+//        homePageNav.navigationBar.barTintColor = UIColor.clearColor()
+        
+        
+        // create instance of MMDrawerController
+        homePageContainer = MMDrawerController(centerViewController: homePageNav, leftDrawerViewController: sideBarNav)
+        
+        homePageContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView
+        homePageContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView
+        
+        window!.rootViewController = homePageContainer
+        window!.makeKeyAndVisible()
+        
         return true
     }
 

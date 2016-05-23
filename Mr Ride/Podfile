@@ -6,5 +6,6 @@ target 'Mr Ride' do
   use_frameworks!
 
   # Pods for Mr Ride
+  pod 'MMDrawerController', '~> 0.6'
 
 end
