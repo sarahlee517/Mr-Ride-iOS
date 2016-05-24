@@ -9,22 +9,23 @@
 import UIKit
 import MMDrawerController
 
-struct Common {
-    
-    static let screenWidth = UIScreen.mainScreen().bounds.maxX
-    
-}
 
 class SideBarViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
     private var tableView: UITableView!
+
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setTableView()
         setupNavigationBar()
+    
     }
+    
+    
     
     func setTableView(){
         tableView = UITableView(frame: CGRectMake(0, 40, Common.screenWidth * 0.7, view.frame.height), style: UITableViewStyle.Plain)
@@ -51,29 +52,60 @@ class SideBarViewController: UIViewController,UITableViewDelegate, UITableViewDa
         return 50
     }
     
+
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let identifier = "cell"
         var cell = tableView.dequeueReusableCellWithIdentifier(identifier)
         
+        
         if cell == nil {
-            cell=UITableViewCell(style: .Value1, reuseIdentifier: identifier)
-            cell!.accessoryType = UITableViewCellAccessoryType.None
-            cell!.selectionStyle = .None
+            cell = UITableViewCell(style: .Value1, reuseIdentifier: identifier)
+            cell?.accessoryType = UITableViewCellAccessoryType.None
+            cell?.selectionStyle = .None
         }
         if indexPath.row == 0{
-            cell!.imageView!.image = UIImage(named: "Done")
-            cell!.textLabel?.text = "Home"
+            
+            cell?.backgroundColor = UIColor.clearColor()
+            cell?.imageView!.image = UIImage(named: "circle.png")
+//            cell?.imageView!.hidden = true
+            cell?.textLabel?.text = "Home"
+            cell?.textLabel?.textColor = UIColor.whiteColor()
+            cell?.textLabel?.font = UIFont.mrSFUITextMediumFont(24)
+
         }
         else{
-            cell!.imageView!.image = UIImage(named: "Done")
-            cell!.textLabel?.text = "History"
+            cell?.backgroundColor = UIColor.clearColor()
+            cell?.imageView!.image = UIImage(named: "circle.png")
+            cell?.imageView!.hidden = true
+            cell?.textLabel?.text = "History"
+            cell?.textLabel?.textColor = UIColor.mrWhite50Color()
+            cell?.textLabel?.font = UIFont.mrSFUITextMediumFont(24)
         }
         return cell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+
         
+        if let oldIndex = tableView.indexPathForSelectedRow {
+            tableView.cellForRowAtIndexPath(oldIndex)?.imageView?.hidden = true
+            tableView.cellForRowAtIndexPath(oldIndex)?.textLabel?.textColor = UIColor.mrWhite50Color()
+        }
+        
+
+        tableView.cellForRowAtIndexPath(indexPath)?.imageView?.hidden = false
+        tableView.cellForRowAtIndexPath(indexPath)?.textLabel?.textColor = UIColor.whiteColor()
+        
+        
+        
+        
+        return indexPath
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+   
         switch(indexPath.row){
             
         case 0:

@@ -19,6 +19,7 @@
 		2611F1C01CF322A30027EB70 /* RobotoMono-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2611F1B51CF322A30027EB70 /* RobotoMono-Thin.ttf */; };
 		2611F1C11CF322A30027EB70 /* RobotoMono-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2611F1B61CF322A30027EB70 /* RobotoMono-ThinItalic.ttf */; };
 		2611F1C31CF329810027EB70 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2611F1C21CF329810027EB70 /* HistoryViewController.swift */; };
+		2611F1C51CF4330E0027EB70 /* TrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2611F1C41CF4330E0027EB70 /* TrackingViewController.swift */; };
 		267386921CF2C8D9000D53E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267386911CF2C8D9000D53E3 /* AppDelegate.swift */; };
 		267386971CF2C8D9000D53E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 267386951CF2C8D9000D53E3 /* Main.storyboard */; };
 		2673869A1CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 267386981CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld */; };
@@ -44,6 +45,7 @@
 		2611F1B51CF322A30027EB70 /* RobotoMono-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Thin.ttf"; sourceTree = "<group>"; };
 		2611F1B61CF322A30027EB70 /* RobotoMono-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-ThinItalic.ttf"; sourceTree = "<group>"; };
 		2611F1C21CF329810027EB70 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		2611F1C41CF4330E0027EB70 /* TrackingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingViewController.swift; sourceTree = "<group>"; };
 		2673868E1CF2C8D9000D53E3 /* Mr Ride.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mr Ride.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		267386911CF2C8D9000D53E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		267386961CF2C8D9000D53E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		267386B41CF2FD66000D53E3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2611F1C41CF4330E0027EB70 /* TrackingViewController.swift */,
 				2611F1C21CF329810027EB70 /* HistoryViewController.swift */,
 				267386B51CF2FD66000D53E3 /* HomePageViewController.swift */,
 				267386B61CF2FD66000D53E3 /* SideBarViewController.swift */,
@@ -297,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2673869A1CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld in Sources */,
+				2611F1C51CF4330E0027EB70 /* TrackingViewController.swift in Sources */,
 				267386BD1CF30309000D53E3 /* UIFont+MRAdditions.swift in Sources */,
 				267386921CF2C8D9000D53E3 /* AppDelegate.swift in Sources */,
 				267386B71CF2FD66000D53E3 /* HomePageViewController.swift in Sources */,
