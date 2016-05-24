@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AhH-WJ-Ryn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="AhH-WJ-Ryn">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -10,8 +10,8 @@
             <objects>
                 <viewController storyboardIdentifier="HomePageViewController" id="BYZ-38-t0r" customClass="HomePageViewController" customModule="Mr_Ride" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="6hb-bg-PYx"/>
+                        <viewControllerLayoutGuide type="bottom" id="AXv-5t-P2v"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -30,15 +30,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1529.5" y="429.5"/>
+            <point key="canvasLocation" x="1044.5" y="406.5"/>
+        </scene>
+        <!--History View Controller-->
+        <scene sceneID="oSS-18-c8e">
+            <objects>
+                <viewController storyboardIdentifier="HistoryViewController" id="pkj-Ps-Ti4" customClass="HistoryViewController" customModule="Mr_Ride" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2Oi-5w-pvF"/>
+                        <viewControllerLayoutGuide type="bottom" id="ksV-bq-cMt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Lr1-F3-543">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.38823530080000002" green="0.84313726430000002" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="VrB-xw-QQ7"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5BH-ZY-KSj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1285.5" y="1192.5"/>
         </scene>
         <!--Side Bar View Controller-->
         <scene sceneID="8EL-Nh-aDO">
             <objects>
                 <viewController storyboardIdentifier="SideBarViewController" id="YXh-vs-2pO" customClass="SideBarViewController" customModule="Mr_Ride" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ww4-Ak-wpB"/>
-                        <viewControllerLayoutGuide type="bottom" id="emd-Lh-g6K"/>
+                        <viewControllerLayoutGuide type="top" id="CkL-tE-7Jt"/>
+                        <viewControllerLayoutGuide type="bottom" id="Pcl-uT-ZW9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lht-tE-qS4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -49,7 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1KI-VW-Ah2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1942.5" y="429.5"/>
+            <point key="canvasLocation" x="1481.5" y="406.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nLn-Vj-s2D">
@@ -68,7 +88,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tOR-XE-j3D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1071.5" y="429.5"/>
+            <point key="canvasLocation" x="571.4666666666667" y="406.59333333333331"/>
         </scene>
     </scenes>
     <resources>

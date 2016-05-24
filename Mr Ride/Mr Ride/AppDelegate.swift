@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var homePageContainer: MMDrawerController?
+    var homePageContainer: MMDrawerController!
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -32,15 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let homePageNav = UINavigationController(rootViewController: homePageViewController)
         let sideBarNav = UINavigationController(rootViewController: sideBarPageViewController)
         
-//        homePageNav.navigationBar.translucent = true
-//        homePageNav.navigationBar.barTintColor = UIColor.clearColor()
-        
-        
         // create instance of MMDrawerController
         homePageContainer = MMDrawerController(centerViewController: homePageNav, leftDrawerViewController: sideBarNav)
+        homePageContainer.maximumLeftDrawerWidth = Common.screenWidth * 0.70
         
-        homePageContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView
-        homePageContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView
+        homePageContainer.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
+        homePageContainer.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.All
         
         window!.rootViewController = homePageContainer
         window!.makeKeyAndVisible()

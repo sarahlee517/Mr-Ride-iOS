@@ -1,5 +1,5 @@
 //
-//  HomePageViewController.swift
+//  HistoryViewController.swift
 //  Mr Ride
 //
 //  Created by Sarah on 5/23/16.
@@ -9,40 +9,36 @@
 import UIKit
 import MMDrawerController
 
-class HomePageViewController: UIViewController {
+class HistoryViewController: UIViewController {
 
-    @IBAction func sideBarButtonDidClicked(sender: AnyObject) {
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.homePageContainer?.toggleDrawerSide(.Left, animated: true, completion: nil)
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.mm_drawerController.showsShadow = false
-        
         setupNavigationBar()
-
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
+    
     func setupNavigationBar(){
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon-menu.png"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.doneSlide))
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+        
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
-        
-        let logo = UIImage(named: "icon-bike.png")?.imageWithRenderingMode(.AlwaysTemplate)
-        let imageView = UIImageView(image:logo)
-        imageView.tintColor = UIColor.mrWhiteColor()
-        self.navigationItem.titleView = imageView
-        
     }
     
+    func doneSlide(){
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.homePageContainer.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+  
+    }
 
     /*
     // MARK: - Navigation

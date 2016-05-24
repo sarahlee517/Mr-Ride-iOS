@@ -7,29 +7,35 @@
 //
 
 import UIKit
+import MMDrawerController
 
-class SideBarViewController: UIViewController,UITableViewDelegate {
+struct Common {
+    
+    static let screenWidth = UIScreen.mainScreen().bounds.maxX
+    
+}
+
+class SideBarViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
     private var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigation()
-//        setTableView()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        setTableView()
+        setupNavigationBar()
     }
     
     func setTableView(){
-//        tableView = UITableView(frame: CGRectMake(100, 0, Common.screenWidth * 0.7, view.frame.height), style: UITableViewStyle.Plain)
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-//        view.addSubview(tableView)
-//        self.tableView.tableFooterView = UIView()
+        tableView = UITableView(frame: CGRectMake(0, 40, Common.screenWidth * 0.7, view.frame.height), style: UITableViewStyle.Plain)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.backgroundColor = UIColor.clearColor()
+        view.addSubview(tableView)
+        
+        self.tableView.tableFooterView = UIView()
+        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -45,10 +51,64 @@ class SideBarViewController: UIViewController,UITableViewDelegate {
         return 50
     }
     
-    func setupNavigation(){
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let identifier = "cell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(identifier)
+        
+        if cell == nil {
+            cell=UITableViewCell(style: .Value1, reuseIdentifier: identifier)
+            cell!.accessoryType = UITableViewCellAccessoryType.None
+            cell!.selectionStyle = .None
+        }
+        if indexPath.row == 0{
+            cell!.imageView!.image = UIImage(named: "Done")
+            cell!.textLabel?.text = "Home"
+        }
+        else{
+            cell!.imageView!.image = UIImage(named: "Done")
+            cell!.textLabel?.text = "History"
+        }
+        return cell!
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        switch(indexPath.row){
+            
+        case 0:
+            
+            let homePageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HomePageViewController") as! HomePageViewController
+            
+            let homePageViewNavController = UINavigationController(rootViewController: homePageViewController)
+            
+            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            appDelegate.homePageContainer.centerViewController = homePageViewNavController
+            appDelegate.homePageContainer.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+            
+            
+        default:
+            
+            let historyViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HistoryViewController") as! HistoryViewController
+            
+            let historyViewNavController = UINavigationController(rootViewController: historyViewController)
+            
+            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            appDelegate.homePageContainer.centerViewController = historyViewNavController
+            appDelegate.homePageContainer.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+        }
+    }
+    
+    
+    func setupNavigationBar(){
+        
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
+        
     }
 
     /*
