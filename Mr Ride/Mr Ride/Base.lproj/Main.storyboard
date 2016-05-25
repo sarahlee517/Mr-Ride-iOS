@@ -89,7 +89,7 @@
                                     <color key="titleColor" red="0.38823530080000002" green="0.84313726430000002" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="letsRideButtonDidClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Eag-Ea-Nsb"/>
+                                    <segue destination="bvh-uf-DAk" kind="push" id="TIn-ll-rQb"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -177,6 +177,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.98431372640000003" green="0.77254903320000001" blue="0.43529412150000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="wNV-fm-Wth"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RAH-pO-lml" userLabel="First Responder" sceneMemberID="firstResponder"/>

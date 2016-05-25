@@ -23,6 +23,8 @@ class HomePageViewController: UIViewController {
         
     }
     @IBAction func letsRideButtonDidClicked(sender: AnyObject) {
+        
+
     }
     
     override func viewDidLoad() {
