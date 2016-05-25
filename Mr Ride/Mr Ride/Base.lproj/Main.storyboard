@@ -85,13 +85,19 @@
                                     <constraint firstAttribute="width" constant="224" id="Icn-7x-Tsm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
-                                <state key="normal" title="Let's Ride">
+                                <state key="normal">
                                     <color key="titleColor" red="0.38823530080000002" green="0.84313726430000002" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="bvh-uf-DAk" kind="push" id="TIn-ll-rQb"/>
+                                    <action selector="letsRideButtonDidClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CJO-am-G9N"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5Q-BF-vzK">
+                                <rect key="frame" x="167" y="549" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.38823530077934265" green="0.84313726425170898" blue="0.96470588445663452" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
@@ -106,12 +112,14 @@
                             <constraint firstItem="noU-r7-kai" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="37" id="PYT-8R-Ze8"/>
                             <constraint firstItem="dpB-3t-aNa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="37" id="REp-hX-uMa"/>
                             <constraint firstAttribute="trailing" secondItem="noU-r7-kai" secondAttribute="trailing" constant="37" id="T1l-hc-pOS"/>
+                            <constraint firstItem="B5Q-BF-vzK" firstAttribute="centerY" secondItem="eYJ-Xo-AGN" secondAttribute="centerY" id="VQT-6o-0Gu"/>
                             <constraint firstAttribute="trailing" secondItem="iIe-KG-i2c" secondAttribute="trailing" constant="37" id="Wqh-ri-Zn1"/>
                             <constraint firstItem="eYJ-Xo-AGN" firstAttribute="top" secondItem="Vfk-ry-ZIU" secondAttribute="bottom" constant="51" id="Y79-i6-YgZ"/>
                             <constraint firstAttribute="trailing" secondItem="dpB-3t-aNa" secondAttribute="trailing" constant="37" id="YBT-vk-Ml2"/>
                             <constraint firstAttribute="trailing" secondItem="yMk-0B-BGD" secondAttribute="trailing" constant="37" id="Ymj-SP-Xhq"/>
                             <constraint firstItem="eYJ-Xo-AGN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZZo-DW-t11"/>
                             <constraint firstItem="dpB-3t-aNa" firstAttribute="top" secondItem="noU-r7-kai" secondAttribute="bottom" constant="15" id="cAN-Jw-qJP"/>
+                            <constraint firstItem="B5Q-BF-vzK" firstAttribute="centerX" secondItem="eYJ-Xo-AGN" secondAttribute="centerX" id="dpH-do-nLV"/>
                             <constraint firstAttribute="trailing" secondItem="Vfk-ry-ZIU" secondAttribute="trailing" constant="37" id="dxV-df-cqW"/>
                             <constraint firstItem="Vfk-ry-ZIU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="37" id="sap-fY-PdM"/>
                             <constraint firstItem="noU-r7-kai" firstAttribute="top" secondItem="yMk-0B-BGD" secondAttribute="bottom" id="vnS-Ms-1mB"/>
@@ -127,6 +135,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="letsRideButton" destination="eYJ-Xo-AGN" id="xKL-TY-gPS"/>
+                        <outlet property="letsRideLabel" destination="B5Q-BF-vzK" id="zFA-Bj-KnC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -162,7 +174,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BH-ZY-KSj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="570.5" y="1142.5"/>
+            <point key="canvasLocation" x="1043.5" y="1886.5"/>
         </scene>
         <!--Tracking View Controller-->
         <scene sceneID="EA8-4A-byK">
@@ -177,31 +189,67 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.98431372640000003" green="0.77254903320000001" blue="0.43529412150000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="wNV-fm-Wth"/>
+                    <navigationItem key="navigationItem" id="wNV-fm-Wth">
+                        <barButtonItem key="rightBarButtonItem" title="r" id="mVG-Db-lv4">
+                            <connections>
+                                <segue destination="Tcl-Cr-maF" kind="push" id="fpb-2A-WWl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RAH-pO-lml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1044.5" y="1142.5"/>
+            <point key="canvasLocation" x="1450.5" y="1142.5"/>
+        </scene>
+        <!--Statistic View Controller-->
+        <scene sceneID="xvv-DJ-8ab">
+            <objects>
+                <viewController storyboardIdentifier="StatisticViewController" id="Tcl-Cr-maF" customClass="StatisticViewController" customModule="Mr_Ride" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="guv-1g-AtK"/>
+                        <viewControllerLayoutGuide type="bottom" id="evs-v2-VLu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SrE-hG-gsy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.78823530673980713" green="0.10980392247438431" blue="0.73333334922790527" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="T6c-S0-kjy"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vGF-na-2tL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1849.5" y="1141.5"/>
         </scene>
         <!--Side Bar View Controller-->
-        <scene sceneID="8EL-Nh-aDO">
+        <scene sceneID="sdN-e4-gPO">
             <objects>
-                <viewController storyboardIdentifier="SideBarViewController" id="YXh-vs-2pO" customClass="SideBarViewController" customModule="Mr_Ride" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="CkL-tE-7Jt"/>
-                        <viewControllerLayoutGuide type="bottom" id="Pcl-uT-ZW9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lht-tE-qS4">
+                <tableViewController storyboardIdentifier="SideBarViewController" id="BNV-HE-lMy" customClass="SideBarViewController" customModule="Mr_Ride" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="SBh-Ca-Qfl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.054901961237192154" green="0.20784313976764679" blue="0.25098040699958801" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="EQh-h1-1gc">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EQh-h1-1gc" id="lno-PZ-Jwn">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="BNV-HE-lMy" id="dQx-NN-HQA"/>
+                            <outlet property="delegate" destination="BNV-HE-lMy" id="JLD-Ou-52x"/>
+                        </connections>
+                    </tableView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1KI-VW-Ah2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p12-b9-KPE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1462.5" y="406.5"/>
+            <point key="canvasLocation" x="1450.5" y="406.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nLn-Vj-s2D">
@@ -221,6 +269,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tOR-XE-j3D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="571.4666666666667" y="406.59333333333331"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LDn-D1-UnH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gxj-mQ-L0A" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VBe-B5-rpZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bvh-uf-DAk" kind="relationship" relationship="rootViewController" id="Gdu-ZQ-Vmt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mqd-j2-BVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1044" y="1142"/>
         </scene>
     </scenes>
     <resources>

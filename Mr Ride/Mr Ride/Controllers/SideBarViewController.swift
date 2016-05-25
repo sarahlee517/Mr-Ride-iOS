@@ -10,105 +10,97 @@ import UIKit
 import MMDrawerController
 
 
-class SideBarViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class SideBarViewController: UITableViewController {
 
-    private var tableView: UITableView!
+    private var selectedRow: NSIndexPath = NSIndexPath(forRow: 1, inSection: 0)
 
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("view.frame: \(view.frame)")
         setTableView()
-        setupNavigationBar()
     
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        print("tableView.view 2: \(tableView.frame)")
+    }
     
     
     func setTableView(){
-        tableView = UITableView(frame: CGRectMake(0, 40, Common.screenWidth * 0.7, view.frame.height), style: UITableViewStyle.Plain)
-        tableView.delegate = self
-        tableView.dataSource = self
+
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        tableView.backgroundColor = UIColor.clearColor()
-        view.addSubview(tableView)
+        tableView.backgroundColor = UIColor.mrDarkSlateBlueColor()
+
         
-        self.tableView.tableFooterView = UIView()
+        print("tableView.view: \(tableView.frame)")
         
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        return 50
+        switch indexPath.row {
+        case 0: return 100.0
+        default: return 50.0
+        }
+        
     }
     
 
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let identifier = "cell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(identifier)
+        let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
         
-        
-        if cell == nil {
-            cell = UITableViewCell(style: .Value1, reuseIdentifier: identifier)
-            cell?.accessoryType = UITableViewCellAccessoryType.None
-            cell?.selectionStyle = .None
-        }
-        if indexPath.row == 0{
+        cell.selectionStyle = .None
+        cell.backgroundColor = UIColor.clearColor()
+        cell.imageView!.image = UIImage(named: "circle.png")
+        cell.imageView!.hidden = true
+        cell.textLabel?.textColor = UIColor.mrWhite50Color()
+        cell.textLabel?.font = UIFont.mrSFUITextMediumFont(24)
+       
+        switch indexPath.row {
+        case 0: break
             
-            cell?.backgroundColor = UIColor.clearColor()
-            cell?.imageView!.image = UIImage(named: "circle.png")
-//            cell?.imageView!.hidden = true
-            cell?.textLabel?.text = "Home"
-            cell?.textLabel?.textColor = UIColor.whiteColor()
-            cell?.textLabel?.font = UIFont.mrSFUITextMediumFont(24)
-
+        case 1: cell.textLabel?.text = "Home"
+            
+        default: cell.textLabel?.text = "History"
         }
-        else{
-            cell?.backgroundColor = UIColor.clearColor()
-            cell?.imageView!.image = UIImage(named: "circle.png")
-            cell?.imageView!.hidden = true
-            cell?.textLabel?.text = "History"
-            cell?.textLabel?.textColor = UIColor.mrWhite50Color()
-            cell?.textLabel?.font = UIFont.mrSFUITextMediumFont(24)
+        
+        if selectedRow != indexPath{
+            cell.imageView?.hidden = true
+            cell.textLabel?.textColor = UIColor.mrWhite50Color()
+  
+        }else if selectedRow.row != 0{
+            cell.imageView?.hidden = false
+            cell.textLabel?.textColor = UIColor.whiteColor()
+            
         }
-        return cell!
+        
+        return cell
     }
     
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-
-        
-        if let oldIndex = tableView.indexPathForSelectedRow {
-            tableView.cellForRowAtIndexPath(oldIndex)?.imageView?.hidden = true
-            tableView.cellForRowAtIndexPath(oldIndex)?.textLabel?.textColor = UIColor.mrWhite50Color()
-        }
-        
-
-        tableView.cellForRowAtIndexPath(indexPath)?.imageView?.hidden = false
-        tableView.cellForRowAtIndexPath(indexPath)?.textLabel?.textColor = UIColor.whiteColor()
-        
-        
-        
-        
-        return indexPath
-    }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        selectedRow = indexPath
    
         switch(indexPath.row){
             
         case 0:
+            break
+ 
+        case 1:
             
             let homePageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HomePageViewController") as! HomePageViewController
             
@@ -118,7 +110,6 @@ class SideBarViewController: UIViewController,UITableViewDelegate, UITableViewDa
             
             appDelegate.homePageContainer.centerViewController = homePageViewNavController
             appDelegate.homePageContainer.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
-            
             
         default:
             
@@ -131,26 +122,9 @@ class SideBarViewController: UIViewController,UITableViewDelegate, UITableViewDa
             appDelegate.homePageContainer.centerViewController = historyViewNavController
             appDelegate.homePageContainer.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
         }
+        
+        tableView.reloadData()
     }
     
-    
-    func setupNavigationBar(){
-        
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.translucent = true
-        
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

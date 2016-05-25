@@ -24,20 +24,32 @@ class TrackingViewController: UIViewController {
     
     func setupNavigationBar(){
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cencel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.clickedCancel))
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Finish", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.clickedFinish))
+        
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+//        self.navigationItem.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
+        self.navigationController?.navigationBar.translucent = false
+        
+        
+        //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        //        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.translucent = true
     }
     
     func clickedCancel(){
         
-       //data here
-        navigationController?.popViewControllerAnimated(true)
-//        self.navigationController!.pushViewController(trackingViewController, animated: true)
+        //navigationController?.popToRootViewControllerAnimated(true)
+        self.dismissViewControllerAnimated(true, completion: nil)
         
+    }
+    
+    func clickedFinish(){
+        let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
+
+        self.navigationController?.pushViewController(statisticViewController, animated: true)
     }
     
 

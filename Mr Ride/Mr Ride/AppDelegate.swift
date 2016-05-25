@@ -28,12 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let homePageViewController = mainStoryboard.instantiateViewControllerWithIdentifier("HomePageViewController")
         
         let sideBarPageViewController = mainStoryboard.instantiateViewControllerWithIdentifier("SideBarViewController")
-        
+
         let homePageNav = UINavigationController(rootViewController: homePageViewController)
-        let sideBarNav = UINavigationController(rootViewController: sideBarPageViewController)
-        
+//        let sideBarNav = UINavigationController(rootViewController: sideBarPageViewController)
+//        sideBarNav.navigationBar.translucent = false
         // create instance of MMDrawerController
-        homePageContainer = MMDrawerController(centerViewController: homePageNav, leftDrawerViewController: sideBarNav)
+        homePageContainer = MMDrawerController(centerViewController: homePageNav, leftDrawerViewController: sideBarPageViewController)
         homePageContainer.maximumLeftDrawerWidth = Common.screenWidth * 0.70
         
         homePageContainer.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
