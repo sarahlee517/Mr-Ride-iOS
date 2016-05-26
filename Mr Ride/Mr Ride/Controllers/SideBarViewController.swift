@@ -16,15 +16,12 @@ class SideBarViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("view.frame: \(view.frame)")
         setTableView()
     
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        print("tableView.view 2: \(tableView.frame)")
     }
     
     
