@@ -7,12 +7,22 @@
 //
 
 import UIKit
+//import MapKit
 
 class TrackingViewController: UIViewController {
+    @IBAction func recordButtonDidClicked(sender: AnyObject) {
+
+
+        
+        
+    }
+    @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var buttonRingView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        setupRecordButton()
         // Do any additional setup after loading the view.
     }
 
@@ -23,12 +33,11 @@ class TrackingViewController: UIViewController {
     
     
     func setupNavigationBar(){
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cencel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.clickedCancel))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.clickedCancel))
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Finish", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.clickedFinish))
         
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-//        self.navigationItem.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
         self.navigationController?.navigationBar.translucent = false
@@ -48,10 +57,21 @@ class TrackingViewController: UIViewController {
     
     func clickedFinish(){
         let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
-
+        statisticViewController.setupNavigationBar(Mode.closeMode)
         self.navigationController?.pushViewController(statisticViewController, animated: true)
     }
     
+    
+    func setupRecordButton(){
+        recordButton.layer.cornerRadius = recordButton.frame.width / 2
+        buttonRingView.backgroundColor = UIColor.clearColor()
+        buttonRingView.layer.cornerRadius = buttonRingView.frame.width / 2
+        buttonRingView.layer.borderWidth = 4
+        buttonRingView.layer.borderColor = UIColor.whiteColor().CGColor
+        
+    }
+    
+
 
     
 

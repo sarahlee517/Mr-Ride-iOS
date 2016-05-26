@@ -10,6 +10,12 @@ import UIKit
 import MMDrawerController
 
 class HistoryViewController: UIViewController {
+    @IBAction func test(sender: AnyObject) {
+        let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
+        statisticViewController.setupNavigationBar(.backMode)
+        self.navigationController?.pushViewController(statisticViewController, animated: true)
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

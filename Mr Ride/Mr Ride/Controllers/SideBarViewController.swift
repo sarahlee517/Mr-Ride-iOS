@@ -73,8 +73,9 @@ class SideBarViewController: UITableViewController {
         case 0: break
             
         case 1: cell.textLabel?.text = "Home"
-            
+           
         default: cell.textLabel?.text = "History"
+      
         }
         
         if selectedRow != indexPath{

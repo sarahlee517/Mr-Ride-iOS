@@ -7,12 +7,18 @@
 //
 
 import UIKit
+enum Mode{
+    case closeMode
+    case backMode
+}
 
 class StatisticViewController: UIViewController {
 
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
+        
         // Do any additional setup after loading the view.
     }
 
@@ -21,11 +27,17 @@ class StatisticViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setupNavigationBar(){
+    func setupNavigationBar(selectedMode:Mode){
         
-        self.navigationItem.hidesBackButton = true
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.clickedClose))
-        
+        switch selectedMode {
+        case .closeMode:
+            print("hello")
+            self.navigationItem.hidesBackButton = true
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.clickedClose))
+        case .backMode:
+            self.navigationItem.hidesBackButton = false
+            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        }
     }
     
     func clickedClose(){
