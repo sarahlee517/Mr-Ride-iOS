@@ -7,9 +7,11 @@
 //
 
 import UIKit
-//import MapKit
+import MapKit
 
 class TrackingViewController: UIViewController {
+    @IBOutlet weak var mapView: MKMapView!
+   
     @IBAction func recordButtonDidClicked(sender: AnyObject) {
 
 
@@ -23,6 +25,7 @@ class TrackingViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupRecordButton()
+        setupMapView()
         // Do any additional setup after loading the view.
     }
 
@@ -69,6 +72,10 @@ class TrackingViewController: UIViewController {
         buttonRingView.layer.borderWidth = 4
         buttonRingView.layer.borderColor = UIColor.whiteColor().CGColor
         
+    }
+    
+    func setupMapView(){
+        mapView.layer.cornerRadius = 10
     }
     
 
