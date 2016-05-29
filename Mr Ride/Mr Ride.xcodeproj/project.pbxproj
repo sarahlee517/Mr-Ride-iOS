@@ -22,6 +22,8 @@
 		2611F1C51CF4330E0027EB70 /* TrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2611F1C41CF4330E0027EB70 /* TrackingViewController.swift */; };
 		2611F1C71CF5940F0027EB70 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2611F1C61CF5940F0027EB70 /* StatisticViewController.swift */; };
 		2611F1CB1CF5CF4F0027EB70 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2611F1CA1CF5CF4F0027EB70 /* MapKit.framework */; };
+		2611F1CE1CF850D20027EB70 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2611F1CC1CF850D20027EB70 /* HistoryTableViewCell.swift */; };
+		2611F1CF1CF850D20027EB70 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2611F1CD1CF850D20027EB70 /* HistoryTableViewCell.xib */; };
 		267386921CF2C8D9000D53E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267386911CF2C8D9000D53E3 /* AppDelegate.swift */; };
 		267386971CF2C8D9000D53E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 267386951CF2C8D9000D53E3 /* Main.storyboard */; };
 		2673869A1CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 267386981CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld */; };
@@ -50,6 +52,8 @@
 		2611F1C41CF4330E0027EB70 /* TrackingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingViewController.swift; sourceTree = "<group>"; };
 		2611F1C61CF5940F0027EB70 /* StatisticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		2611F1CA1CF5CF4F0027EB70 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		2611F1CC1CF850D20027EB70 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HistoryTableViewCell.swift; path = ../HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		2611F1CD1CF850D20027EB70 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HistoryTableViewCell.xib; path = ../HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		2673868E1CF2C8D9000D53E3 /* Mr Ride.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mr Ride.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		267386911CF2C8D9000D53E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		267386961CF2C8D9000D53E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 		267386901CF2C8D9000D53E3 /* Mr Ride */ = {
 			isa = PBXGroup;
 			children = (
+				2611F1CC1CF850D20027EB70 /* HistoryTableViewCell.swift */,
+				2611F1CD1CF850D20027EB70 /* HistoryTableViewCell.xib */,
 				267386B31CF2EB9E000D53E3 /* Mr Ride-Bridging-Header.h */,
 				267386911CF2C8D9000D53E3 /* AppDelegate.swift */,
 				267386951CF2C8D9000D53E3 /* Main.storyboard */,
@@ -235,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2611F1BA1CF322A30027EB70 /* RobotoMono-Italic.ttf in Resources */,
+				2611F1CF1CF850D20027EB70 /* HistoryTableViewCell.xib in Resources */,
 				2611F1BE1CF322A30027EB70 /* RobotoMono-MediumItalic.ttf in Resources */,
 				2611F1B71CF322A30027EB70 /* LICENSE.txt in Resources */,
 				2611F1B91CF322A30027EB70 /* RobotoMono-BoldItalic.ttf in Resources */,
@@ -310,6 +317,7 @@
 				2611F1C51CF4330E0027EB70 /* TrackingViewController.swift in Sources */,
 				267386BD1CF30309000D53E3 /* UIFont+MRAdditions.swift in Sources */,
 				267386921CF2C8D9000D53E3 /* AppDelegate.swift in Sources */,
+				2611F1CE1CF850D20027EB70 /* HistoryTableViewCell.swift in Sources */,
 				267386B71CF2FD66000D53E3 /* HomePageViewController.swift in Sources */,
 				267386B81CF2FD66000D53E3 /* SideBarViewController.swift in Sources */,
 				2611F1C71CF5940F0027EB70 /* StatisticViewController.swift in Sources */,

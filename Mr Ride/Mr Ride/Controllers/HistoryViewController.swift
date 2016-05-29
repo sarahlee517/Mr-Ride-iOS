@@ -9,7 +9,14 @@
 import UIKit
 import MMDrawerController
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: UIViewController, UITableViewDelegate {
+    let gradientLayer = CAGradientLayer()
+    
+    @IBOutlet weak var gradientView: UIView!
+    
+    @IBOutlet var tableView: UIView!
+    
+    
     @IBAction func test(sender: AnyObject) {
         let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
         statisticViewController.setupNavigationBar(.backMode)
@@ -20,6 +27,9 @@ class HistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        setupGradientView()
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -27,11 +37,32 @@ class HistoryViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int){
     
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        return cell
+    }
+
+    
+    
+    func setupGradientView(){
+        
+        gradientLayer.frame = self.view.bounds
+        
+        let color1 = UIColor.mrLightblueColor().CGColor as CGColorRef
+        let color2 = UIColor.mrPineGreen50Color().CGColor as CGColorRef
+        
+        gradientLayer.colors = [color1, color2]
+        gradientLayer.locations = [0.0, 0.5]
+        self.gradientView.layer.addSublayer(gradientLayer)
+    }
     
     func setupNavigationBar(){
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon-menu.png"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.doneSlide))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+        
+        self.navigationController?.navigationBar.topItem?.title = "History"
         
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)

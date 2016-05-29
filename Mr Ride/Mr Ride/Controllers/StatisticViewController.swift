@@ -31,11 +31,8 @@ class StatisticViewController: UIViewController {
         
         switch selectedMode {
         case .closeMode:
-            print("hello")
-            self.navigationItem.hidesBackButton = true
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.clickedClose))
         case .backMode:
-            self.navigationItem.hidesBackButton = false
             self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         }
     }
