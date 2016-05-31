@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 enum Mode{
     case closeMode
     case backMode
@@ -55,3 +56,5 @@ class StatisticViewController: UIViewController {
     */
 
 }
+
+

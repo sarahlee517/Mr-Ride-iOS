@@ -7,34 +7,125 @@
 //
 
 import UIKit
+import CoreLocation
+import HealthKit
 import MapKit
 
-class TrackingViewController: UIViewController {
+class TrackingViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+    
+    @IBOutlet weak var gradient: UIView!
     @IBOutlet weak var mapView: MKMapView!
-   
-    @IBAction func recordButtonDidClicked(sender: AnyObject) {
-
-
-        
-        
-    }
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var buttonRingView: UIView!
-
+    @IBOutlet weak var recordTimeLabel: UILabel!
+    @IBAction func recordButtonDidClicked(sender: AnyObject) {
+        stopwatch()
+    }
+    
+    let locationManager = CLLocationManager()
+    let gradientLayer = CAGradientLayer()
+    var timer = NSTimer()
+    var hours = 0
+    var minutes = 0
+    var seconds = 0
+    var fractions = 0
+    var myLocations: [CLLocation] = []
+    
+    //MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupRecordButton()
         setupMapView()
-        // Do any additional setup after loading the view.
-    }
+        setupRecordLabel()
+        setupGradientView()
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        mapView.delegate = self
+        mapView.showsUserLocation = true
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        
+        myLocations.append(locations[0] as CLLocation)
+
+        let newRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
+        mapView.setRegion(newRegion, animated: true)
+        
+        if (myLocations.count > 1){
+            let sourceIndex = myLocations.count - 1
+            let destinationIndex = myLocations.count - 2
+            
+            let source = myLocations[sourceIndex].coordinate
+            let destination = myLocations[destinationIndex].coordinate
+            var route = [source, destination]
+            let polyline = MKPolyline(coordinates: &route, count: route.count)
+            mapView.addOverlay(polyline)
+        }
+    }
     
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+        renderer.strokeColor = UIColor.blueColor()
+        renderer.lineWidth = 3
+        return renderer
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError){
+        print("Errors: " + error.localizedDescription)
+    }
+    
+}
+
+//MARK: - Stopwatch
+extension TrackingViewController{
+    
+    func stopwatch(){
+        
+        if !timer.valid{
+            timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        }else{
+            timer.invalidate()
+        }
+    }
+    
+    @objc func updateTime(){
+        fractions += 1
+        
+        if fractions == 100{
+            seconds += 1
+            fractions = 0
+        }
+        
+        if seconds == 60{
+            minutes += 1
+            seconds = 0
+        }
+        
+        if minutes == 60{
+            hours += 1
+            minutes = 0
+        }
+        
+        let strHours = String(format: "%02d", hours)
+        let strMinutes = String(format: "%02d", minutes)
+        let strSeconds = String(format: "%02d", seconds)
+        let strFraction = String(format: "%02d", fractions)
+        
+        recordTimeLabel.text = "\(strHours):\(strMinutes):\(strSeconds).\(strFraction)"
+    }
+}
+
+
+//MARK: - Setup
+extension TrackingViewController{
+
     func setupNavigationBar(){
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.clickedCancel))
         
@@ -44,11 +135,6 @@ class TrackingViewController: UIViewController {
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
         self.navigationController?.navigationBar.translucent = false
-        
-        
-        //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        //        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.translucent = true
     }
     
     func clickedCancel(){
@@ -74,22 +160,32 @@ class TrackingViewController: UIViewController {
         
     }
     
+    func setupRecordLabel(){
+        recordTimeLabel.text = "00:00:00.00"
+        recordTimeLabel.textColor = UIColor.mrWhiteColor()
+        recordTimeLabel.font = UIFont.mrRobotoMonoLightFon(30)
+        
+    }
+    
     func setupMapView(){
         mapView.layer.cornerRadius = 10
     }
     
-
-
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func setupGradientView(){
+        
+        gradientLayer.frame = self.view.bounds
+        
+        let color1 = UIColor.mrBlack60Color().CGColor as CGColorRef
+        let color2 = UIColor.mrBlack40Color().CGColor as CGColorRef
+        
+        gradientLayer.colors = [color1, color2]
+        gradientLayer.locations = [0.0, 0.5]
+        self.gradient.layer.addSublayer(gradientLayer)
     }
-    */
 
 }
+
+
+
+
+

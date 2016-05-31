@@ -33,9 +33,13 @@ extension UIFont {
         return UIFont.systemFontOfSize(size, weight: UIFontWeightMedium)
     }
 
-    class func mrSFUITextBoldFon(size: CGFloat) -> UIFont {
+    class func mrSFUITextBoldFont(size: CGFloat) -> UIFont {
 		return UIFont.systemFontOfSize(size, weight: UIFontWeightBold)
 	}
+    
+    class func mrSFUITextLightFont(size: CGFloat) -> UIFont {
+        return UIFont.systemFontOfSize(size, weight: UIFontWeightLight)
+    }
     
 
     
