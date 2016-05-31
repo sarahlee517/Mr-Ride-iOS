@@ -13,23 +13,28 @@ import MapKit
 
 class TrackingViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
+    @IBOutlet weak var calBurnedLabel: UILabel!
+    @IBOutlet weak var mapView: UIView!
+    @IBOutlet weak var speedLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var gradient: UIView!
-    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var buttonRingView: UIView!
     @IBOutlet weak var recordTimeLabel: UILabel!
     @IBAction func recordButtonDidClicked(sender: AnyObject) {
+        mapViewController.myLocations.removeAll()
         stopwatch()
     }
     
-    let locationManager = CLLocationManager()
+    let calorieCalculator = CalorieCalculator()
     let gradientLayer = CAGradientLayer()
     var timer = NSTimer()
     var hours = 0
     var minutes = 0
     var seconds = 0
     var fractions = 0
-    var myLocations: [CLLocation] = []
+    var distance = 0.0
+    var timeForCal = 0.0
     
     //MARK: - View LifeCycle
     override func viewDidLoad() {
@@ -39,49 +44,25 @@ class TrackingViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         setupMapView()
         setupRecordLabel()
         setupGradientView()
-        
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        
-        mapView.delegate = self
-        mapView.showsUserLocation = true
-
-        
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        
-        myLocations.append(locations[0] as CLLocation)
-
-        let newRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
-        mapView.setRegion(newRegion, animated: true)
-        
-        if (myLocations.count > 1){
-            let sourceIndex = myLocations.count - 1
-            let destinationIndex = myLocations.count - 2
-            
-            let source = myLocations[sourceIndex].coordinate
-            let destination = myLocations[destinationIndex].coordinate
-            var route = [source, destination]
-            let polyline = MKPolyline(coordinates: &route, count: route.count)
-            mapView.addOverlay(polyline)
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer.invalidate()
+    }
+    
+    private var mapViewController: MapViewController!
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let mapView = segue.destinationViewController as? MapViewController where segue.identifier == "EmbedSegue"{
+            print("qa")
+            self.mapViewController = mapView
+            mapViewController.trackingViewController = self
         }
     }
     
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
-        renderer.strokeColor = UIColor.blueColor()
-        renderer.lineWidth = 3
-        return renderer
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError){
-        print("Errors: " + error.localizedDescription)
-    }
-    
 }
+
 
 //MARK: - Stopwatch
 extension TrackingViewController{
@@ -90,15 +71,20 @@ extension TrackingViewController{
         
         if !timer.valid{
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            mapViewController.locationManager.startUpdatingLocation()
         }else{
+            mapViewController.locationManager.stopUpdatingLocation()
             timer.invalidate()
         }
     }
     
-    @objc func updateTime(){
+    @objc func updateTime(timer: NSTimer){
+        
+        print(timeForCal)
         fractions += 1
         
         if fractions == 100{
+            timeForCal += 1
             seconds += 1
             fractions = 0
         }
@@ -119,6 +105,13 @@ extension TrackingViewController{
         let strFraction = String(format: "%02d", fractions)
         
         recordTimeLabel.text = "\(strHours):\(strMinutes):\(strSeconds).\(strFraction)"
+        
+        let averageSpeed = (mapViewController.distance/1000) / (timeForCal/360000)
+        
+        let kCalBurned = calorieCalculator.kiloCalorieBurned(.Bike, speed: averageSpeed, weight: 50.0, time: timeForCal/360000)
+        calBurnedLabel.text = String(format: "%.2f kcal", kCalBurned)
+        
+        
     }
 }
 

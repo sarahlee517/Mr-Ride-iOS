@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
-   <Group
-      location = "group:Mr Ride/Utilities"
-      name = "Utilities">
-      <FileRef
-         location = "group:UIColor+MRAdditions.swift">
-      </FileRef>
-      <FileRef
-         location = "group:UIFont+MRAdditions.swift">
-      </FileRef>
-   </Group>
    <FileRef
       location = "group:Mr Ride.xcodeproj">
    </FileRef>
