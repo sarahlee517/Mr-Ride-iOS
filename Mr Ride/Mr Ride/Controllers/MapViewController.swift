@@ -27,7 +27,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.activityType = .Fitness
-        locationManager.distanceFilter = 10.0
+//        locationManager.distanceFilter = 10.0
         
         
         mapView.delegate = self

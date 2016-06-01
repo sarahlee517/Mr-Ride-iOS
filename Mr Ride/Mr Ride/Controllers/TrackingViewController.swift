@@ -51,11 +51,15 @@ class TrackingViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         timer.invalidate()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        mapViewController.myLocations.removeAll()
+    }
+    
     private var mapViewController: MapViewController!
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let mapView = segue.destinationViewController as? MapViewController where segue.identifier == "EmbedSegue"{
-            print("qa")
             self.mapViewController = mapView
             mapViewController.trackingViewController = self
         }
@@ -79,8 +83,7 @@ extension TrackingViewController{
     }
     
     @objc func updateTime(timer: NSTimer){
-        
-        print(timeForCal)
+
         fractions += 1
         
         if fractions == 100{
@@ -106,9 +109,9 @@ extension TrackingViewController{
         
         recordTimeLabel.text = "\(strHours):\(strMinutes):\(strSeconds).\(strFraction)"
         
-        let averageSpeed = (mapViewController.distance/1000) / (timeForCal/360000)
+        let averageSpeed = (mapViewController.distance/1000) / (timeForCal/3600)
         
-        let kCalBurned = calorieCalculator.kiloCalorieBurned(.Bike, speed: averageSpeed, weight: 50.0, time: timeForCal/360000)
+        let kCalBurned = calorieCalculator.kiloCalorieBurned(.Bike, speed: averageSpeed, weight: 50.0, time: timeForCal/3600)
         calBurnedLabel.text = String(format: "%.2f kcal", kCalBurned)
         
         

@@ -575,7 +575,6 @@
         <!--Map View Controller-->
         <scene sceneID="thr-OA-ZJT">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lFr-k2-g75" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="MapViewController" id="mMM-Jn-sDV" customClass="MapViewController" customModule="Mr_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="xai-LV-zJT">
                         <rect key="frame" x="0.0" y="0.0" width="340" height="205"/>
@@ -585,6 +584,7 @@
                         <outlet property="mapView" destination="xai-LV-zJT" id="crG-5n-sCN"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lFr-k2-g75" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1651.5" y="1810.5"/>
         </scene>
