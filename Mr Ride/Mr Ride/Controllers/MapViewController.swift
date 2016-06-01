@@ -17,7 +17,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var myLocations: [CLLocation] = []
     var distance = 0.0
     var speed = 0.0
+    var buttonDidClicked = false
     weak var trackingViewController: TrackingViewController?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +29,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.activityType = .Fitness
-//        locationManager.distanceFilter = 10.0
-        
+        locationManager.startUpdatingLocation()
         
         mapView.delegate = self
         mapView.showsUserLocation = true
@@ -41,17 +42,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.requestWhenInUseAuthorization()
     }
     
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         
         if let myLastLocation = myLocations.last{
             distance += locations[0].distanceFromLocation(myLastLocation)
-            trackingViewController!.distanceLabel.text = String(format: "%.2f m", distance)
+            //trackingViewController!.distanceLabel.text = String(format: "%.2f m", distance)
             
             speed = locations[0].speed * 3.6
-            trackingViewController!.speedLabel.text = String(format: "%.1f km / h", speed)
-            
-            
-            
+            //trackingViewController!.speedLabel.text = String(format: "%.1f km / h", speed)
+  
         }
         
         
@@ -59,6 +59,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let newRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
         mapView.setRegion(newRegion, animated: true)
+        
+//        if (myLocations.count > 1){
+//            
+//            let sourceIndex = myLocations.count - 1
+//            let destinationIndex = myLocations.count - 2
+//            
+//            let source = myLocations[sourceIndex].coordinate
+//            let destination = myLocations[destinationIndex].coordinate
+//            var route = [source, destination]
+//            let polyline = MKPolyline(coordinates: &route, count: route.count)
+//            mapView.addOverlay(polyline)
+//        }
+    }
+    
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+        renderer.strokeColor = UIColor.blueColor()
+        renderer.lineWidth = 3
+        return renderer
+    }
+    
+    func startUpdateUI(){
+        trackingViewController!.distanceLabel.text = String(format: "%.2f m", distance)
+        trackingViewController!.speedLabel.text = String(format: "%.1f km / h", speed)
         
         if (myLocations.count > 1){
             
@@ -71,13 +95,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let polyline = MKPolyline(coordinates: &route, count: route.count)
             mapView.addOverlay(polyline)
         }
-    }
-    
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
-        renderer.strokeColor = UIColor.blueColor()
-        renderer.lineWidth = 3
-        return renderer
+
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError){

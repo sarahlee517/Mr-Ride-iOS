@@ -11,7 +11,7 @@ import CoreLocation
 import HealthKit
 import MapKit
 
-class TrackingViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class TrackingViewController: UIViewController{
     
     @IBOutlet weak var calBurnedLabel: UILabel!
     @IBOutlet weak var mapView: UIView!
@@ -22,7 +22,6 @@ class TrackingViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     @IBOutlet weak var buttonRingView: UIView!
     @IBOutlet weak var recordTimeLabel: UILabel!
     @IBAction func recordButtonDidClicked(sender: AnyObject) {
-        mapViewController.myLocations.removeAll()
         stopwatch()
     }
     
@@ -75,6 +74,7 @@ extension TrackingViewController{
         
         if !timer.valid{
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            mapViewController.myLocations.removeAll()
             mapViewController.locationManager.startUpdatingLocation()
         }else{
             mapViewController.locationManager.stopUpdatingLocation()
@@ -114,7 +114,8 @@ extension TrackingViewController{
         let kCalBurned = calorieCalculator.kiloCalorieBurned(.Bike, speed: averageSpeed, weight: 50.0, time: timeForCal/3600)
         calBurnedLabel.text = String(format: "%.2f kcal", kCalBurned)
         
-        
+        mapViewController.startUpdateUI()
+
     }
 }
 
