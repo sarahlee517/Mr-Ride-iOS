@@ -354,7 +354,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="wNV-fm-Wth">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" title="Finish" id="mVG-Db-lv4">
+                        <barButtonItem key="rightBarButtonItem" title="Finish" style="done" id="mVG-Db-lv4">
                             <connections>
                                 <segue destination="Tcl-Cr-maF" kind="push" id="fpb-2A-WWl"/>
                             </connections>

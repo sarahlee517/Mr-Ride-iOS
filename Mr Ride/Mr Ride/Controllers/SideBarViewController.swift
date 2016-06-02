@@ -29,9 +29,6 @@ class SideBarViewController: UITableViewController {
 
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.backgroundColor = UIColor.mrDarkSlateBlueColor()
-
-        
-        print("tableView.view: \(tableView.frame)")
         
     }
     

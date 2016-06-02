@@ -22,7 +22,6 @@ class TrackingViewController: UIViewController{
     @IBOutlet weak var buttonRingView: UIView!
     @IBOutlet weak var recordTimeLabel: UILabel!
     @IBAction func recordButtonDidClicked(sender: AnyObject) {
-        
         stopwatch()
     }
     
@@ -36,7 +35,7 @@ class TrackingViewController: UIViewController{
     var distance = 0.0
     var timeForCal = 0.0
     var date = ""
-    
+
     //MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,14 +46,14 @@ class TrackingViewController: UIViewController{
         setupGradientView()
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        timer.invalidate()
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         mapViewController.myLocations.removeAll()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer.invalidate()
     }
     
     private var mapViewController: MapViewController!
@@ -77,10 +76,8 @@ extension TrackingViewController{
         if !timer.valid{
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             mapViewController.myLocations.removeAll()
-            mapViewController.locationManager.startUpdatingLocation()
-            mapViewController.buttonDidClicked = true
+            mapViewController.currentLocation = mapViewController.locationManager.location
         }else{
-            mapViewController.locationManager.stopUpdatingLocation()
             timer.invalidate()
         }
     }

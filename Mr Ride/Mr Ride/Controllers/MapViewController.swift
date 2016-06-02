@@ -19,7 +19,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var speed = 0.0
     var buttonDidClicked = false
     weak var trackingViewController: TrackingViewController?
-    
+    var currentLocation: CLLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,13 +45,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         
-        if buttonDidClicked == true{
-            if let myLastLocation = myLocations.last{
-                distance += locations[0].distanceFromLocation(myLastLocation)
-                speed = locations[0].speed * 3.6
-            }
-        }
-    
         myLocations.append(locations[0] as CLLocation)
         
         let newRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
@@ -68,18 +61,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func startUpdateUI(){
         
-//        if let myLastLocation = myLocations.last{
-//            if (myLocations.count > 2){
-//            let destinationIndex = myLocations.count - 2
-//                let test = myLocations.count - 1
-//            distance += myLocations[destinationIndex].distanceFromLocation(myLocations[test])
-//                speed = myLocations.last!.speed * 3.6
-//            }
-//        }
+        locationManager.startUpdatingLocation()
         
-        trackingViewController!.distanceLabel.text = String(format: "%.2f m", distance)
-        trackingViewController!.speedLabel.text = String(format: "%.1f km / h", speed)
+        if let location = currentLocation{
+            distance += locationManager.location!.distanceFromLocation(location)
+            speed = locationManager.location!.speed * 3.6
+            
+            trackingViewController!.distanceLabel.text = String(format: "%.2f m", distance)
+            trackingViewController!.speedLabel.text = String(format: "%.1f km / h", speed)
+        }
         
+        currentLocation = locationManager.location
+
         if (myLocations.count > 1){
             
             let sourceIndex = myLocations.count - 1
