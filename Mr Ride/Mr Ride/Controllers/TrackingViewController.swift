@@ -22,6 +22,7 @@ class TrackingViewController: UIViewController{
     @IBOutlet weak var buttonRingView: UIView!
     @IBOutlet weak var recordTimeLabel: UILabel!
     @IBAction func recordButtonDidClicked(sender: AnyObject) {
+        
         stopwatch()
     }
     
@@ -34,6 +35,7 @@ class TrackingViewController: UIViewController{
     var fractions = 0
     var distance = 0.0
     var timeForCal = 0.0
+    var date = ""
     
     //MARK: - View LifeCycle
     override func viewDidLoad() {
@@ -76,6 +78,7 @@ extension TrackingViewController{
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             mapViewController.myLocations.removeAll()
             mapViewController.locationManager.startUpdatingLocation()
+            mapViewController.buttonDidClicked = true
         }else{
             mapViewController.locationManager.stopUpdatingLocation()
             timer.invalidate()
@@ -132,6 +135,8 @@ extension TrackingViewController{
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
         self.navigationController?.navigationBar.translucent = false
+        
+        setupDate()
     }
     
     func clickedCancel(){
@@ -178,6 +183,17 @@ extension TrackingViewController{
         gradientLayer.colors = [color1, color2]
         gradientLayer.locations = [0.0, 0.5]
         self.gradient.layer.addSublayer(gradientLayer)
+    }
+    
+    func setupDate(){
+        
+        let currentDate = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        date = dateFormatter.stringFromDate(currentDate)
+        self.navigationItem.title = date
+  
     }
 
 }

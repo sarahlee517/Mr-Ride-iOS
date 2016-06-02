@@ -45,32 +45,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         
-        if let myLastLocation = myLocations.last{
-            distance += locations[0].distanceFromLocation(myLastLocation)
-            //trackingViewController!.distanceLabel.text = String(format: "%.2f m", distance)
-            
-            speed = locations[0].speed * 3.6
-            //trackingViewController!.speedLabel.text = String(format: "%.1f km / h", speed)
-  
+        if buttonDidClicked == true{
+            if let myLastLocation = myLocations.last{
+                distance += locations[0].distanceFromLocation(myLastLocation)
+                speed = locations[0].speed * 3.6
+            }
         }
-        
-        
+    
         myLocations.append(locations[0] as CLLocation)
         
         let newRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
         mapView.setRegion(newRegion, animated: true)
-        
-//        if (myLocations.count > 1){
-//            
-//            let sourceIndex = myLocations.count - 1
-//            let destinationIndex = myLocations.count - 2
-//            
-//            let source = myLocations[sourceIndex].coordinate
-//            let destination = myLocations[destinationIndex].coordinate
-//            var route = [source, destination]
-//            let polyline = MKPolyline(coordinates: &route, count: route.count)
-//            mapView.addOverlay(polyline)
-//        }
+
     }
     
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
@@ -81,6 +67,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func startUpdateUI(){
+        
+//        if let myLastLocation = myLocations.last{
+//            if (myLocations.count > 2){
+//            let destinationIndex = myLocations.count - 2
+//                let test = myLocations.count - 1
+//            distance += myLocations[destinationIndex].distanceFromLocation(myLocations[test])
+//                speed = myLocations.last!.speed * 3.6
+//            }
+//        }
+        
         trackingViewController!.distanceLabel.text = String(format: "%.2f m", distance)
         trackingViewController!.speedLabel.text = String(format: "%.1f km / h", speed)
         
@@ -92,8 +88,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let source = myLocations[sourceIndex].coordinate
             let destination = myLocations[destinationIndex].coordinate
             var route = [source, destination]
+    
             let polyline = MKPolyline(coordinates: &route, count: route.count)
             mapView.addOverlay(polyline)
+            
         }
 
     }
