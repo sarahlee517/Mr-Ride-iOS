@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import CoreLocation
-import HealthKit
-import MapKit
+import CoreData
 
 class TrackingViewController: UIViewController{
     
@@ -32,16 +30,17 @@ class TrackingViewController: UIViewController{
     var minutes = 0
     var seconds = 0
     var fractions = 0
-    var distance = 0.0
-    var timeForCal = 0.0
+    var calTime = 0.0
+    var totalFraction = 0
     var date = ""
 
+    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
     //MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupRecordButton()
-        setupMapView()
         setupRecordLabel()
         setupGradientView()
     }
@@ -85,9 +84,10 @@ extension TrackingViewController{
     @objc func updateTime(timer: NSTimer){
 
         fractions += 1
+        totalFraction += 1
         
         if fractions == 100{
-            timeForCal += 1
+            calTime += 1
             seconds += 1
             fractions = 0
         }
@@ -109,9 +109,9 @@ extension TrackingViewController{
         
         recordTimeLabel.text = "\(strHours):\(strMinutes):\(strSeconds).\(strFraction)"
         
-        let averageSpeed = (mapViewController.distance/1000) / (timeForCal/3600)
+        let averageSpeed = (mapViewController.distance/1000) / (calTime/3600)
         
-        let kCalBurned = calorieCalculator.kiloCalorieBurned(.Bike, speed: averageSpeed, weight: 50.0, time: timeForCal/3600)
+        let kCalBurned = calorieCalculator.kiloCalorieBurned(.Bike, speed: averageSpeed, weight: 50.0, time: calTime/3600)
         calBurnedLabel.text = String(format: "%.2f kcal", kCalBurned)
         
         mapViewController.startUpdateUI()
@@ -144,6 +144,8 @@ extension TrackingViewController{
     }
     
     func clickedFinish(){
+        saveRide()
+        
         let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
         statisticViewController.setupNavigationBar(Mode.closeMode)
         self.navigationController?.pushViewController(statisticViewController, animated: true)
@@ -163,11 +165,6 @@ extension TrackingViewController{
         recordTimeLabel.text = "00:00:00.00"
         recordTimeLabel.textColor = UIColor.mrWhiteColor()
         recordTimeLabel.font = UIFont.mrRobotoMonoLightFon(30)
-        
-    }
-    
-    func setupMapView(){
-        mapView.layer.cornerRadius = 10
     }
     
     func setupGradientView(){
@@ -194,6 +191,33 @@ extension TrackingViewController{
     }
 
 }
+
+//MARK: - Core Data
+extension TrackingViewController{
+    func saveRide(){
+        let saveRide = NSEntityDescription.insertNewObjectForEntityForName("RideHistory", inManagedObjectContext: moc) as! RideHistory
+        saveRide.date = NSDate()
+        saveRide.distance = mapViewController.distance
+        saveRide.tatalTime = totalFraction
+        saveRide.weight = 50.0
+        
+        let locations = mapViewController.myLocations
+        var savedLocations = [Locations]()
+        for location in locations{
+            let savedLocation = NSEntityDescription.insertNewObjectForEntityForName("Locations", inManagedObjectContext: self.moc) as! Locations
+            savedLocation.timestamp = location.timestamp
+            savedLocation.latitude = location.coordinate.latitude
+            savedLocation.longtitude = location.coordinate.longitude
+            savedLocations.append(savedLocation)
+        }
+        
+        saveRide.locations = NSSet(array: savedLocations)
+    }
+    
+
+}
+
+
 
 
 

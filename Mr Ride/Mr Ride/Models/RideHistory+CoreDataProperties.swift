@@ -14,7 +14,7 @@ import CoreData
 
 extension RideHistory {
 
-    @NSManaged var date: String?
+    @NSManaged var date: NSDate?
     @NSManaged var distance: NSNumber?
     @NSManaged var tatalTime: NSNumber?
     @NSManaged var weight: NSNumber?

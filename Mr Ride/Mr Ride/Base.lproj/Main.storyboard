@@ -392,6 +392,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.38823530080000002" green="0.84313726430000002" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image-medal" translatesAutoresizingMaskIntoConstraints="NO" id="gBf-lX-MDT">
+                                <rect key="frame" x="264" y="64" width="55" height="85"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Good Job!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4w-ZW-gCG" userLabel="goodjob">
+                                <rect key="frame" x="264" y="154" width="59" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ga5-8o-wYI">
                                 <rect key="frame" x="38" y="84" width="299" height="14"/>
                                 <constraints>
@@ -469,8 +478,11 @@
                         <color key="backgroundColor" red="0.78823530673980713" green="0.10980392247438431" blue="0.73333334922790527" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Wsx-La-Fsa" secondAttribute="trailing" constant="15" id="1vc-jr-aKf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gBf-lX-MDT" secondAttribute="trailing" constant="40" id="29H-5j-dOS"/>
                             <constraint firstItem="n0c-wc-Dc2" firstAttribute="centerY" secondItem="SrE-hG-gsy" secondAttribute="centerY" id="2Ja-Wk-0Tx"/>
                             <constraint firstItem="n0c-wc-Dc2" firstAttribute="centerX" secondItem="SrE-hG-gsy" secondAttribute="centerX" id="2tg-yz-ScU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Z4w-ZW-gCG" secondAttribute="trailing" constant="36" id="4p4-3T-zQx"/>
+                            <constraint firstItem="gBf-lX-MDT" firstAttribute="top" secondItem="guv-1g-AtK" secondAttribute="bottom" id="5l3-gO-nEh"/>
                             <constraint firstAttribute="trailing" secondItem="c11-b0-qpD" secondAttribute="trailing" constant="38" id="9K2-ej-d6e"/>
                             <constraint firstItem="IWW-TA-8oa" firstAttribute="leading" secondItem="SrE-hG-gsy" secondAttribute="leading" constant="38" id="AUP-be-Ifj"/>
                             <constraint firstAttribute="trailing" secondItem="fQQ-yO-Cvf" secondAttribute="trailing" constant="38" id="D7D-aL-085"/>
@@ -486,6 +498,7 @@
                             <constraint firstItem="1G4-DJ-JHn" firstAttribute="top" secondItem="IWW-TA-8oa" secondAttribute="bottom" id="Xet-7f-uU1"/>
                             <constraint firstItem="lsU-Fh-dVY" firstAttribute="top" secondItem="c11-b0-qpD" secondAttribute="bottom" id="dCP-My-KA5"/>
                             <constraint firstItem="RPO-rt-5vi" firstAttribute="leading" secondItem="SrE-hG-gsy" secondAttribute="leading" constant="38" id="eyV-gd-UU0"/>
+                            <constraint firstItem="Z4w-ZW-gCG" firstAttribute="top" secondItem="gBf-lX-MDT" secondAttribute="bottom" constant="5" id="fKN-UX-Jag"/>
                             <constraint firstItem="ga5-8o-wYI" firstAttribute="top" secondItem="guv-1g-AtK" secondAttribute="bottom" constant="20" id="iaL-up-8NV"/>
                             <constraint firstAttribute="trailing" secondItem="RPO-rt-5vi" secondAttribute="trailing" constant="38" id="kPF-EF-FMC"/>
                             <constraint firstItem="fQQ-yO-Cvf" firstAttribute="top" secondItem="ga5-8o-wYI" secondAttribute="bottom" id="n2c-Tx-rIt"/>
@@ -500,10 +513,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="T6c-S0-kjy"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="avgSpeedLabel" destination="lsU-Fh-dVY" id="wt6-D2-luC"/>
+                        <outlet property="caloriesLabel" destination="1G4-DJ-JHn" id="h29-Fk-7nZ"/>
+                        <outlet property="distanceLabel" destination="fQQ-yO-Cvf" id="3c2-is-qKT"/>
+                        <outlet property="gradient" destination="n0c-wc-Dc2" id="3cg-n0-fZy"/>
+                        <outlet property="recordTimeLabel" destination="RPO-rt-5vi" id="bDp-0T-yog"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vGF-na-2tL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1849.5" y="1141.5"/>
+            <point key="canvasLocation" x="1932.5" y="1128.5"/>
         </scene>
         <!--Side Bar View Controller-->
         <scene sceneID="sdN-e4-gPO">
@@ -577,7 +597,7 @@
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="mMM-Jn-sDV" customClass="MapViewController" customModule="Mr_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="xai-LV-zJT">
-                        <rect key="frame" x="0.0" y="0.0" width="340" height="205"/>
+                        <rect key="frame" x="0.0" y="0.0" width="345" height="200"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </mapView>
                     <connections>
@@ -592,8 +612,9 @@
     <resources>
         <image name="icon-menu" width="30" height="30"/>
         <image name="image-history-background" width="1536" height="1021"/>
+        <image name="image-medal" width="55" height="85"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eX9-CC-eD2"/>
+        <segue reference="GxV-2y-r8m"/>
     </inferredMetricsTieBreakers>
 </document>
