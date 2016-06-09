@@ -28,7 +28,6 @@ class HomePageViewController: UIViewController {
     @IBAction func letsRideButtonDidClicked(sender: AnyObject) {
         let trackingViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TrackingViewController") as! TrackingViewController
         let trackingNavController = UINavigationController.init(rootViewController: trackingViewController)
-        
         self.navigationController?.presentViewController(trackingNavController, animated: true, completion: nil)
 
     }

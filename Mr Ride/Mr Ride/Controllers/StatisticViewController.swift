@@ -8,11 +8,14 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 enum Mode{
     case closeMode
     case backMode
 }
+
+
 
 class StatisticViewController: UIViewController {
     
@@ -24,23 +27,30 @@ class StatisticViewController: UIViewController {
     
     let gradientLayer = CAGradientLayer()
     var date = ""
-    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     let calorieCalculator = CalorieCalculator()
-
+//    let rideData = RideData()
+    
+    
+    private var mapViewController: MapViewController!
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let mapView = segue.destinationViewController as? MapViewController where segue.identifier == "EmbedSegue"{
+            self.mapViewController = mapView
+        }
+    }
 
 
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        getDataFromCoreData()
+        RideManager.sharedManager.getDataFromCoreData()
+        
         setupGradientView()
         setupNavigationBar()
+        setupLabel()
+        setupMap()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-    }
+    
     
     func setupNavigationBar(selectedMode:Mode){
         
@@ -57,24 +67,16 @@ class StatisticViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
-//MARK: - setup
+//MARK: - Setup UI
 extension StatisticViewController{
     
-    func setupLabel(totalTime totalTime: Int, distance: Double){
+    func setupLabel(){
+        
+        let totalTime = RideManager.sharedManager.rideData.totalTime
+        let distance = RideManager.sharedManager.rideData.distance
         
         let fractions = totalTime % 100
         let seconds = (totalTime / 100) % 60
@@ -94,13 +96,17 @@ extension StatisticViewController{
         
         let totalTimeDouble = Double(totalTime)
         let averageSpeed = (distance/1000) / (totalTimeDouble/360000)
-        
         avgSpeedLabel.text = String(format: "%.2f km / h", averageSpeed)
         
         let kCalBurned = calorieCalculator.kiloCalorieBurned(.Bike, speed: averageSpeed, weight: 50.0, time: totalTimeDouble/360000)
         caloriesLabel.text = String(format: "%.2f kcal", kCalBurned)
         
         
+    }
+    
+    func setupMap(){
+        let myCoordinate = RideManager.sharedManager.myCoordinate
+        mapViewController.setPolyLineRegion(myCoordinate)
     }
     
     
@@ -137,44 +143,7 @@ extension StatisticViewController{
         
     }
     
-    func getDataFromCoreData() {
-        let request = NSFetchRequest(entityName: "RideHistory")
-        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        request.fetchLimit = 1
-        do {
-            let results = try moc.executeFetchRequest(request) as! [RideHistory]
-            for result in results {
-                
-                if let distance = result.distance as? Double,
-                    let totalTime = result.tatalTime as? Int{
-                    setupLabel(totalTime: totalTime, distance: distance)
-                    
-                }
-                
-                
-            }
-        }catch{
-            fatalError("Failed to fetch data: \(error)")
-        }
-    }
-    
-    
-//    func showData(){
-//        
-//        let request = NSFetchRequest(entityName: "RideHistory")
-//        do {
-//            let results = try moc.executeFetchRequest(request) as! [RideHistory]
-//            for result in results {
-//                print(result.date)
-//                print(result.distance)
-//                print(result.locations)
-//                print(result.tatalTime)
-//            }
-//        }catch{
-//            fatalError("Failed to fetch data: \(error)")
-//            
-//        }
-//    }
+
 
 }
 

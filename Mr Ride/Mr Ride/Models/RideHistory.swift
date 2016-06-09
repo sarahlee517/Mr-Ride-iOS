@@ -15,3 +15,13 @@ class RideHistory: NSManagedObject {
 // Insert code here to add functionality to your managed object subclass
 
 }
+
+extension RideHistory {
+    
+    @NSManaged var date: NSDate?
+    @NSManaged var distance: NSNumber?
+    @NSManaged var tatalTime: NSNumber?
+    @NSManaged var weight: NSNumber?
+    @NSManaged var locations: NSOrderedSet?
+    
+}

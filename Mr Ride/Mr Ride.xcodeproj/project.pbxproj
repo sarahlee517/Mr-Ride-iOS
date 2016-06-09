@@ -36,10 +36,9 @@
 		267386BC1CF30309000D53E3 /* UIColor+MRAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267386B91CF30309000D53E3 /* UIColor+MRAdditions.swift */; };
 		267386BD1CF30309000D53E3 /* UIFont+MRAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267386BA1CF30309000D53E3 /* UIFont+MRAdditions.swift */; };
 		26C5F787599AB326EB65A70C /* Pods_Mr_Ride.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8A82676C4E43B58C08284D /* Pods_Mr_Ride.framework */; };
-		26CEF5501D0010B900355E8C /* RideHistory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CEF54C1D0010B900355E8C /* RideHistory+CoreDataProperties.swift */; };
 		26CEF5511D0010B900355E8C /* RideHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CEF54D1D0010B900355E8C /* RideHistory.swift */; };
-		26CEF5521D0010B900355E8C /* Locations+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CEF54E1D0010B900355E8C /* Locations+CoreDataProperties.swift */; };
 		26CEF5531D0010B900355E8C /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CEF54F1D0010B900355E8C /* Locations.swift */; };
+		26D05D361D0567F2000E84B8 /* RideManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D05D351D0567F2000E84B8 /* RideManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,10 +73,9 @@
 		267386B61CF2FD66000D53E3 /* SideBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarViewController.swift; sourceTree = "<group>"; };
 		267386B91CF30309000D53E3 /* UIColor+MRAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+MRAdditions.swift"; sourceTree = "<group>"; };
 		267386BA1CF30309000D53E3 /* UIFont+MRAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+MRAdditions.swift"; sourceTree = "<group>"; };
-		26CEF54C1D0010B900355E8C /* RideHistory+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RideHistory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		26CEF54D1D0010B900355E8C /* RideHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideHistory.swift; sourceTree = "<group>"; };
-		26CEF54E1D0010B900355E8C /* Locations+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Locations+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		26CEF54F1D0010B900355E8C /* Locations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
+		26D05D351D0567F2000E84B8 /* RideManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideManager.swift; sourceTree = "<group>"; };
 		7E5AF3C427FCBD3F5E8A5DD6 /* Pods-Mr Ride.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mr Ride.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mr Ride/Pods-Mr Ride.debug.xcconfig"; sourceTree = "<group>"; };
 		90E2BFEAFCF53D325FD4BE7F /* Pods-Mr Ride.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mr Ride.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mr Ride/Pods-Mr Ride.release.xcconfig"; sourceTree = "<group>"; };
 		CD8A82676C4E43B58C08284D /* Pods_Mr_Ride.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mr_Ride.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,11 +125,10 @@
 		2611F1D91CFBDF1F0027EB70 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				26CEF54C1D0010B900355E8C /* RideHistory+CoreDataProperties.swift */,
 				26CEF54D1D0010B900355E8C /* RideHistory.swift */,
-				26CEF54E1D0010B900355E8C /* Locations+CoreDataProperties.swift */,
 				26CEF54F1D0010B900355E8C /* Locations.swift */,
 				2611F1E41CFD887B0027EB70 /* CalorieCalulator.swift */,
+				26D05D351D0567F2000E84B8 /* RideManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -364,9 +361,8 @@
 				2611F1E31CFD71AA0027EB70 /* MapViewController.swift in Sources */,
 				2673869A1CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld in Sources */,
 				2611F1C51CF4330E0027EB70 /* TrackingViewController.swift in Sources */,
-				26CEF5521D0010B900355E8C /* Locations+CoreDataProperties.swift in Sources */,
+				26D05D361D0567F2000E84B8 /* RideManager.swift in Sources */,
 				267386BD1CF30309000D53E3 /* UIFont+MRAdditions.swift in Sources */,
-				26CEF5501D0010B900355E8C /* RideHistory+CoreDataProperties.swift in Sources */,
 				26CEF5531D0010B900355E8C /* Locations.swift in Sources */,
 				267386921CF2C8D9000D53E3 /* AppDelegate.swift in Sources */,
 				2611F1D31CFBCCE90027EB70 /* HistoryTableViewCell.swift in Sources */,

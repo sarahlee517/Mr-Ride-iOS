@@ -15,3 +15,13 @@ class Locations: NSManagedObject {
 // Insert code here to add functionality to your managed object subclass
 
 }
+
+extension Locations {
+    
+    @NSManaged var latitude: NSNumber?
+    @NSManaged var longtitude: NSNumber?
+    @NSManaged var timestamp: NSDate?
+    @NSManaged var ride: RideHistory?
+    
+}
+

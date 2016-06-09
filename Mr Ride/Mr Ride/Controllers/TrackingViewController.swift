@@ -43,11 +43,8 @@ class TrackingViewController: UIViewController{
         setupRecordButton()
         setupRecordLabel()
         setupGradientView()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         mapViewController.myLocations.removeAll()
+        mapViewController.showUserLocation()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -58,13 +55,13 @@ class TrackingViewController: UIViewController{
     private var mapViewController: MapViewController!
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let mapView = segue.destinationViewController as? MapViewController where segue.identifier == "EmbedSegue"{
+        if let mapView = segue.destinationViewController as? MapViewController where segue.identifier == "EmbedSegueFromTrackingPage"{
             self.mapViewController = mapView
             mapViewController.trackingViewController = self
         }
     }
-    
 }
+
 
 
 //MARK: - Stopwatch
@@ -74,7 +71,6 @@ extension TrackingViewController{
         
         if !timer.valid{
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-            mapViewController.myLocations.removeAll()
             mapViewController.currentLocation = mapViewController.locationManager.location
         }else{
             timer.invalidate()
@@ -102,25 +98,16 @@ extension TrackingViewController{
             minutes = 0
         }
         
-        let strHours = String(format: "%02d", hours)
-        let strMinutes = String(format: "%02d", minutes)
-        let strSeconds = String(format: "%02d", seconds)
-        let strFraction = String(format: "%02d", fractions)
-        
-        recordTimeLabel.text = "\(strHours):\(strMinutes):\(strSeconds).\(strFraction)"
-        
-        let averageSpeed = (mapViewController.distance/1000) / (calTime/3600)
-        
-        let kCalBurned = calorieCalculator.kiloCalorieBurned(.Bike, speed: averageSpeed, weight: 50.0, time: calTime/3600)
-        calBurnedLabel.text = String(format: "%.2f kcal", kCalBurned)
-        
+        updateTimerLabels()
+        updateKcalLabel()
         mapViewController.startUpdateUI()
 
     }
 }
 
 
-//MARK: - Setup
+
+//MARK: - Setup UI
 extension TrackingViewController{
 
     func setupNavigationBar(){
@@ -146,8 +133,15 @@ extension TrackingViewController{
     func clickedFinish(){
         saveRide()
         
+        do {
+            try self.moc.save()
+        }catch{
+            fatalError("Failure to save context: \(error)")
+        }
+        
         let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
         statisticViewController.setupNavigationBar(Mode.closeMode)
+        mapViewController.locationManager.stopUpdatingLocation()
         self.navigationController?.pushViewController(statisticViewController, animated: true)
     }
     
@@ -165,6 +159,24 @@ extension TrackingViewController{
         recordTimeLabel.text = "00:00:00.00"
         recordTimeLabel.textColor = UIColor.mrWhiteColor()
         recordTimeLabel.font = UIFont.mrRobotoMonoLightFon(30)
+    }
+    
+    func updateTimerLabels(){
+        let strHours = String(format: "%02d", hours)
+        let strMinutes = String(format: "%02d", minutes)
+        let strSeconds = String(format: "%02d", seconds)
+        let strFraction = String(format: "%02d", fractions)
+        
+        recordTimeLabel.text = "\(strHours):\(strMinutes):\(strSeconds).\(strFraction)"
+    }
+    
+    func updateKcalLabel(){
+        let averageSpeed = (mapViewController.distance/1000) / (calTime/3600)
+        
+        let kCalBurned = calorieCalculator.kiloCalorieBurned(.Bike, speed: averageSpeed, weight: 50.0, time: calTime/3600)
+        if (kCalBurned >= 0.01){
+            calBurnedLabel.text = String(format: "%.2f kcal", kCalBurned)
+        }
     }
     
     func setupGradientView(){
@@ -192,14 +204,20 @@ extension TrackingViewController{
 
 }
 
+
 //MARK: - Core Data
 extension TrackingViewController{
     func saveRide(){
+        print("locations: \(mapViewController.myLocations.count)")
+        
         let saveRide = NSEntityDescription.insertNewObjectForEntityForName("RideHistory", inManagedObjectContext: moc) as! RideHistory
         saveRide.date = NSDate()
         saveRide.distance = mapViewController.distance
         saveRide.tatalTime = totalFraction
         saveRide.weight = 50.0
+        
+        print("mapViewController.distance: \(mapViewController.distance)")
+        print("totalFraction: \(totalFraction)")
         
         let locations = mapViewController.myLocations
         var savedLocations = [Locations]()
@@ -211,7 +229,7 @@ extension TrackingViewController{
             savedLocations.append(savedLocation)
         }
         
-        saveRide.locations = NSSet(array: savedLocations)
+        saveRide.locations = NSOrderedSet(array: savedLocations)
     }
     
 
