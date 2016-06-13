@@ -50,7 +50,6 @@ extension MapViewController{
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         
         myLocations.append(locations[0] as CLLocation)
-        print("didupdate")
         
         let newRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
         mapView.setRegion(newRegion, animated: true)
@@ -141,7 +140,7 @@ extension MapViewController{
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
         renderer.strokeColor = UIColor.mrBubblegumColor()
-        renderer.lineWidth = 3
+        renderer.lineWidth = 5
         return renderer
     }
 }

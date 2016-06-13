@@ -28,26 +28,16 @@ class StatisticViewController: UIViewController {
     let gradientLayer = CAGradientLayer()
     var date = ""
     let calorieCalculator = CalorieCalculator()
-//    let rideData = RideData()
-    
-    
-    private var mapViewController: MapViewController!
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let mapView = segue.destinationViewController as? MapViewController where segue.identifier == "EmbedSegue"{
-            self.mapViewController = mapView
-        }
-    }
+
 
 
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         RideManager.sharedManager.getDataFromCoreData()
-        
+        setupLabel(totalTime: totalTime, distance: distance)
         setupGradientView()
         setupNavigationBar()
-        setupLabel()
         setupMap()
     }
     
@@ -67,16 +57,25 @@ class StatisticViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
+    
+    //
+    //MARK: - Segue for MapViewController
+    private var mapViewController: MapViewController!
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let mapView = segue.destinationViewController as? MapViewController where segue.identifier == "EmbedSegue"{
+            self.mapViewController = mapView
+        }
+    }
 
 }
 
 //MARK: - Setup UI
 extension StatisticViewController{
     
-    func setupLabel(){
+    func setupLabel(totalTime totalTime: Int, distance: Double){
         
-        let totalTime = RideManager.sharedManager.rideData.totalTime
-        let distance = RideManager.sharedManager.rideData.distance
+        print("totalTime:\(totalTime), distance:\(distance)")
         
         let fractions = totalTime % 100
         let seconds = (totalTime / 100) % 60

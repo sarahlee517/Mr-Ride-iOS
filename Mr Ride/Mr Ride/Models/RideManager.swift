@@ -16,16 +16,10 @@ class MyLocation: CLLocation{
 }
 
 
-class RideData{
+struct RideData{
     var totalTime: Int = 0
     var distance: Double = 0.0
-    
-    init(){}
-    
-    init(totalTime: Int, distance: Double){
-        self.totalTime = totalTime
-        self.distance = distance
-    }
+    var date = NSDate()
 }
 
 
@@ -36,7 +30,8 @@ class RideManager{
     static let sharedManager = RideManager()
     
     var myCoordinate = [MyLocation]()
-    let rideData = RideData()
+    var rideData = RideData()
+    var historyData = [RideData]()
     
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -51,12 +46,18 @@ class RideManager{
             for result in results {
                 
                 if let distance = result.distance as? Double,
-                    let totalTime = result.tatalTime as? Int{
-
-                    rideData.distance = distance
-                    rideData.totalTime = totalTime
-
+                    let totalTime = result.tatalTime as? Int,
+                    let date = result.date{
+                        
+                        RideManager.sharedManager.historyData.append(
+                            RideData(
+                                totalTime: totalTime,
+                                distance: distance,
+                                date: date
+                            )
+                        )
                 }
+                print(historyData)
                 
                 if let locations = result.locations!.array as? [Locations]{
                     for locaton in locations{

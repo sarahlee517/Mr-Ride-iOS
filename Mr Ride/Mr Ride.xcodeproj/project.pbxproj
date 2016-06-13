@@ -26,6 +26,8 @@
 		2611F1D41CFBCCE90027EB70 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2611F1D21CFBCCE90027EB70 /* HistoryTableViewCell.xib */; };
 		2611F1E31CFD71AA0027EB70 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2611F1E21CFD71AA0027EB70 /* MapViewController.swift */; };
 		2611F1E51CFD887B0027EB70 /* CalorieCalulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2611F1E41CFD887B0027EB70 /* CalorieCalulator.swift */; };
+		261330471D0917F5000C88CC /* HistoryTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261330461D0917F5000C88CC /* HistoryTableHeader.swift */; };
+		261330491D091817000C88CC /* HistoryTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 261330481D091817000C88CC /* HistoryTableHeader.xib */; };
 		267386921CF2C8D9000D53E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267386911CF2C8D9000D53E3 /* AppDelegate.swift */; };
 		267386971CF2C8D9000D53E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 267386951CF2C8D9000D53E3 /* Main.storyboard */; };
 		2673869A1CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 267386981CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld */; };
@@ -57,10 +59,12 @@
 		2611F1C41CF4330E0027EB70 /* TrackingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingViewController.swift; sourceTree = "<group>"; };
 		2611F1C61CF5940F0027EB70 /* StatisticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		2611F1CA1CF5CF4F0027EB70 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		2611F1D11CFBCCE90027EB70 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
-		2611F1D21CFBCCE90027EB70 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
+		2611F1D11CFBCCE90027EB70 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HistoryTableViewCell.swift; path = ../HistoryPageCell/HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		2611F1D21CFBCCE90027EB70 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HistoryTableViewCell.xib; path = ../HistoryPageCell/HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		2611F1E21CFD71AA0027EB70 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2611F1E41CFD887B0027EB70 /* CalorieCalulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalorieCalulator.swift; sourceTree = "<group>"; };
+		261330461D0917F5000C88CC /* HistoryTableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableHeader.swift; sourceTree = "<group>"; };
+		261330481D091817000C88CC /* HistoryTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableHeader.xib; sourceTree = "<group>"; };
 		2673868E1CF2C8D9000D53E3 /* Mr Ride.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mr Ride.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		267386911CF2C8D9000D53E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		267386961CF2C8D9000D53E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -112,16 +116,6 @@
 			path = Roboto_Mono;
 			sourceTree = "<group>";
 		};
-		2611F1D01CFBCCE90027EB70 /* HistoryPageCell */ = {
-			isa = PBXGroup;
-			children = (
-				2611F1D11CFBCCE90027EB70 /* HistoryTableViewCell.swift */,
-				2611F1D21CFBCCE90027EB70 /* HistoryTableViewCell.xib */,
-			);
-			name = HistoryPageCell;
-			path = ../HistoryPageCell;
-			sourceTree = "<group>";
-		};
 		2611F1D91CFBDF1F0027EB70 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,7 +131,10 @@
 			isa = PBXGroup;
 			children = (
 				267386951CF2C8D9000D53E3 /* Main.storyboard */,
-				2611F1D01CFBCCE90027EB70 /* HistoryPageCell */,
+				261330461D0917F5000C88CC /* HistoryTableHeader.swift */,
+				261330481D091817000C88CC /* HistoryTableHeader.xib */,
+				2611F1D11CFBCCE90027EB70 /* HistoryTableViewCell.swift */,
+				2611F1D21CFBCCE90027EB70 /* HistoryTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -253,7 +250,6 @@
 				TargetAttributes = {
 					2673868D1CF2C8D9000D53E3 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = HD873D5K6H;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -295,6 +291,7 @@
 				2611F1BC1CF322A30027EB70 /* RobotoMono-LightItalic.ttf in Resources */,
 				2673869F1CF2C8D9000D53E3 /* LaunchScreen.storyboard in Resources */,
 				2673869C1CF2C8D9000D53E3 /* Assets.xcassets in Resources */,
+				261330491D091817000C88CC /* HistoryTableHeader.xib in Resources */,
 				267386971CF2C8D9000D53E3 /* Main.storyboard in Resources */,
 				2611F1BD1CF322A30027EB70 /* RobotoMono-Medium.ttf in Resources */,
 				2611F1BF1CF322A30027EB70 /* RobotoMono-Regular.ttf in Resources */,
@@ -364,6 +361,7 @@
 				26D05D361D0567F2000E84B8 /* RideManager.swift in Sources */,
 				267386BD1CF30309000D53E3 /* UIFont+MRAdditions.swift in Sources */,
 				26CEF5531D0010B900355E8C /* Locations.swift in Sources */,
+				261330471D0917F5000C88CC /* HistoryTableHeader.swift in Sources */,
 				267386921CF2C8D9000D53E3 /* AppDelegate.swift in Sources */,
 				2611F1D31CFBCCE90027EB70 /* HistoryTableViewCell.swift in Sources */,
 				267386B71CF2FD66000D53E3 /* HomePageViewController.swift in Sources */,
@@ -488,6 +486,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Mr Ride/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appworks-school-sarahlee.Mr-Ride";
@@ -503,6 +502,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Mr Ride/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appworks-school-sarahlee.Mr-Ride";

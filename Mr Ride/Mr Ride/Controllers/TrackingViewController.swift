@@ -71,6 +71,7 @@ extension TrackingViewController{
         
         if !timer.valid{
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            mapViewController.myLocations.removeAll()
             mapViewController.currentLocation = mapViewController.locationManager.location
         }else{
             timer.invalidate()
@@ -208,10 +209,20 @@ extension TrackingViewController{
 //MARK: - Core Data
 extension TrackingViewController{
     func saveRide(){
-        print("locations: \(mapViewController.myLocations.count)")
         
         let saveRide = NSEntityDescription.insertNewObjectForEntityForName("RideHistory", inManagedObjectContext: moc) as! RideHistory
-        saveRide.date = NSDate()
+        
+        let myDateString = "2016-07-20"
+        
+        let mydateFormatter = NSDateFormatter()
+        mydateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierISO8601)
+        mydateFormatter.dateFormat = "yyyy-MM-dd"
+        mydateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        if let dateToBeSaved = mydateFormatter.dateFromString(myDateString) {
+            saveRide.date = dateToBeSaved
+        }
+        
+//        saveRide.date = NSDate()
         saveRide.distance = mapViewController.distance
         saveRide.tatalTime = totalFraction
         saveRide.weight = 50.0

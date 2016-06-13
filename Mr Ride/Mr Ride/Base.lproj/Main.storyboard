@@ -168,7 +168,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pn9-vP-gqD">
                                 <rect key="frame" x="22" y="40" width="331" height="153"/>
-                                <color key="backgroundColor" red="0.082444556057453156" green="0.039290629327297211" blue="0.019641581922769547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000298023224" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="153" id="KJW-Xe-Ziz"/>
                                 </constraints>
@@ -573,7 +573,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tOR-XE-j3D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="571.4666666666667" y="406.59333333333331"/>
+            <point key="canvasLocation" x="256.5" y="396.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LDn-D1-UnH">

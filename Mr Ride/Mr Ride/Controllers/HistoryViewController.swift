@@ -18,6 +18,7 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     
     @IBOutlet weak var tableView: UITableView!
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let ride = [RideData]()
     
     //MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -28,6 +29,9 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
         
         let nib = UINib(nibName: "HistoryTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "HistoryTableViewCell")
+        
+        let headerNib = UINib(nibName: "HistoryTableHeader", bundle: nil)
+        tableView.registerNib(headerNib, forHeaderFooterViewReuseIdentifier: "HistoryTableHeader")
         
         setupNavigationBar()
         setupGradientView()
@@ -54,13 +58,13 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
         let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        print("fetchRequest:\(fetchRequest)")
+        
         
         // Initialize Fetched Results Controller
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: self.moc,
-            sectionNameKeyPath: "date",
+            sectionNameKeyPath: "getMonth",
             cacheName: nil
         )
         
@@ -121,31 +125,30 @@ extension HistoryViewController{
     }
     
     func configureCell(cell: HistoryTableViewCell, atIndexPath indexPath: NSIndexPath) {
-        
-        print("configureCell")
         let records = fetchedResultsController.objectAtIndexPath(indexPath)
         
         if let distance = records.valueForKey("distance") as? Double,
-            let totalTime = records.valueForKey("tatalTime") as? Int{
-
-            setupTimeLabel(cell, totalTime: totalTime)
+            let totalTime = records.valueForKey("tatalTime") as? Int,
+            let date = records.valueForKey("date") as? NSDate{
             
-            let distanceKm = distance / 1000
-            cell.distanceLabel.text = String(format: "%.2f km", distanceKm)
+            setupDataLabel(cell, date: date)
+            setupTimeLabel(cell, totalTime: totalTime)
+            setupDistanceLabel(cell, distance: distance)
             
         }
     }
-
     
-
     
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//       
-//    }
+    func setupDistanceLabel(cell: HistoryTableViewCell, distance: Double){
+        let distanceKm = distance / 1000
+        cell.distanceLabel.text = String(format: "%.2f km", distanceKm)
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
+        let ride = RideManager.sharedManager.historyData[indexPath.row]
         statisticViewController.setupNavigationBar(.backMode)
+        statisticViewController.setupLabel(totalTime: ride.totalTime, distance: ride.distance)
         self.navigationController?.pushViewController(statisticViewController, animated: true)
         
     }
@@ -162,6 +165,31 @@ extension HistoryViewController{
         return CGFloat(60)
     }
     
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let currSection = fetchedResultsController.sections?[section]
+        let title = currSection!.name
+        
+        // Dequeue with the reuse identifier
+        let cell = self.tableView.dequeueReusableHeaderFooterViewWithIdentifier("HistoryTableHeader")
+        let header = cell as! HistoryTableHeader
+        
+        header.monthLabel.text = title
+        header.backgrandView.backgroundColor = UIColor.clearColor()
+        
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 10))
+        footerView.backgroundColor = UIColor.clearColor()
+        
+        return footerView
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10.0
+    }
     
 
     
@@ -219,16 +247,25 @@ extension HistoryViewController{
         
     }
     
-//    func showProducts() {
-//        print(1)
-//        let request = NSFetchRequest(entityName: "RideHistory")
-//        do {
-//            let results = try moc.executeFetchRequest(request) as! [RideHistory]
-//            for result in results {
-//                print("distance: \(result.distance!), tatalTime: \(result.tatalTime)")
-//            }
-//        }catch{
-//            fatalError("Failed to fetch data: \(error)")
-//        }
-//    }
+    func setupDataLabel(cell: HistoryTableViewCell, date: NSDate){
+        let recordDate = date
+        let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)
+        let components = calendar?.components([.Month, .Day], fromDate: recordDate)
+        
+        let dayText = components?.day
+        let dateText = String(format: "%02dth", dayText!)
+        
+        let font:UIFont? = UIFont.mrRobotoMonoLightFon(24)
+        let fontSuper:UIFont? = UIFont.mrRobotoMonoLightFon(12)
+        let attString:NSMutableAttributedString = NSMutableAttributedString(
+            string: dateText,
+            attributes: [NSFontAttributeName:font!]
+        )
+        attString.setAttributes(
+            [NSFontAttributeName:fontSuper!,NSBaselineOffsetAttributeName:0],
+            range: NSRange(location:2,length:2))
+        cell.dateLabel.attributedText = attString
+    }
+
+    
 }
