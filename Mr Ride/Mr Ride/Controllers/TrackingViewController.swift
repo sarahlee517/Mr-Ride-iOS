@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 class TrackingViewController: UIViewController{
     
@@ -23,6 +24,7 @@ class TrackingViewController: UIViewController{
         stopwatch()
     }
     
+    let ride = [RideData]()
     let calorieCalculator = CalorieCalculator()
     let gradientLayer = CAGradientLayer()
     var timer = NSTimer()
@@ -33,7 +35,9 @@ class TrackingViewController: UIViewController{
     var calTime = 0.0
     var totalFraction = 0
     var date = ""
-
+    var distance = 0.0
+    var location = [CLLocation]()
+    
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     //MARK: - View LifeCycle
@@ -79,7 +83,7 @@ extension TrackingViewController{
     }
     
     @objc func updateTime(timer: NSTimer){
-
+        
         fractions += 1
         totalFraction += 1
         
@@ -102,7 +106,7 @@ extension TrackingViewController{
         updateTimerLabels()
         updateKcalLabel()
         mapViewController.startUpdateUI()
-
+        
     }
 }
 
@@ -110,7 +114,7 @@ extension TrackingViewController{
 
 //MARK: - Setup UI
 extension TrackingViewController{
-
+    
     func setupNavigationBar(){
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.clickedCancel))
         
@@ -142,7 +146,13 @@ extension TrackingViewController{
         
         let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
         statisticViewController.setupNavigationBar(Mode.closeMode)
+        
+        statisticViewController.distance = distance
+        statisticViewController.totalTime = totalFraction
+        statisticViewController.location = location
+        
         mapViewController.locationManager.stopUpdatingLocation()
+        
         self.navigationController?.pushViewController(statisticViewController, animated: true)
     }
     
@@ -200,9 +210,9 @@ extension TrackingViewController{
         dateFormatter.dateFormat = "yyyy/MM/dd"
         date = dateFormatter.stringFromDate(currentDate)
         self.navigationItem.title = date
-  
+        
     }
-
+    
 }
 
 
@@ -212,7 +222,8 @@ extension TrackingViewController{
         
         let saveRide = NSEntityDescription.insertNewObjectForEntityForName("RideHistory", inManagedObjectContext: moc) as! RideHistory
         
-        let myDateString = "2016-07-20"
+        //fake date for testing tableView section
+        let myDateString = "2016-03-17"
         
         let mydateFormatter = NSDateFormatter()
         mydateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierISO8601)
@@ -222,13 +233,10 @@ extension TrackingViewController{
             saveRide.date = dateToBeSaved
         }
         
-//        saveRide.date = NSDate()
+        //        saveRide.date = NSDate()
         saveRide.distance = mapViewController.distance
         saveRide.tatalTime = totalFraction
         saveRide.weight = 50.0
-        
-        print("mapViewController.distance: \(mapViewController.distance)")
-        print("totalFraction: \(totalFraction)")
         
         let locations = mapViewController.myLocations
         var savedLocations = [Locations]()
@@ -243,7 +251,7 @@ extension TrackingViewController{
         saveRide.locations = NSOrderedSet(array: savedLocations)
     }
     
-
+    
 }
 
 

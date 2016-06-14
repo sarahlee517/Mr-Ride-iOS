@@ -20,6 +20,7 @@ struct RideData{
     var totalTime: Int = 0
     var distance: Double = 0.0
     var date = NSDate()
+    var myLocations = [MyLocation]()
 }
 
 
@@ -30,7 +31,6 @@ class RideManager{
     static let sharedManager = RideManager()
     
     var myCoordinate = [MyLocation]()
-    var rideData = RideData()
     var historyData = [RideData]()
     
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -40,24 +40,10 @@ class RideManager{
         
         let request = NSFetchRequest(entityName: "RideHistory")
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        request.fetchLimit = 1
         do {
             let results = try moc.executeFetchRequest(request) as! [RideHistory]
             for result in results {
                 
-                if let distance = result.distance as? Double,
-                    let totalTime = result.tatalTime as? Int,
-                    let date = result.date{
-                        
-                        RideManager.sharedManager.historyData.append(
-                            RideData(
-                                totalTime: totalTime,
-                                distance: distance,
-                                date: date
-                            )
-                        )
-                }
-                print(historyData)
                 
                 if let locations = result.locations!.array as? [Locations]{
                     for locaton in locations{
@@ -72,6 +58,20 @@ class RideManager{
                             )
                         }
                     }
+                }
+                
+                if let distance = result.distance as? Double,
+                    let totalTime = result.tatalTime as? Int,
+                    let date = result.date{
+                    
+                    RideManager.sharedManager.historyData.append(
+                        RideData(
+                            totalTime: totalTime,
+                            distance: distance,
+                            date: date,
+                            myLocations: myCoordinate
+                        )
+                    )
                 }
             }
         }catch{

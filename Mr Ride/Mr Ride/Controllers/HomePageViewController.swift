@@ -18,7 +18,7 @@ struct Common {
 class HomePageViewController: UIViewController {
     @IBOutlet weak var letsRideLabel: UILabel!
     @IBOutlet weak var letsRideButton: UIButton!
-
+    
     @IBAction func sideBarButtonDidClicked(sender: AnyObject) {
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.homePageContainer?.toggleDrawerSide(.Left, animated: true, completion: nil)
@@ -29,7 +29,7 @@ class HomePageViewController: UIViewController {
         let trackingViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TrackingViewController") as! TrackingViewController
         let trackingNavController = UINavigationController.init(rootViewController: trackingViewController)
         self.navigationController?.presentViewController(trackingNavController, animated: true, completion: nil)
-
+        
     }
     
     //MARK: - ViewLife Cycle
@@ -40,9 +40,9 @@ class HomePageViewController: UIViewController {
         
         setupNavigationBar()
         setupButton()
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -63,14 +63,12 @@ class HomePageViewController: UIViewController {
     
     func setupButton(){
         letsRideButton.layer.cornerRadius = 30
-//        letsRideLabel.shadowColor = UIColor.redColor()
-//        letsRideLabel.shadowOffset = CGSizeMake(0, -1.0)
         letsRideLabel.text = "Let's Ride"
         letsRideLabel.font = UIFont.mrSFUITextMediumFont(30)
         letsRideLabel.textColor = UIColor.mrLightblueColor()
     }
     
     
-
-
+    
+    
 }

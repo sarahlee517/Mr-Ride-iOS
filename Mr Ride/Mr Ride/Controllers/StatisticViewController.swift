@@ -28,9 +28,10 @@ class StatisticViewController: UIViewController {
     let gradientLayer = CAGradientLayer()
     var date = ""
     let calorieCalculator = CalorieCalculator()
-
-
-
+    var totalTime = 0
+    var distance = 0.0
+    var location = [CLLocation]()
+    
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,7 @@ class StatisticViewController: UIViewController {
         setupLabel(totalTime: totalTime, distance: distance)
         setupGradientView()
         setupNavigationBar()
-        setupMap()
+        setupMap(location)
     }
     
     
@@ -67,7 +68,7 @@ class StatisticViewController: UIViewController {
             self.mapViewController = mapView
         }
     }
-
+    
 }
 
 //MARK: - Setup UI
@@ -103,9 +104,8 @@ extension StatisticViewController{
         
     }
     
-    func setupMap(){
-        let myCoordinate = RideManager.sharedManager.myCoordinate
-        mapViewController.setPolyLineRegion(myCoordinate)
+    func setupMap(location: [CLLocation]){
+        mapViewController.setPolyLineRegion(location)
     }
     
     
@@ -142,8 +142,8 @@ extension StatisticViewController{
         
     }
     
-
-
+    
+    
 }
 
 

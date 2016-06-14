@@ -1,6 +1,6 @@
 //
 //  SideBarViewController.swift
-//  
+//
 //
 //  Created by Sarah on 5/23/16.
 //
@@ -11,13 +11,13 @@ import MMDrawerController
 
 
 class SideBarViewController: UITableViewController {
-
+    
     private var selectedRow: NSIndexPath = NSIndexPath(forRow: 1, inSection: 0)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
-    
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -26,7 +26,7 @@ class SideBarViewController: UITableViewController {
     
     
     func setTableView(){
-
+        
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.backgroundColor = UIColor.mrDarkSlateBlueColor()
         
@@ -49,7 +49,7 @@ class SideBarViewController: UITableViewController {
         
     }
     
-
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -62,20 +62,20 @@ class SideBarViewController: UITableViewController {
         cell.imageView!.hidden = true
         cell.textLabel?.textColor = UIColor.mrWhite50Color()
         cell.textLabel?.font = UIFont.mrSFUITextMediumFont(24)
-       
+        
         switch indexPath.row {
         case 0: break
             
         case 1: cell.textLabel?.text = "Home"
-           
+            
         default: cell.textLabel?.text = "History"
-      
+            
         }
         
         if selectedRow != indexPath{
             cell.imageView?.hidden = true
             cell.textLabel?.textColor = UIColor.mrWhite50Color()
-  
+            
         }else if selectedRow.row != 0{
             cell.imageView?.hidden = false
             cell.textLabel?.textColor = UIColor.whiteColor()
@@ -89,12 +89,12 @@ class SideBarViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         selectedRow = indexPath
-   
+        
         switch(indexPath.row){
             
         case 0:
             break
- 
+            
         case 1:
             
             let homePageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HomePageViewController") as! HomePageViewController
@@ -121,5 +121,5 @@ class SideBarViewController: UITableViewController {
         tableView.reloadData()
     }
     
-
+    
 }

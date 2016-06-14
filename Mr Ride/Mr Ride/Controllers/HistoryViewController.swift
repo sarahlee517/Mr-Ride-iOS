@@ -24,6 +24,8 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        RideManager.sharedManager.getDataFromCoreData()
+        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -46,14 +48,14 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     }
     
     
-
+    
     
     // MARK: -
     // MARK: FetchedResultsController
     lazy var fetchedResultsController: NSFetchedResultsController = {
         // Initialize Fetch Request
         let fetchRequest = NSFetchRequest(entityName: "RideHistory")
-
+        
         // Add Sort Descriptors
         let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
@@ -100,8 +102,8 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
         default: break
         }
     }
-
-
+    
+    
 }
 
 
@@ -109,7 +111,6 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
 extension HistoryViewController{
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if let sections = fetchedResultsController.sections where sections.count > 0 {
-            print(sections[section].numberOfObjects)
             return sections[section].numberOfObjects
         }else{
             return 0
@@ -120,6 +121,7 @@ extension HistoryViewController{
         
         let cell = UINib(nibName: "HistoryTableViewCell", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! HistoryTableViewCell
         
+        cell.selectionStyle = .None
         configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -148,11 +150,13 @@ extension HistoryViewController{
         let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
         let ride = RideManager.sharedManager.historyData[indexPath.row]
         statisticViewController.setupNavigationBar(.backMode)
-        statisticViewController.setupLabel(totalTime: ride.totalTime, distance: ride.distance)
+        statisticViewController.distance = ride.distance
+        statisticViewController.totalTime = ride.totalTime
+        statisticViewController.location = ride.myLocations
         self.navigationController?.pushViewController(statisticViewController, animated: true)
         
     }
-
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if let sections = fetchedResultsController.sections {
             return sections.count
@@ -191,7 +195,7 @@ extension HistoryViewController{
         return 10.0
     }
     
-
+    
     
     
 }
@@ -233,7 +237,7 @@ extension HistoryViewController{
         appDelegate.homePageContainer.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
         
     }
-
+    
     func setupTimeLabel(cell:HistoryTableViewCell, totalTime: Int){
         let seconds = (totalTime / 100) % 60
         let minutes = (totalTime / 6000) % 60
@@ -266,6 +270,6 @@ extension HistoryViewController{
             range: NSRange(location:2,length:2))
         cell.dateLabel.attributedText = attString
     }
-
+    
     
 }

@@ -77,14 +77,17 @@ extension MapViewController{
             
             trackingViewController!.distanceLabel.text = String(format: "%.1f m", distance)
             trackingViewController!.speedLabel.text = String(format: "%.1f km / h", speed)
+            
+            trackingViewController!.distance = distance
         }
         
         currentLocation = locationManager.location
         
         drawPolyLine(myLocations)
+        trackingViewController!.location = myLocations
         
     }
-
+    
     func setupMapView(){
         mapView.layer.cornerRadius = 10
     }
