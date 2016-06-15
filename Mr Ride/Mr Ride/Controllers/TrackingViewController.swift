@@ -223,7 +223,7 @@ extension TrackingViewController{
         let saveRide = NSEntityDescription.insertNewObjectForEntityForName("RideHistory", inManagedObjectContext: moc) as! RideHistory
         
         //fake date for testing tableView section
-        let myDateString = "2016-03-17"
+        let myDateString = "2016-06-04"
         
         let mydateFormatter = NSDateFormatter()
         mydateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierISO8601)

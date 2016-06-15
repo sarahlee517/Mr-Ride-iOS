@@ -35,7 +35,6 @@ class StatisticViewController: UIViewController {
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        RideManager.sharedManager.getDataFromCoreData()
         setupLabel(totalTime: totalTime, distance: distance)
         setupGradientView()
         setupNavigationBar()
@@ -76,7 +75,7 @@ extension StatisticViewController{
     
     func setupLabel(totalTime totalTime: Int, distance: Double){
         
-        print("totalTime:\(totalTime), distance:\(distance)")
+        print("distance:\(distance), totalTime:\(totalTime)")
         
         let fractions = totalTime % 100
         let seconds = (totalTime / 100) % 60
@@ -105,7 +104,9 @@ extension StatisticViewController{
     }
     
     func setupMap(location: [CLLocation]){
+        print("Location: \(location.count)")
         mapViewController.setPolyLineRegion(location)
+        
     }
     
     

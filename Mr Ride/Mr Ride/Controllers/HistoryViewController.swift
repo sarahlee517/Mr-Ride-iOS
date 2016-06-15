@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import MapKit
 import MMDrawerController
 
 class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource {
@@ -19,7 +20,9 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     @IBOutlet weak var tableView: UITableView!
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     let ride = [RideData]()
+    var myCoordinate = [MyLocation]()
     
+    //
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +58,9 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     lazy var fetchedResultsController: NSFetchedResultsController = {
         // Initialize Fetch Request
         let fetchRequest = NSFetchRequest(entityName: "RideHistory")
-        
+        //
+        //        let path: [Path] = path.identifier
+        //        let identifier = NSUUID().UUIDString
         // Add Sort Descriptors
         let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
@@ -148,11 +153,17 @@ extension HistoryViewController{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
-        let ride = RideManager.sharedManager.historyData[indexPath.row]
+        let records = fetchedResultsController.objectAtIndexPath(indexPath) as! RideHistory
+        
+        if let distance = records.distance?.doubleValue,
+            let totalTime = records.tatalTime?.intValue,            let date = records.date {
+            statisticViewController.distance = distance
+            statisticViewController.totalTime = Int(totalTime)
+            statisticViewController.location = getLocations(date)
+            
+        }
         statisticViewController.setupNavigationBar(.backMode)
-        statisticViewController.distance = ride.distance
-        statisticViewController.totalTime = ride.totalTime
-        statisticViewController.location = ride.myLocations
+        
         self.navigationController?.pushViewController(statisticViewController, animated: true)
         
     }
@@ -194,10 +205,6 @@ extension HistoryViewController{
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10.0
     }
-    
-    
-    
-    
 }
 
 
@@ -269,6 +276,35 @@ extension HistoryViewController{
             [NSFontAttributeName:fontSuper!,NSBaselineOffsetAttributeName:0],
             range: NSRange(location:2,length:2))
         cell.dateLabel.attributedText = attString
+    }
+    
+    func getLocations(date: NSDate)->[CLLocation]{
+        
+        let request = NSFetchRequest(entityName: "RideHistory")
+        request.predicate = NSPredicate(format: "date = %@", date)
+        var newLocations = [CLLocation]()
+        do {
+            let results = try moc.executeFetchRequest(request) as! [RideHistory]
+            
+            for result in results {
+                
+                if let locations = result.locations?.array as? [Locations]{
+                    
+                    for locaton in locations{
+                        if let  _longtitude = locaton.longtitude?.doubleValue,
+                            _latitude = locaton.latitude?.doubleValue{
+                            
+                            let newLocation = CLLocation(latitude: _latitude, longitude: _longtitude)
+                            newLocations.append(newLocation)
+                            
+                        }
+                    }
+                }
+            }
+        }catch{
+            fatalError("Failed to fetch data: \(error)")
+        }
+        return newLocations
     }
     
     

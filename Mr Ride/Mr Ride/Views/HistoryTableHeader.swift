@@ -10,7 +10,6 @@ import UIKit
 
 class HistoryTableHeader: UITableViewHeaderFooterView {
     @IBOutlet weak var headerView: UIView!
-
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var backgrandView: UIView!
 

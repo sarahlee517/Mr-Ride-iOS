@@ -29,13 +29,12 @@ extension RideHistory {
 extension RideHistory{
     var getMonth:String{
         let recordDate = date
-//        let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
-//        let components = calendar.components([.Month, .Day], fromDate: recordDate!)
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MMM yyyy"
         
         let title = dateFormatter.stringFromDate(recordDate!)
+        
         
         return title
     }

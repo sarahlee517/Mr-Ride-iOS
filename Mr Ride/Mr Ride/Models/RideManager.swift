@@ -30,9 +30,9 @@ class RideManager{
     
     static let sharedManager = RideManager()
     
-    var myCoordinate = [MyLocation]()
+//    var myCoordinate = [MyLocation]()
     var historyData = [RideData]()
-    
+//    var fetchResultController
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     //MARK: Get Data From Core Data
@@ -45,20 +45,20 @@ class RideManager{
             for result in results {
                 
                 
-                if let locations = result.locations!.array as? [Locations]{
-                    for locaton in locations{
-                        if let  _longtitude = locaton.longtitude?.doubleValue,
-                            _latitude = locaton.latitude?.doubleValue{
-                            
-                            myCoordinate.append(
-                                MyLocation(
-                                    latitude: _latitude,
-                                    longitude: _longtitude
-                                )
-                            )
-                        }
-                    }
-                }
+//                if let locations = result.locations!.array as? [Locations]{
+//                    for locaton in locations{
+//                        if let  _longtitude = locaton.longtitude?.doubleValue,
+//                            _latitude = locaton.latitude?.doubleValue{
+//                            
+//                            myCoordinate.append(
+//                                MyLocation(
+//                                    latitude: _latitude,
+//                                    longitude: _longtitude
+//                                )
+//                            )
+//                        }
+//                    }
+//                }
                 
                 if let distance = result.distance as? Double,
                     let totalTime = result.tatalTime as? Int,
@@ -69,7 +69,7 @@ class RideManager{
                             totalTime: totalTime,
                             distance: distance,
                             date: date,
-                            myLocations: myCoordinate
+                            myLocations: [MyLocation]()
                         )
                     )
                 }
@@ -77,5 +77,7 @@ class RideManager{
         }catch{
             fatalError("Failed to fetch data: \(error)")
         }
+        print("History Count:\(historyData.count)")
+        print(historyData)
     }
 }
