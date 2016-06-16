@@ -7,5 +7,5 @@ target 'Mr Ride' do
 
   # Pods for Mr Ride
   pod 'MMDrawerController', '~> 0.6'
-
+  pod 'Charts', '~> 2.2'
 end

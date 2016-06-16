@@ -132,14 +132,14 @@ extension HistoryViewController{
     }
     
     func configureCell(cell: HistoryTableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let records = fetchedResultsController.objectAtIndexPath(indexPath)
+        let records = fetchedResultsController.objectAtIndexPath(indexPath) as! RideHistory
         
-        if let distance = records.valueForKey("distance") as? Double,
-            let totalTime = records.valueForKey("tatalTime") as? Int,
-            let date = records.valueForKey("date") as? NSDate{
+        if let distance = records.distance?.doubleValue,
+            let totalTime = records.tatalTime?.intValue,
+            let date = records.date{
             
             setupDataLabel(cell, date: date)
-            setupTimeLabel(cell, totalTime: totalTime)
+            setupTimeLabel(cell, totalTime: Int(totalTime))
             setupDistanceLabel(cell, distance: distance)
             
         }
@@ -156,11 +156,11 @@ extension HistoryViewController{
         let records = fetchedResultsController.objectAtIndexPath(indexPath) as! RideHistory
         
         if let distance = records.distance?.doubleValue,
-            let totalTime = records.tatalTime?.intValue,            let date = records.date {
-            statisticViewController.distance = distance
-            statisticViewController.totalTime = Int(totalTime)
-            statisticViewController.location = getLocations(date)
-            
+            let totalTime = records.tatalTime?.intValue,
+            let date = records.date {
+                statisticViewController.distance = distance
+                statisticViewController.totalTime = Int(totalTime)
+                statisticViewController.location = getLocations(date)
         }
         statisticViewController.setupNavigationBar(.backMode)
         
