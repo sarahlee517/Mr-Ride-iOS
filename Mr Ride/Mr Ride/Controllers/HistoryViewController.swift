@@ -10,17 +10,21 @@ import UIKit
 import CoreData
 import MapKit
 import MMDrawerController
+import Charts
 
-class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource, ChartViewDelegate {
     let gradientLayer = CAGradientLayer()
     
-    @IBOutlet weak var chart: UIView!
+    @IBOutlet weak var lineChart: LineChartView!
     @IBOutlet weak var gradientView: UIView!
     
     @IBOutlet weak var tableView: UITableView!
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     let ride = [RideData]()
     var myCoordinate = [MyLocation]()
+    
+    var months: [String]!
+    
     
     //
     //MARK: - View Life Cycle
@@ -31,6 +35,8 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
         
         tableView.dataSource = self
         tableView.delegate = self
+        lineChart.delegate = self
+        
         
         let nib = UINib(nibName: "HistoryTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "HistoryTableViewCell")
@@ -48,20 +54,24 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
             let fetchError = error as NSError
             print("\(fetchError), \(fetchError.userInfo)")
         }
+        
+        // chart view
+        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0]
+        
+        setChart(months, values: unitsSold)
+
     }
     
     
     
     
-    // MARK: -
-    // MARK: FetchedResultsController
+    //
+    // MARK: - FetchedResultsController
     lazy var fetchedResultsController: NSFetchedResultsController = {
+        
         // Initialize Fetch Request
         let fetchRequest = NSFetchRequest(entityName: "RideHistory")
-        //
-        //        let path: [Path] = path.identifier
-        //        let identifier = NSUUID().UUIDString
-        // Add Sort Descriptors
         let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
@@ -107,8 +117,6 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
         default: break
         }
     }
-    
-    
 }
 
 
@@ -152,6 +160,7 @@ extension HistoryViewController{
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
         let records = fetchedResultsController.objectAtIndexPath(indexPath) as! RideHistory
         
@@ -162,6 +171,7 @@ extension HistoryViewController{
                 statisticViewController.totalTime = Int(totalTime)
                 statisticViewController.location = getLocations(date)
         }
+        
         statisticViewController.setupNavigationBar(.backMode)
         
         self.navigationController?.pushViewController(statisticViewController, animated: true)
@@ -206,6 +216,71 @@ extension HistoryViewController{
         return 10.0
     }
 }
+
+
+//MARK: - Chart View
+extension HistoryViewController{
+
+    func setChart(dataPoints: [String], values: [Double]) {
+        
+        var dataEntries: [ChartDataEntry] = []
+        
+        for i in 0..<dataPoints.count {
+            let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
+            dataEntries.append(dataEntry)
+        }
+        
+        
+        let chartDataSet = LineChartDataSet(yVals: dataEntries, label: "Units Sold")
+        let chartData = LineChartData(xVals: dataPoints, dataSet: chartDataSet)
+        lineChart.data = chartData
+        
+        
+        //fill gradient for the curve
+        let gradientColors = [UIColor.mrBrightSkyBlueColor().CGColor, UIColor.mrTurquoiseBlueColor().CGColor]
+        let colorLocations:[CGFloat] = [0.0, 0.3]
+        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), gradientColors, colorLocations) // Gradient Object
+        chartDataSet.fill = ChartFill.fillWithLinearGradient(gradient!, angle: 90.0)
+        chartDataSet.drawFilledEnabled = true
+        chartDataSet.lineWidth = 0.0
+        
+        chartDataSet.drawCirclesEnabled = false //remove the point circle
+        
+        chartDataSet.drawCubicEnabled = true  //make the line to be curve
+        chartData.setDrawValues(false)        //remove value label on each point
+        
+        //make chartview not scalable and remove the interaction line
+        lineChart.setScaleEnabled(false)
+        lineChart.userInteractionEnabled = false
+        
+        //set display attribute
+        lineChart.xAxis.drawAxisLineEnabled = false
+        lineChart.xAxis.drawGridLinesEnabled = false
+        
+        lineChart.xAxis.labelPosition = .Bottom
+        lineChart.xAxis.labelTextColor = UIColor.whiteColor()
+        
+        lineChart.leftAxis.drawAxisLineEnabled = false
+        lineChart.rightAxis.drawAxisLineEnabled = false
+        lineChart.leftAxis.drawLabelsEnabled = false
+        lineChart.rightAxis.drawLabelsEnabled = false
+        
+        //ony display leftAxis gridline
+        lineChart.rightAxis.drawGridLinesEnabled = false
+        lineChart.leftAxis.gridColor = UIColor.whiteColor()
+        
+        
+        lineChart.legend.enabled = false  // remove legend icon
+        lineChart.descriptionText = ""   // clear description
+        
+    }
+
+
+}
+
+
+
+
 
 
 

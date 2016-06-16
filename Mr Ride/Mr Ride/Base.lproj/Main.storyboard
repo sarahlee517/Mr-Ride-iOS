@@ -166,7 +166,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgZ-PT-nxH">
                                 <rect key="frame" x="0.0" y="354" width="375" height="313"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pn9-vP-gqD">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pn9-vP-gqD" customClass="LineChartView" customModule="Charts">
                                 <rect key="frame" x="22" y="40" width="331" height="153"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000298023224" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
@@ -200,8 +200,8 @@
                     <navigationItem key="navigationItem" id="VrB-xw-QQ7"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="chart" destination="Pn9-vP-gqD" id="Mk2-Yu-IZd"/>
                         <outlet property="gradientView" destination="dgZ-PT-nxH" id="lou-es-flo"/>
+                        <outlet property="lineChart" destination="Pn9-vP-gqD" id="99g-Vx-Zwi"/>
                         <outlet property="tableView" destination="ZDw-ul-3Z6" id="zWC-rk-WLc"/>
                     </connections>
                 </viewController>

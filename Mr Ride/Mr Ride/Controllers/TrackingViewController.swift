@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import MapKit
+import Charts
 
 class TrackingViewController: UIViewController{
     
@@ -64,6 +65,9 @@ class TrackingViewController: UIViewController{
             mapViewController.trackingViewController = self
         }
     }
+    
+    
+
 }
 
 
@@ -223,17 +227,11 @@ extension TrackingViewController{
         let saveRide = NSEntityDescription.insertNewObjectForEntityForName("RideHistory", inManagedObjectContext: moc) as! RideHistory
         
         //fake date for testing tableView section
-        let myDateString = "2016-06-04"
+//        let myDateString = "2016-06-04"
+//        fakeDate(saveRide: saveRide, myDateString: myDateString)
+
         
-        let mydateFormatter = NSDateFormatter()
-        mydateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierISO8601)
-        mydateFormatter.dateFormat = "yyyy-MM-dd"
-        mydateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        if let dateToBeSaved = mydateFormatter.dateFromString(myDateString) {
-            saveRide.date = dateToBeSaved
-        }
-        
-        //        saveRide.date = NSDate()
+        saveRide.date = NSDate()
         saveRide.distance = mapViewController.distance
         saveRide.tatalTime = totalFraction
         saveRide.weight = 50.0
@@ -249,6 +247,17 @@ extension TrackingViewController{
         }
         
         saveRide.locations = NSOrderedSet(array: savedLocations)
+    }
+    
+    //For Debugging TableView Section
+    func fakeDate(saveRide: RideHistory, myDateString: String){
+        let mydateFormatter = NSDateFormatter()
+        mydateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierISO8601)
+        mydateFormatter.dateFormat = "yyyy-MM-dd"
+        mydateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        if let dateToBeSaved = mydateFormatter.dateFromString(myDateString) {
+            saveRide.date = dateToBeSaved
+        }
     }
     
     

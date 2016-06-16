@@ -73,7 +73,7 @@
                 <outlet property="lineView" destination="cyT-Zs-oPb" id="jEH-xU-3Py"/>
                 <outlet property="totalTimeLabel" destination="wVC-AY-Frt" id="0rW-Rg-NYO"/>
             </connections>
-            <point key="canvasLocation" x="-48.5" y="227.5"/>
+            <point key="canvasLocation" x="-270.5" y="236.5"/>
         </tableViewCell>
     </objects>
 </document>
