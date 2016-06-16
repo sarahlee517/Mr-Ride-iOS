@@ -246,8 +246,8 @@ extension HistoryViewController{
         
         chartDataSet.drawCirclesEnabled = false //remove the point circle
         
-        chartDataSet.drawCubicEnabled = true  //make the line to be curve
-        chartData.setDrawValues(false)        //remove value label on each point
+        chartDataSet.mode = .CubicBezier  //make the line to be curve
+        chartData.setDrawValues(false)      //remove value label on each point
         
         //make chartview not scalable and remove the interaction line
         lineChart.setScaleEnabled(false)
