@@ -8,6 +8,7 @@
 
 import UIKit
 import MMDrawerController
+import Charts
 
 struct Common {
     
@@ -15,9 +16,10 @@ struct Common {
 }
 
 
-class HomePageViewController: UIViewController {
+class HomePageViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var letsRideLabel: UILabel!
     @IBOutlet weak var letsRideButton: UIButton!
+    @IBOutlet weak var lineChartView: LineChartView!
     
     @IBAction func sideBarButtonDidClicked(sender: AnyObject) {
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -37,10 +39,17 @@ class HomePageViewController: UIViewController {
         super.viewDidLoad()
         
         self.mm_drawerController.showsShadow = false
-        
+        lineChartView.delegate = self
         setupNavigationBar()
         setupButton()
         
+        
+        //chart view
+        // chart view
+        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0]
+        
+        setChart(months, values: unitsSold)
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,7 +77,58 @@ class HomePageViewController: UIViewController {
         letsRideLabel.textColor = UIColor.mrLightblueColor()
     }
     
-    
-    
-    
+    func setChart(dataPoints: [String], values: [Double]) {
+        
+        var dataEntries: [ChartDataEntry] = []
+        
+        for i in 0..<dataPoints.count {
+            let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
+            dataEntries.append(dataEntry)
+        }
+        
+        
+        let chartDataSet = LineChartDataSet(yVals: dataEntries, label: "Units Sold")
+        let chartData = LineChartData(xVals: dataPoints, dataSet: chartDataSet)
+        lineChartView.data = chartData
+        
+        
+        //fill gradient for the curve
+        let gradientColors = [ UIColor.mrRobinsEggBlue0Color().CGColor, UIColor.mrWaterBlueColor().CGColor] // Colors of the gradient
+        let colorLocations:[CGFloat] = [0.0, 0.35] // Positioning of the gradient
+        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), gradientColors, colorLocations) // Gradient Object
+        chartDataSet.fill = ChartFill.fillWithLinearGradient(gradient!, angle: 90.0)
+        chartDataSet.drawFilledEnabled = true
+        chartDataSet.lineWidth = 0.0
+        
+        
+        chartDataSet.drawCirclesEnabled = false //remove the point circle
+        chartDataSet.mode = .CubicBezier //make the line to be curve
+        chartData.setDrawValues(false)        //remove value label on each point
+        
+        //make chartview not scalable and remove the interaction line
+        lineChartView.setScaleEnabled(false)
+        lineChartView.userInteractionEnabled = false
+        
+        //set display attribute
+        lineChartView.xAxis.drawAxisLineEnabled = false
+        lineChartView.xAxis.drawGridLinesEnabled = false
+        
+        //display no labels
+        lineChartView.xAxis.drawLabelsEnabled = false
+        
+        
+        lineChartView.leftAxis.drawAxisLineEnabled = false
+        lineChartView.rightAxis.drawAxisLineEnabled = false
+        lineChartView.leftAxis.drawLabelsEnabled = false
+        lineChartView.rightAxis.drawLabelsEnabled = false
+        
+        //display no gridlines
+        lineChartView.rightAxis.drawGridLinesEnabled = false
+        lineChartView.leftAxis.drawGridLinesEnabled = false
+        
+        
+        lineChartView.legend.enabled = false  // remove legend icon (Lower left corner)
+        lineChartView.descriptionText = ""   // clear description
+        
+    }
 }

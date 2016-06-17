@@ -18,6 +18,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ty-i4-Xr9" userLabel="LineChartView" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="-10" y="273" width="395" height="122"/>
+                                <color key="backgroundColor" red="0.38823530077934265" green="0.84313726425170898" blue="0.96470588445663452" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="122" id="jY4-7q-zQm"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.5 km" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIe-KG-i2c">
                                 <rect key="frame" x="37" y="164" width="301" height="95"/>
                                 <constraints>
@@ -114,9 +121,11 @@
                             <constraint firstItem="yMk-0B-BGD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="37" id="Iyk-b5-QUQ"/>
                             <constraint firstItem="Vfk-ry-ZIU" firstAttribute="top" secondItem="dpB-3t-aNa" secondAttribute="bottom" id="Mqt-SO-Ej8"/>
                             <constraint firstItem="noU-r7-kai" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="37" id="PYT-8R-Ze8"/>
+                            <constraint firstItem="dpB-3t-aNa" firstAttribute="top" secondItem="3ty-i4-Xr9" secondAttribute="bottom" constant="31" id="Qbr-Hg-WHH"/>
                             <constraint firstItem="dpB-3t-aNa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="37" id="REp-hX-uMa"/>
                             <constraint firstAttribute="trailing" secondItem="noU-r7-kai" secondAttribute="trailing" constant="37" id="T1l-hc-pOS"/>
                             <constraint firstItem="B5Q-BF-vzK" firstAttribute="centerY" secondItem="eYJ-Xo-AGN" secondAttribute="centerY" id="VQT-6o-0Gu"/>
+                            <constraint firstAttribute="trailing" secondItem="3ty-i4-Xr9" secondAttribute="trailing" constant="-10" id="VzN-4u-Xlm"/>
                             <constraint firstAttribute="trailing" secondItem="iIe-KG-i2c" secondAttribute="trailing" constant="37" id="Wqh-ri-Zn1"/>
                             <constraint firstItem="eYJ-Xo-AGN" firstAttribute="top" secondItem="Vfk-ry-ZIU" secondAttribute="bottom" constant="51" id="Y79-i6-YgZ"/>
                             <constraint firstAttribute="trailing" secondItem="dpB-3t-aNa" secondAttribute="trailing" constant="37" id="YBT-vk-Ml2"/>
@@ -128,6 +137,7 @@
                             <constraint firstItem="Vfk-ry-ZIU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="37" id="sap-fY-PdM"/>
                             <constraint firstItem="noU-r7-kai" firstAttribute="top" secondItem="yMk-0B-BGD" secondAttribute="bottom" id="vnS-Ms-1mB"/>
                             <constraint firstItem="iy4-gy-2Uw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="37" id="vtE-qX-ggN"/>
+                            <constraint firstItem="3ty-i4-Xr9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-10" id="w5C-Fy-whA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bte-xK-1tR">
@@ -142,6 +152,7 @@
                     <connections>
                         <outlet property="letsRideButton" destination="eYJ-Xo-AGN" id="xKL-TY-gPS"/>
                         <outlet property="letsRideLabel" destination="B5Q-BF-vzK" id="zFA-Bj-KnC"/>
+                        <outlet property="lineChartView" destination="3ty-i4-Xr9" id="Gkq-JY-tT9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

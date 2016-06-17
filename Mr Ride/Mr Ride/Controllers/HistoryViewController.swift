@@ -12,7 +12,7 @@ import MapKit
 import MMDrawerController
 import Charts
 
-class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource, ChartViewDelegate {
+class HistoryViewController: UIViewController {
     let gradientLayer = CAGradientLayer()
     
     @IBOutlet weak var lineChart: LineChartView!
@@ -63,9 +63,6 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
 
     }
     
-    
-    
-    
     //
     // MARK: - FetchedResultsController
     lazy var fetchedResultsController: NSFetchedResultsController = {
@@ -91,7 +88,12 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
         return fetchedResultsController
     }()
     
-    // MARK: Fetched Results Controller Delegate Methods
+
+}
+
+// MARK: Fetched Results Controller Delegate Methods
+extension HistoryViewController: NSFetchedResultsControllerDelegate{
+
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         tableView.beginUpdates()
     }
@@ -121,7 +123,7 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
 
 
 //MARK: - Implement TableView
-extension HistoryViewController{
+extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if let sections = fetchedResultsController.sections where sections.count > 0 {
             return sections[section].numberOfObjects
@@ -219,7 +221,7 @@ extension HistoryViewController{
 
 
 //MARK: - Chart View
-extension HistoryViewController{
+extension HistoryViewController: ChartViewDelegate{
 
     func setChart(dataPoints: [String], values: [Double]) {
         
