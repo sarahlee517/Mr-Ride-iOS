@@ -30,6 +30,7 @@ class HomePageViewController: UIViewController, ChartViewDelegate {
     @IBAction func letsRideButtonDidClicked(sender: AnyObject) {
         let trackingViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TrackingViewController") as! TrackingViewController
         let trackingNavController = UINavigationController.init(rootViewController: trackingViewController)
+        trackingViewController.navigationController?.modalPresentationStyle = .OverCurrentContext
         self.navigationController?.presentViewController(trackingNavController, animated: true, completion: nil)
         
     }

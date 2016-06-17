@@ -50,6 +50,8 @@ class TrackingViewController: UIViewController{
         setupGradientView()
         mapViewController.myLocations.removeAll()
         mapViewController.showUserLocation()
+//        self.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+//        self.navigationController?.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
     }
     
     override func viewWillDisappear(animated: Bool) {

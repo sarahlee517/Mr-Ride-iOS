@@ -24,7 +24,7 @@ class HistoryViewController: UIViewController {
     var myCoordinate = [MyLocation]()
     
     var months: [String]!
-    
+    var distance: [Double] = [0.0]
     
     //
     //MARK: - View Life Cycle
@@ -202,7 +202,6 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
         
         header.monthLabel.text = title
         header.backgrandView.backgroundColor = UIColor.clearColor()
-        
         
         return cell
     }

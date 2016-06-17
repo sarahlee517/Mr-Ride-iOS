@@ -234,7 +234,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RFr-im-zf2" userLabel="Gradient">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.38823530080000002" green="0.84313726430000002" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ex-75-Kjr">
                                 <rect key="frame" x="38" y="84" width="299" height="14"/>
@@ -332,7 +331,6 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="0.38823530077934265" green="0.84313726425170898" blue="0.96470588445663452" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="0u8-Cx-OLQ" firstAttribute="top" secondItem="nbJ-58-4kH" secondAttribute="bottom" constant="41" id="0SC-Ko-2ou"/>
                             <constraint firstAttribute="trailing" secondItem="lCe-w4-ptY" secondAttribute="trailing" constant="38" id="1m7-aV-pBR"/>
