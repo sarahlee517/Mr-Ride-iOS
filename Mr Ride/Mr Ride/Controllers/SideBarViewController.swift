@@ -37,7 +37,7 @@ class SideBarViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -68,7 +68,9 @@ class SideBarViewController: UITableViewController {
             
         case 1: cell.textLabel?.text = "Home"
             
-        default: cell.textLabel?.text = "History"
+        case 2: cell.textLabel?.text = "History"
+            
+        default: cell.textLabel?.text = "Map"
             
         }
         
@@ -106,7 +108,8 @@ class SideBarViewController: UITableViewController {
             appDelegate.homePageContainer.centerViewController = homePageViewNavController
             appDelegate.homePageContainer.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
             
-        default:
+            
+        case 2:
             
             let historyViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HistoryViewController") as! HistoryViewController
             
@@ -115,6 +118,16 @@ class SideBarViewController: UITableViewController {
             let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             
             appDelegate.homePageContainer.centerViewController = historyViewNavController
+            appDelegate.homePageContainer.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+            
+        default:
+            let informationMapViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InformationMapViewController") as! InformationMapViewController
+            
+            let informationMapNavController = UINavigationController(rootViewController: informationMapViewController)
+            
+            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            appDelegate.homePageContainer.centerViewController = informationMapNavController
             appDelegate.homePageContainer.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
         }
         

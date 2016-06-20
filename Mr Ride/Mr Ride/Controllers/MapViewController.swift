@@ -22,7 +22,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     weak var statisticViewController: StatisticViewController?
     var currentLocation: CLLocation?
     
-    //MARK: - View Lide Cycle
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         

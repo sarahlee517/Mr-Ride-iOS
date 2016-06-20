@@ -12,7 +12,10 @@ import MapKit
 import MMDrawerController
 import Charts
 
-class HistoryViewController: UIViewController {
+
+
+
+class HistoryViewController: UIViewController, ChartDataDelegate {
     let gradientLayer = CAGradientLayer()
     
     @IBOutlet weak var lineChart: LineChartView!
@@ -22,12 +25,12 @@ class HistoryViewController: UIViewController {
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     let ride = [RideData]()
     var myCoordinate = [MyLocation]()
+
+    var distanceForChart = [Double]()
+    var dateForChart = [String]()
     
-    var months: [String]!
-    var distance: [Double] = [0.0]
     
-    //
-    //MARK: - View Life Cycle
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,13 +57,7 @@ class HistoryViewController: UIViewController {
             let fetchError = error as NSError
             print("\(fetchError), \(fetchError.userInfo)")
         }
-        
-        // chart view
-        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0]
-        
-        setChart(months, values: unitsSold)
-
+        fetchDataForChart()
     }
     
     //
@@ -145,13 +142,12 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
         let records = fetchedResultsController.objectAtIndexPath(indexPath) as! RideHistory
         
         if let distance = records.distance?.doubleValue,
-            let totalTime = records.tatalTime?.intValue,
+            let totalTime = records.totalTime?.intValue,
             let date = records.date{
             
             setupDataLabel(cell, date: date)
             setupTimeLabel(cell, totalTime: Int(totalTime))
             setupDistanceLabel(cell, distance: distance)
-            
         }
     }
     
@@ -164,10 +160,11 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
+        
         let records = fetchedResultsController.objectAtIndexPath(indexPath) as! RideHistory
         
         if let distance = records.distance?.doubleValue,
-            let totalTime = records.tatalTime?.intValue,
+            let totalTime = records.totalTime?.intValue,
             let date = records.date {
                 statisticViewController.distance = distance
                 statisticViewController.totalTime = Int(totalTime)
@@ -221,6 +218,34 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
 
 //MARK: - Chart View
 extension HistoryViewController: ChartViewDelegate{
+    
+    func fetchDataForChart(){
+        for section in 0..<tableView.numberOfSections {
+            for row in 0..<tableView.numberOfRowsInSection(section) {
+                let indexPath = NSIndexPath(forRow: row, inSection: section)
+                
+                let records = fetchedResultsController.objectAtIndexPath(indexPath) as! RideHistory
+                
+                guard
+                    let date = records.date,
+                    let distance = records.distance?.doubleValue
+                    
+                    else {
+                        print("\(self.dynamicType) Fetch Data For Charts failed.")
+                        continue
+                }
+                
+                dateForChart.append(dateString(date))
+                distanceForChart.append(distance)
+            }
+        }
+        dateForChart = dateForChart.reverse()
+        distanceForChart = distanceForChart.reverse()
+        RideManager.sharedManager.dateForChart = dateForChart
+        RideManager.sharedManager.distanceForChart = distanceForChart
+        setChart(dateForChart, values: distanceForChart)
+    }
+    
 
     func setChart(dataPoints: [String], values: [Double]) {
         
@@ -274,6 +299,17 @@ extension HistoryViewController: ChartViewDelegate{
         lineChart.legend.enabled = false  // remove legend icon
         lineChart.descriptionText = ""   // clear description
         
+    }
+    
+    func dateString(date: NSDate) -> String{
+        
+        let recordDate = date
+        let dateFormatter = NSDateFormatter()
+        
+        dateFormatter.dateFormat = "MM/dd"
+        
+        let title = dateFormatter.stringFromDate(recordDate)
+        return title
     }
 
 

@@ -20,7 +20,7 @@ extension RideHistory {
     
     @NSManaged var date: NSDate?
     @NSManaged var distance: NSNumber?
-    @NSManaged var tatalTime: NSNumber?
+    @NSManaged var totalTime: NSNumber?
     @NSManaged var weight: NSNumber?
     @NSManaged var locations: NSOrderedSet?
     

@@ -25,6 +25,8 @@ class StatisticViewController: UIViewController {
     @IBOutlet weak var avgSpeedLabel: UILabel!
     @IBOutlet weak var caloriesLabel: UILabel!
     
+    weak var delegate: DismissDelegate?
+    
     let gradientLayer = CAGradientLayer()
     var date = ""
     let calorieCalculator = CalorieCalculator()
@@ -32,7 +34,7 @@ class StatisticViewController: UIViewController {
     var distance = 0.0
     var location = [CLLocation]()
     
-    //MARK: - View Life Cycle
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLabel(totalTime: totalTime, distance: distance)
@@ -54,6 +56,7 @@ class StatisticViewController: UIViewController {
     
     func clickedClose(){
         
+        self.delegate?.showHomaPages()
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }

@@ -29,6 +29,10 @@ struct RideData{
 class RideManager{
     
     static let sharedManager = RideManager()
+    var distanceForChart = [Double]()
+    var dateForChart = [String]()
+    
+    
     
 //    var myCoordinate = [MyLocation]()
     var historyData = [RideData]()
@@ -61,7 +65,7 @@ class RideManager{
 //                }
                 
                 if let distance = result.distance as? Double,
-                    let totalTime = result.tatalTime as? Int,
+                    let totalTime = result.totalTime as? Int,
                     let date = result.date{
                     
                     RideManager.sharedManager.historyData.append(

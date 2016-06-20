@@ -9,9 +9,15 @@
 import UIKit
 import MMDrawerController
 import Charts
+import CoreData
+
+protocol ChartDataDelegate: class{
+    
+    var distanceForChart: [Double] { get }
+    var dateForChart: [String] { get }
+}
 
 struct Common {
-    
     static let screenWidth = UIScreen.mainScreen().bounds.maxX
 }
 
@@ -28,14 +34,26 @@ class HomePageViewController: UIViewController, ChartViewDelegate {
     }
     
     @IBAction func letsRideButtonDidClicked(sender: AnyObject) {
+        hideInformationLabels()
         let trackingViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TrackingViewController") as! TrackingViewController
         let trackingNavController = UINavigationController.init(rootViewController: trackingViewController)
+        trackingViewController.delegate = self
         trackingViewController.navigationController?.modalPresentationStyle = .OverCurrentContext
         self.navigationController?.presentViewController(trackingNavController, animated: true, completion: nil)
         
     }
     
-    //MARK: - ViewLife Cycle
+    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    var distanceForChart = [Double]()
+    var dateForChart = [String]()
+}
+
+
+
+
+//MARK: - View Lifecycle
+extension HomePageViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,39 +61,46 @@ class HomePageViewController: UIViewController, ChartViewDelegate {
         lineChartView.delegate = self
         setupNavigationBar()
         setupButton()
+        getDataFromCoreData()
+        setChart(dateForChart, values: distanceForChart)
+    }
+}
+
+
+
+//MARK: - LineChart View
+extension HomePageViewController{
+    func getDataFromCoreData() {
         
+        let request = NSFetchRequest(entityName: "RideHistory")
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        do {
+            let results = try moc.executeFetchRequest(request) as! [RideHistory]
+            for result in results {
+                
+                if let distance = result.distance as? Double,
+                    let date = result.date{
+                    distanceForChart.append(distance)
+                    dateForChart.append(dateString(date))
+                }
+            }
+        }catch{
+            fatalError("Failed to fetch data: \(error)")
+        }
         
-        //chart view
-        // chart view
-        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0]
-        
-        setChart(months, values: unitsSold)
+        distanceForChart = distanceForChart.reverse()
+        dateForChart = dateForChart.reverse()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    //MARK- Setup Items
-    func setupNavigationBar(){
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.translucent = true
+    func dateString(date: NSDate) -> String{
         
-        let logo = UIImage(named: "icon-bike.png")?.imageWithRenderingMode(.AlwaysTemplate)
-        let imageView = UIImageView(image:logo)
-        imageView.tintColor = UIColor.mrWhiteColor()
-        self.navigationItem.titleView = imageView
+        let recordDate = date
+        let dateFormatter = NSDateFormatter()
         
-    }
-    
-    func setupButton(){
-        letsRideButton.layer.cornerRadius = 30
-        letsRideLabel.text = "Let's Ride"
-        letsRideLabel.font = UIFont.mrSFUITextMediumFont(30)
-        letsRideLabel.textColor = UIColor.mrLightblueColor()
+        dateFormatter.dateFormat = "MM/dd"
+        
+        let title = dateFormatter.stringFromDate(recordDate)
+        return title
     }
     
     func setChart(dataPoints: [String], values: [Double]) {
@@ -86,7 +111,6 @@ class HomePageViewController: UIViewController, ChartViewDelegate {
             let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
             dataEntries.append(dataEntry)
         }
-        
         
         let chartDataSet = LineChartDataSet(yVals: dataEntries, label: "Units Sold")
         let chartData = LineChartData(xVals: dataPoints, dataSet: chartDataSet)
@@ -131,5 +155,50 @@ class HomePageViewController: UIViewController, ChartViewDelegate {
         lineChartView.legend.enabled = false  // remove legend icon (Lower left corner)
         lineChartView.descriptionText = ""   // clear description
         
+    }
+}
+
+
+
+//MARK: - Setup UI
+extension HomePageViewController{
+    
+    func setupNavigationBar(){
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.translucent = true
+        
+        let logo = UIImage(named: "icon-bike.png")?.imageWithRenderingMode(.AlwaysTemplate)
+        let imageView = UIImageView(image:logo)
+        imageView.tintColor = UIColor.mrWhiteColor()
+        self.navigationItem.titleView = imageView
+        
+    }
+    
+    func setupButton(){
+        letsRideButton.layer.cornerRadius = 30
+        letsRideLabel.text = "Let's Ride"
+        letsRideLabel.font = UIFont.mrSFUITextMediumFont(30)
+        letsRideLabel.textColor = UIColor.mrLightblueColor()
+    }
+    
+    func hideInformationLabels(){
+        for subview in view.subviews where subview is UILabel{
+            subview.hidden = true
+        }
+        letsRideButton.hidden = true
+    }
+}
+
+
+
+//MARK: - Implement DismissDelegate Function
+extension HomePageViewController: DismissDelegate{
+    func showHomaPages(){
+        for subview in view.subviews where subview is UILabel{
+            subview.hidden = false
+        }
+        letsRideButton.hidden = false
     }
 }

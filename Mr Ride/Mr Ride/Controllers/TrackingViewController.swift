@@ -11,6 +11,11 @@ import CoreData
 import MapKit
 import Charts
 
+protocol DismissDelegate: class{
+    func showHomaPages()
+}
+
+
 class TrackingViewController: UIViewController{
     
     @IBOutlet weak var calBurnedLabel: UILabel!
@@ -22,8 +27,11 @@ class TrackingViewController: UIViewController{
     @IBOutlet weak var buttonRingView: UIView!
     @IBOutlet weak var recordTimeLabel: UILabel!
     @IBAction func recordButtonDidClicked(sender: AnyObject) {
+        showFinish()
         stopwatch()
     }
+    
+    weak var delegate: DismissDelegate?
     
     let ride = [RideData]()
     let calorieCalculator = CalorieCalculator()
@@ -50,8 +58,6 @@ class TrackingViewController: UIViewController{
         setupGradientView()
         mapViewController.myLocations.removeAll()
         mapViewController.showUserLocation()
-//        self.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-//        self.navigationController?.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -124,8 +130,6 @@ extension TrackingViewController{
     func setupNavigationBar(){
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.clickedCancel))
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Finish", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.clickedFinish))
-        
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
@@ -134,9 +138,13 @@ extension TrackingViewController{
         setupDate()
     }
     
+    func showFinish(){
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Finish", style: UIBarButtonItemStyle.Done, target: self, action: #selector(self.clickedFinish))
+    }
+    
     func clickedCancel(){
         
-        //navigationController?.popToRootViewControllerAnimated(true)
+        self.delegate?.showHomaPages()
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
@@ -151,6 +159,10 @@ extension TrackingViewController{
         }
         
         let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
+        statisticViewController.navigationController?.modalPresentationStyle = .OverCurrentContext
+        statisticViewController.delegate = delegate
+        
+//
         statisticViewController.setupNavigationBar(Mode.closeMode)
         
         statisticViewController.distance = distance
@@ -158,6 +170,8 @@ extension TrackingViewController{
         statisticViewController.location = location
         
         mapViewController.locationManager.stopUpdatingLocation()
+        
+        statisticViewController.view.backgroundColor = UIColor.clearColor()
         
         self.navigationController?.pushViewController(statisticViewController, animated: true)
     }
@@ -228,14 +242,14 @@ extension TrackingViewController{
         
         let saveRide = NSEntityDescription.insertNewObjectForEntityForName("RideHistory", inManagedObjectContext: moc) as! RideHistory
         
-        //fake date for testing tableView section
+//        //fake date for testing tableView section
 //        let myDateString = "2016-06-04"
-//        fakeDate(saveRide: saveRide, myDateString: myDateString)
+//        fakeDate(saveRide, myDateString: myDateString)
 
         
         saveRide.date = NSDate()
         saveRide.distance = mapViewController.distance
-        saveRide.tatalTime = totalFraction
+        saveRide.totalTime = totalFraction
         saveRide.weight = 50.0
         
         let locations = mapViewController.myLocations

@@ -28,6 +28,7 @@
 		2611F1E51CFD887B0027EB70 /* CalorieCalulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2611F1E41CFD887B0027EB70 /* CalorieCalulator.swift */; };
 		261330471D0917F5000C88CC /* HistoryTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261330461D0917F5000C88CC /* HistoryTableHeader.swift */; };
 		261330491D091817000C88CC /* HistoryTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 261330481D091817000C88CC /* HistoryTableHeader.xib */; };
+		262473C61D17902C004ABB0D /* InformationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262473C51D17902C004ABB0D /* InformationMapViewController.swift */; };
 		267386921CF2C8D9000D53E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267386911CF2C8D9000D53E3 /* AppDelegate.swift */; };
 		267386971CF2C8D9000D53E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 267386951CF2C8D9000D53E3 /* Main.storyboard */; };
 		2673869A1CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 267386981CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld */; };
@@ -65,6 +66,7 @@
 		2611F1E41CFD887B0027EB70 /* CalorieCalulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalorieCalulator.swift; sourceTree = "<group>"; };
 		261330461D0917F5000C88CC /* HistoryTableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableHeader.swift; sourceTree = "<group>"; };
 		261330481D091817000C88CC /* HistoryTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableHeader.xib; sourceTree = "<group>"; };
+		262473C51D17902C004ABB0D /* InformationMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationMapViewController.swift; sourceTree = "<group>"; };
 		2673868E1CF2C8D9000D53E3 /* Mr Ride.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mr Ride.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		267386911CF2C8D9000D53E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		267386961CF2C8D9000D53E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		267386B41CF2FD66000D53E3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				262473C51D17902C004ABB0D /* InformationMapViewController.swift */,
 				2611F1C61CF5940F0027EB70 /* StatisticViewController.swift */,
 				2611F1E21CFD71AA0027EB70 /* MapViewController.swift */,
 				2611F1C41CF4330E0027EB70 /* TrackingViewController.swift */,
@@ -364,6 +367,7 @@
 				261330471D0917F5000C88CC /* HistoryTableHeader.swift in Sources */,
 				267386921CF2C8D9000D53E3 /* AppDelegate.swift in Sources */,
 				2611F1D31CFBCCE90027EB70 /* HistoryTableViewCell.swift in Sources */,
+				262473C61D17902C004ABB0D /* InformationMapViewController.swift in Sources */,
 				267386B71CF2FD66000D53E3 /* HomePageViewController.swift in Sources */,
 				2611F1E51CFD887B0027EB70 /* CalorieCalulator.swift in Sources */,
 				267386B81CF2FD66000D53E3 /* SideBarViewController.swift in Sources */,
