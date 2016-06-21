@@ -9,4 +9,5 @@ target 'Mr Ride' do
   pod 'MMDrawerController', '~> 0.6'
   pod 'Charts', '~> 2.2.5'
   pod 'Alamofire', '~> 3.4'
+  pod 'SwiftyJSON', '~> 2.3'
 end

@@ -15,17 +15,20 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
+  - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - Charts (~> 2.2.5)
   - MMDrawerController (~> 0.6)
+  - SwiftyJSON (~> 2.3)
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 99889404065abcdcefbbc2fda46219a7ef582a8e
+PODFILE CHECKSUM: 06082d3fe756f95f434ffeff89b78669b1fe2301
 
 COCOAPODS: 1.0.0.rc.1
