@@ -8,15 +8,28 @@
 
 import UIKit
 import MMDrawerController
+import MapKit
 
 class InformationMapViewController: UIViewController {
+    @IBOutlet weak var areaLabel: UIView!
 
+    @IBOutlet weak var arrowImage: UIImageView!
+    @IBOutlet weak var ButtonTitleLabel: UILabel!
+    @IBOutlet weak var AddressLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var minsLabel: UIView!
+    @IBOutlet weak var detailMapView: MKMapView!
+    
+    @IBAction func pickerButton(sender: AnyObject) {
+    }
+    @IBOutlet weak var dashboard: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-         setupNavigationBar()
+        setupNavigationBar()
+        setupMapRasious()
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -37,6 +50,10 @@ class InformationMapViewController: UIViewController {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.homePageContainer.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
         
+    }
+    
+    func setupMapRasious(){
+        detailMapView.layer.cornerRadius = 10
     }
     
 
