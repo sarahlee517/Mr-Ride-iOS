@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (3.4.1)
   - Charts (2.2.5):
     - Charts/Core (= 2.2.5)
   - Charts/Core (2.2.5)
@@ -16,13 +17,15 @@ PODS:
     - MMDrawerController/Core
 
 DEPENDENCIES:
+  - Alamofire (~> 3.4)
   - Charts (~> 2.2.5)
   - MMDrawerController (~> 0.6)
 
 SPEC CHECKSUMS:
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
 
-PODFILE CHECKSUM: 988c53db55c683b60377cf851b737309161e298f
+PODFILE CHECKSUM: 99889404065abcdcefbbc2fda46219a7ef582a8e
 
 COCOAPODS: 1.0.0.rc.1
