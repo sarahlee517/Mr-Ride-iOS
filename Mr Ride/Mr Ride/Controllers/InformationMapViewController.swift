@@ -10,7 +10,7 @@ import UIKit
 import MMDrawerController
 import MapKit
 
-class InformationMapViewController: UIViewController {
+class InformationMapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     @IBOutlet weak var areaLabel: UIView!
 
     @IBOutlet weak var arrowImage: UIImageView!
@@ -23,16 +23,36 @@ class InformationMapViewController: UIViewController {
     @IBAction func pickerButton(sender: AnyObject) {
     }
     @IBOutlet weak var dashboard: UIView!
+    
+    let locationManager = CLLocationManager()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        setupMapRasious()
-        // Do any additional setup after loading the view.
+        setupMap()
+        PublicToiletManager.sharedManager.getPublicToilet(){ data in
+
+            self.addAnnotations(data)
+        }
+  
+        
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+        self.detailMapView.showsUserLocation = true
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        
+        let newRegion = MKCoordinateRegion(center: detailMapView.userLocation.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
+        detailMapView.setRegion(newRegion, animated: true)
+        
+    }
+    
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        
     }
     
     func setupNavigationBar(){
@@ -52,8 +72,23 @@ class InformationMapViewController: UIViewController {
         
     }
     
-    func setupMapRasious(){
+    func setupMap(){
         detailMapView.layer.cornerRadius = 10
+    }
+    
+    func addAnnotations(data: [PublicToiletModel]){
+        if data.count > 0{
+            var annotations = [MKPointAnnotation]()
+            
+            for toilet in data{                
+                let annotation = MKPointAnnotation()
+                annotation.title = toilet.name
+                annotation.coordinate = toilet.coordinate
+                annotations.append(annotation)
+            }
+            
+            detailMapView.addAnnotations(annotations)
+        }else { print("no data") }
     }
     
 

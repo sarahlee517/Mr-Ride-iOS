@@ -15,7 +15,7 @@ import Charts
 
 
 
-class HistoryViewController: UIViewController, ChartDataDelegate {
+class HistoryViewController: UIViewController {
     let gradientLayer = CAGradientLayer()
     
     @IBOutlet weak var lineChart: LineChartView!

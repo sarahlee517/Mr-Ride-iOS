@@ -25,7 +25,7 @@
                                     <constraint firstAttribute="height" constant="122" id="jY4-7q-zQm"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.5 km" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIe-KG-i2c">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.5 km" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="iIe-KG-i2c">
                                 <rect key="frame" x="37" y="164" width="301" height="95"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="95" id="qLr-4y-k1U"/>
@@ -175,10 +175,10 @@
                                 <rect key="frame" x="0.0" y="354" width="375" height="313"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgZ-PT-nxH">
-                                <rect key="frame" x="0.0" y="354" width="375" height="313"/>
+                                <rect key="frame" x="0.0" y="352" width="375" height="315"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pn9-vP-gqD" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="22" y="40" width="331" height="153"/>
+                                <rect key="frame" x="20" y="40" width="335" height="153"/>
                                 <color key="backgroundColor" red="0.38823530077934265" green="0.84313726425170898" blue="0.96470588445663452" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="153" id="KJW-Xe-Ziz"/>
@@ -191,14 +191,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.38823530077934265" green="0.84313726425170898" blue="0.96470588445663452" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="dgZ-PT-nxH" firstAttribute="top" secondItem="2Oi-5w-pvF" secondAttribute="bottom" constant="334" id="1oD-7V-fVd"/>
+                            <constraint firstItem="dgZ-PT-nxH" firstAttribute="top" secondItem="2Oi-5w-pvF" secondAttribute="bottom" constant="332" id="1oD-7V-fVd"/>
                             <constraint firstAttribute="trailing" secondItem="dgZ-PT-nxH" secondAttribute="trailing" id="6MG-YQ-HPl"/>
-                            <constraint firstAttribute="trailing" secondItem="Pn9-vP-gqD" secondAttribute="trailing" constant="22" id="9YI-R4-EhD"/>
+                            <constraint firstAttribute="trailing" secondItem="Pn9-vP-gqD" secondAttribute="trailing" constant="20" id="9YI-R4-EhD"/>
                             <constraint firstItem="xHc-rj-OqW" firstAttribute="leading" secondItem="Lr1-F3-543" secondAttribute="leading" id="NX6-sz-dc0"/>
                             <constraint firstItem="ksV-bq-cMt" firstAttribute="top" secondItem="dgZ-PT-nxH" secondAttribute="bottom" id="VfB-PY-TBE"/>
                             <constraint firstItem="ksV-bq-cMt" firstAttribute="top" secondItem="ZDw-ul-3Z6" secondAttribute="bottom" id="YLQ-Jp-jHd"/>
                             <constraint firstAttribute="trailing" secondItem="ZDw-ul-3Z6" secondAttribute="trailing" constant="22" id="ZzX-LJ-JTu"/>
-                            <constraint firstItem="Pn9-vP-gqD" firstAttribute="leading" secondItem="Lr1-F3-543" secondAttribute="leading" constant="22" id="aMj-LQ-Zfr"/>
+                            <constraint firstItem="Pn9-vP-gqD" firstAttribute="leading" secondItem="Lr1-F3-543" secondAttribute="leading" constant="20" id="aMj-LQ-Zfr"/>
                             <constraint firstItem="xHc-rj-OqW" firstAttribute="top" secondItem="2Oi-5w-pvF" secondAttribute="bottom" constant="334" id="e7Q-dT-Hpl"/>
                             <constraint firstItem="ksV-bq-cMt" firstAttribute="top" secondItem="xHc-rj-OqW" secondAttribute="bottom" id="fGK-qr-YCh"/>
                             <constraint firstItem="dgZ-PT-nxH" firstAttribute="leading" secondItem="Lr1-F3-543" secondAttribute="leading" id="fee-w6-dcS"/>
@@ -576,7 +576,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tOR-XE-j3D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="256.5" y="396.5"/>
+            <point key="canvasLocation" x="476.5" y="406.5"/>
         </scene>
         <!--Information Map View Controller-->
         <scene sceneID="Mhv-FU-0Gs">

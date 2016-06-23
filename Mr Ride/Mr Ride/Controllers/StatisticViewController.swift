@@ -55,7 +55,6 @@ class StatisticViewController: UIViewController {
     }
     
     func clickedClose(){
-        
         self.delegate?.showHomaPages()
         self.dismissViewControllerAnimated(true, completion: nil)
         

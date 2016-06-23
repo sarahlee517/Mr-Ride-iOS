@@ -11,12 +11,6 @@ import MMDrawerController
 import Charts
 import CoreData
 
-protocol ChartDataDelegate: class{
-    
-    var distanceForChart: [Double] { get }
-    var dateForChart: [String] { get }
-}
-
 struct Common {
     static let screenWidth = UIScreen.mainScreen().bounds.maxX
 }
@@ -196,6 +190,11 @@ extension HomePageViewController{
 //MARK: - Implement DismissDelegate Function
 extension HomePageViewController: DismissDelegate{
     func showHomaPages(){
+        
+        distanceForChart.removeAll()
+        dateForChart.removeAll()
+        getDataFromCoreData()
+        setChart(dateForChart, values: distanceForChart)
         for subview in view.subviews where subview is UILabel{
             subview.hidden = false
         }
