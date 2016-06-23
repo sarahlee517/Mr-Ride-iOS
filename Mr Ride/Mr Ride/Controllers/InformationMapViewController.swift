@@ -30,7 +30,7 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        setupMap()
+        setupMapCornerRadius()
         PublicToiletManager.sharedManager.getPublicToilet(){ data in
 
             self.addAnnotations(data)
@@ -55,6 +55,28 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
         
     }
     
+    
+    func addAnnotations(data: [PublicToiletModel]){
+        if data.count > 0{
+            var annotations = [MKPointAnnotation]()
+            
+            for toilet in data{                
+                let annotation = MKPointAnnotation()
+                annotation.title = toilet.name
+                annotation.coordinate = toilet.coordinate
+                annotations.append(annotation)
+            }
+            
+            detailMapView.addAnnotations(annotations)
+        }else { print("no data") }
+    }
+
+}
+
+
+//MARK: - Setup UI
+extension InformationMapViewController{
+    
     func setupNavigationBar(){
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon-menu.png"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.doneSlide))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
@@ -72,34 +94,9 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
         
     }
     
-    func setupMap(){
+    func setupMapCornerRadius(){
         detailMapView.layer.cornerRadius = 10
     }
-    
-    func addAnnotations(data: [PublicToiletModel]){
-        if data.count > 0{
-            var annotations = [MKPointAnnotation]()
-            
-            for toilet in data{                
-                let annotation = MKPointAnnotation()
-                annotation.title = toilet.name
-                annotation.coordinate = toilet.coordinate
-                annotations.append(annotation)
-            }
-            
-            detailMapView.addAnnotations(annotations)
-        }else { print("no data") }
-    }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
