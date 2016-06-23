@@ -8,16 +8,46 @@
 
 import UIKit
 import CoreData
+import MMDrawerController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var homePageContainer: MMDrawerController!
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let homePageViewController = mainStoryboard.instantiateViewControllerWithIdentifier("HomePageViewController")
+        
+        let sideBarPageViewController = mainStoryboard.instantiateViewControllerWithIdentifier("SideBarViewController")
+
+        let homePageNav = UINavigationController(rootViewController: homePageViewController)
+//        let sideBarNav = UINavigationController(rootViewController: sideBarPageViewController)
+//        sideBarNav.navigationBar.translucent = false
+        // create instance of MMDrawerController
+        homePageContainer = MMDrawerController(centerViewController: homePageNav, leftDrawerViewController: sideBarPageViewController)
+        homePageContainer.maximumLeftDrawerWidth = Common.screenWidth * 0.70
+        
+        homePageContainer.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
+        homePageContainer.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.All
+        
+        window!.rootViewController = homePageContainer
+        window!.makeKeyAndVisible()
+        
         return true
+    }
+    
+    var shouldSupportAllOrientation = false
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+        if (shouldSupportAllOrientation == true){
+            return UIInterfaceOrientationMask.All
+        }
+        return UIInterfaceOrientationMask.Portrait
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -45,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - Core Data stack
-
+    
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.appworks-school-sarahlee.Mr_Ride" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)

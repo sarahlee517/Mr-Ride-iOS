@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HistoryTableHeader" customModule="Mr_Ride" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="34"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" restorationIdentifier="HistoryTableHeader" translatesAutoresizingMaskIntoConstraints="NO" id="9ZW-FX-24g" userLabel="backgroundView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="34"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Pu-Eo-1Jl" userLabel="headerView">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="24"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MonthLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnC-3z-y5W">
+                                    <rect key="frame" x="20" y="0.0" width="560" height="24"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                    <color key="textColor" red="0.054901961237192154" green="0.20784313976764679" blue="0.25098040699958801" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="pnC-3z-y5W" firstAttribute="height" secondItem="9Pu-Eo-1Jl" secondAttribute="height" id="5Mj-cL-yVX"/>
+                                <constraint firstItem="pnC-3z-y5W" firstAttribute="centerX" secondItem="9Pu-Eo-1Jl" secondAttribute="centerX" id="Cfn-cs-BYT"/>
+                                <constraint firstItem="pnC-3z-y5W" firstAttribute="centerY" secondItem="9Pu-Eo-1Jl" secondAttribute="centerY" id="GpO-lx-zdh"/>
+                                <constraint firstAttribute="height" constant="24" id="U24-oD-v8v"/>
+                                <constraint firstItem="pnC-3z-y5W" firstAttribute="leading" secondItem="9Pu-Eo-1Jl" secondAttribute="leading" constant="20" id="mNd-bR-OO1"/>
+                                <constraint firstItem="pnC-3z-y5W" firstAttribute="height" secondItem="9Pu-Eo-1Jl" secondAttribute="height" id="qhk-of-zDz"/>
+                                <constraint firstItem="pnC-3z-y5W" firstAttribute="width" secondItem="9Pu-Eo-1Jl" secondAttribute="width" id="yxb-kG-eU2"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="5Mj-cL-yVX"/>
+                                    <exclude reference="yxb-kG-eU2"/>
+                                </mask>
+                            </variation>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.89815217110000001" blue="0.95031690329999996" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="9Pu-Eo-1Jl" firstAttribute="top" secondItem="9ZW-FX-24g" secondAttribute="top" id="eu3-73-kNk"/>
+                        <constraint firstAttribute="trailing" secondItem="9Pu-Eo-1Jl" secondAttribute="trailing" id="ssk-l4-0s5"/>
+                        <constraint firstAttribute="bottom" secondItem="9Pu-Eo-1Jl" secondAttribute="bottom" constant="10" id="yd7-14-c4u"/>
+                        <constraint firstItem="9Pu-Eo-1Jl" firstAttribute="leading" secondItem="9ZW-FX-24g" secondAttribute="leading" id="ysc-Jw-wTL"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="9ZW-FX-24g" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="3h3-NY-40K"/>
+                <constraint firstItem="9ZW-FX-24g" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DuC-IF-crv"/>
+                <constraint firstAttribute="trailing" secondItem="9ZW-FX-24g" secondAttribute="trailing" id="Lvm-SR-NFX"/>
+                <constraint firstAttribute="bottom" secondItem="9ZW-FX-24g" secondAttribute="bottom" id="vKZ-Z6-iOG"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="backgrandView" destination="9ZW-FX-24g" id="Ks3-S1-Y59"/>
+                <outlet property="headerView" destination="9Pu-Eo-1Jl" id="5zA-Q5-EBa"/>
+                <outlet property="monthLabel" destination="pnC-3z-y5W" id="Rv1-bZ-6Cl"/>
+            </connections>
+            <point key="canvasLocation" x="395" y="333"/>
+        </view>
+    </objects>
+</document>
