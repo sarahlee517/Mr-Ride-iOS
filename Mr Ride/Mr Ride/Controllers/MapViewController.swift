@@ -76,6 +76,7 @@ extension MapViewController{
             speed = locationManager.location!.speed * 3.6
             
             trackingViewController!.distanceLabel.text = String(format: "%.1f m", distance)
+            if speed < 0 { speed = 0 }
             trackingViewController!.speedLabel.text = String(format: "%.1f km / h", speed)
             
             trackingViewController!.distance = distance

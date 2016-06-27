@@ -43,6 +43,10 @@ class StatisticViewController: UIViewController {
         setupMap(location)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        view.backgroundColor = UIColor.clearColor()
+    }
     
     func setupNavigationBar(selectedMode:Mode){
         

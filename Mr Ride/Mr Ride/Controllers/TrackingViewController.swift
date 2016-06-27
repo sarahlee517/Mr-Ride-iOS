@@ -171,7 +171,7 @@ extension TrackingViewController{
         
         mapViewController.locationManager.stopUpdatingLocation()
         
-        statisticViewController.view.backgroundColor = UIColor.clearColor()
+//        statisticViewController.view.backgroundColor = UIColor.clearColor()
         
         self.navigationController?.pushViewController(statisticViewController, animated: true)
     }

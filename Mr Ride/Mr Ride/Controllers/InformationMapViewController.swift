@@ -72,7 +72,6 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
         self.pickerViewToolBar.layer.borderWidth = 1
         pickerViewToolBar.layer.borderColor = UIColor.mrBlack15Color().CGColor
         
-//        pickerView.backgroundColor = UIColor.clearColor()
 
     
     }
@@ -107,6 +106,22 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        var imageName = "icon-station"
+        
+        if let myAnnotation = annotation as? MyAnnotaion{
+            switch myAnnotation.type! {
+            case "toilet":
+                imageName = "icon-toilet"
+            default:
+                imageName = "icon-station"
+            }
+        }
+        
+        
         let annotationView = MKAnnotationView()
         annotationView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         annotationView.layer.cornerRadius = annotationView.frame.width / 2
@@ -117,7 +132,7 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
         
         let toiletView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         toiletView.center = CGPointMake(annotationView.frame.width / 2, annotationView.frame.height / 2 )
-        toiletView.backgroundColor = UIColor(patternImage: UIImage(named: "icon-toilet")!)
+        toiletView.backgroundColor = UIColor(patternImage: UIImage(named: imageName)!)
         annotationView.addSubview(toiletView)
         
         return annotationView
@@ -126,7 +141,7 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
     //=======================
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         
-        let newRegion = MKCoordinateRegion(center: detailMapView.userLocation.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
+        let newRegion = MKCoordinateRegion(center: detailMapView.userLocation.coordinate, span: MKCoordinateSpanMake(0.05, 0.05))
         detailMapView.setRegion(newRegion, animated: true)
         
     }
@@ -134,12 +149,27 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         
         dashboard.hidden = false
+        
         view.backgroundColor = UIColor.mrLightblueColor()
         
         if let annotation = view.annotation as? MyAnnotaion{
-            titleLabel.text = annotation.title
-            AddressLabel.text = annotation.address
-            categoryLabel.text = annotation.category
+            switch annotation.type! {
+            case "toilet":
+                titleLabel.text = annotation.title
+                AddressLabel.text = annotation.address
+                categoryLabel.text = annotation.category
+            default:
+                titleLabel.text = annotation.title
+                AddressLabel.text = annotation.address
+                categoryLabel.text = annotation.category
+            }
+
+        }
+    }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if view.annotation is MyAnnotaion{
+            
         }
     }
     
@@ -158,7 +188,7 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
             
             for toilet in data{
                 
-                let annotation = MyAnnotaion(
+                let annotation = MyAnnotaion(type: "toilet",
                     address: toilet.address, category: toilet.Category)
                 annotation.title = toilet.name
                 annotation.coordinate = toilet.coordinate
@@ -179,7 +209,7 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
             
             for station in data{
                 
-                let annotation = MyAnnotaion(
+                let annotation = MyAnnotaion(type: "station",
                     address: station.address, category: station.district)
                 annotation.title = station.name
                 annotation.subtitle = String(station.numberOfRemainingBikes)
