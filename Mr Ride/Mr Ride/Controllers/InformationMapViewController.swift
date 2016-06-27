@@ -10,6 +10,8 @@ import UIKit
 import MMDrawerController
 import MapKit
 
+//todo: 1. move away from user location, 2. annotation detail view is missing, 3. home page with real data, 4. connect crash analysis services
+
 class InformationMapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate{
     @IBOutlet weak var areaLabel: UIView!
 
