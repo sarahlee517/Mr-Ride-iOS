@@ -11,11 +11,12 @@ import CoreLocation
 
 struct PublicToiletModelHelper{
     struct JSONKey {
-        static let District = "行政區"
+        static let Category = "類別"
         static let Longtitude = "經度"
         static let Latitude = "緯度"
         static let Name = "單位名稱"
         static let Address = "地址"
+        
     }
     
     
@@ -26,7 +27,7 @@ struct PublicToiletModelHelper{
     
     func parsePublicToilet(json json: JSON) throws -> PublicToiletModel{
         
-        guard let district = json[JSONKey.District].string else { throw JSONError.MissingDistrict }
+        guard let category = json[JSONKey.Category].string else { throw JSONError.MissingDistrict }
         
         let numberFormatter = NSNumberFormatter()
         
@@ -41,7 +42,7 @@ struct PublicToiletModelHelper{
         guard let address = json[JSONKey.Address].string else { throw JSONError.MissingAddress }
         
         let publicToilet = PublicToiletModel(
-            district: district,
+            Category: category,
             coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
             name: name,
             address: address

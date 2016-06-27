@@ -57,6 +57,7 @@ extension HomePageViewController{
         setupButton()
         getDataFromCoreData()
         setChart(dateForChart, values: distanceForChart)
+    
     }
 }
 

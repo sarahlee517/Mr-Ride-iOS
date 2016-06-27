@@ -10,7 +10,7 @@ import UIKit
 import MMDrawerController
 import MapKit
 
-class InformationMapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class InformationMapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate{
     @IBOutlet weak var areaLabel: UIView!
 
     @IBOutlet weak var arrowImage: UIImageView!
@@ -20,30 +20,110 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
     @IBOutlet weak var minsLabel: UIView!
     @IBOutlet weak var detailMapView: MKMapView!
     
+    @IBOutlet weak var categoryLabel: UILabel!
     @IBAction func pickerButton(sender: AnyObject) {
+        ButtonTitleLabel.userInteractionEnabled = false
+        pickerView.hidden = false
+        pickerViewToolBar.hidden = false
     }
     @IBOutlet weak var dashboard: UIView!
     
+    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var pickerViewToolBar: UIView!
+    @IBAction func pickerCancelButton(sender: AnyObject) {
+        
+        self.pickerView.hidden = true
+        self.pickerViewToolBar.hidden = true
+        
+    }
+
+    @IBAction func pickerViewDoneButton(sender: AnyObject) {
+        
+        self.pickerView.hidden = true
+        self.pickerViewToolBar.hidden = true
+        
+    }
     let locationManager = CLLocationManager()
     
+    let pickerData = ["Toilet", "Ubike Station"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        setupMapCornerRadius()
+        setupViews()
         PublicToiletManager.sharedManager.getPublicToilet(){ data in
 
-            self.addAnnotations(data)
+            self.addToiletAnnotations(data)
         }
   
-        
+        self.detailMapView.delegate = self
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.detailMapView.showsUserLocation = true
+        
+        //picker view
+        self.pickerView.dataSource = self
+        self.pickerView.delegate = self
+        self.pickerView.hidden = true
+        self.pickerViewToolBar.hidden = true
+        self.pickerView.backgroundColor = UIColor.whiteColor()
+        self.pickerViewToolBar.layer.borderWidth = 1
+        pickerViewToolBar.layer.borderColor = UIColor.mrBlack15Color().CGColor
+        
+//        pickerView.backgroundColor = UIColor.clearColor()
+
+    
     }
     
+    // implement pickerview delegate 
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count;
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch row {
+        case 0:
+            ButtonTitleLabel.text = pickerData[row]
+            PublicToiletManager.sharedManager.getPublicToilet(){ data in
+                self.addToiletAnnotations(data)
+            }
+        default:
+            ButtonTitleLabel.text = pickerData[row]
+            YouBikeManager.sharedManager.getStation(){ data in
+                self.addStationAnnotations(data)
+            }
+        }
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let annotationView = MKAnnotationView()
+        annotationView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        annotationView.layer.cornerRadius = annotationView.frame.width / 2
+        annotationView.backgroundColor = UIColor.whiteColor()
+        annotationView.layer.shadowColor = UIColor.blackColor().CGColor
+        annotationView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        annotationView.layer.shadowOpacity = 0.5
+        
+        let toiletView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        toiletView.center = CGPointMake(annotationView.frame.width / 2, annotationView.frame.height / 2 )
+        toiletView.backgroundColor = UIColor(patternImage: UIImage(named: "icon-toilet")!)
+        annotationView.addSubview(toiletView)
+        
+        return annotationView
+    }
+
+    //=======================
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         
         let newRegion = MKCoordinateRegion(center: detailMapView.userLocation.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
@@ -53,15 +133,33 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         
+        dashboard.hidden = false
+        view.backgroundColor = UIColor.mrLightblueColor()
+        
+        if let annotation = view.annotation as? MyAnnotaion{
+            titleLabel.text = annotation.title
+            AddressLabel.text = annotation.address
+            categoryLabel.text = annotation.category
+        }
+    }
+    
+    func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
+        
+        view.backgroundColor = UIColor.whiteColor()
+        dashboard.hidden = true
     }
     
     
-    func addAnnotations(data: [PublicToiletModel]){
+    func addToiletAnnotations(data: [PublicToiletModel]){
+        
+        detailMapView.removeAnnotations(detailMapView.annotations)
         if data.count > 0{
-            var annotations = [MKPointAnnotation]()
+            var annotations = [MyAnnotaion]()
             
-            for toilet in data{                
-                let annotation = MKPointAnnotation()
+            for toilet in data{
+                
+                let annotation = MyAnnotaion(
+                    address: toilet.address, category: toilet.Category)
                 annotation.title = toilet.name
                 annotation.coordinate = toilet.coordinate
                 annotations.append(annotation)
@@ -71,7 +169,29 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
         }else { print("no data") }
     }
 
+    
+    func addStationAnnotations(data: [YouBikeModel]){
+        
+        detailMapView.removeAnnotations(detailMapView.annotations)
+        print(1)
+        if data.count > 0{
+            var annotations = [MyAnnotaion]()
+            
+            for station in data{
+                
+                let annotation = MyAnnotaion(
+                    address: station.address, category: station.district)
+                annotation.title = station.name
+                annotation.subtitle = String(station.numberOfRemainingBikes)
+                annotation.coordinate = station.coordinate
+                annotations.append(annotation)
+            }
+            
+            detailMapView.addAnnotations(annotations)
+        }else { print("no data") }
+    }
 }
+
 
 
 //MARK: - Setup UI
@@ -94,9 +214,18 @@ extension InformationMapViewController{
         
     }
     
-    func setupMapCornerRadius(){
+    func setupViews(){
         detailMapView.layer.cornerRadius = 10
+        
+        categoryLabel.layer.cornerRadius = 2
+        categoryLabel.layer.borderWidth = 0.5
+        categoryLabel.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        dashboard.layer.cornerRadius = 10
+        
+        dashboard.hidden = true
     }
 
 
 }
+

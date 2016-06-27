@@ -28,6 +28,7 @@
 		2611F1E51CFD887B0027EB70 /* CalorieCalulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2611F1E41CFD887B0027EB70 /* CalorieCalulator.swift */; };
 		261330471D0917F5000C88CC /* HistoryTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261330461D0917F5000C88CC /* HistoryTableHeader.swift */; };
 		261330491D091817000C88CC /* HistoryTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 261330481D091817000C88CC /* HistoryTableHeader.xib */; };
+		261B94E91D1BDF1B00BB88A6 /* MyAnnotaion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261B94E81D1BDF1B00BB88A6 /* MyAnnotaion.swift */; };
 		262473C61D17902C004ABB0D /* InformationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262473C51D17902C004ABB0D /* InformationMapViewController.swift */; };
 		267386921CF2C8D9000D53E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267386911CF2C8D9000D53E3 /* AppDelegate.swift */; };
 		267386971CF2C8D9000D53E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 267386951CF2C8D9000D53E3 /* Main.storyboard */; };
@@ -38,6 +39,9 @@
 		267386B81CF2FD66000D53E3 /* SideBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267386B61CF2FD66000D53E3 /* SideBarViewController.swift */; };
 		267386BC1CF30309000D53E3 /* UIColor+MRAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267386B91CF30309000D53E3 /* UIColor+MRAdditions.swift */; };
 		267386BD1CF30309000D53E3 /* UIFont+MRAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267386BA1CF30309000D53E3 /* UIFont+MRAdditions.swift */; };
+		2674531E1D20C1D70028E45B /* YouBikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674531D1D20C1D70028E45B /* YouBikeModel.swift */; };
+		267453201D20C1EB0028E45B /* YouBikeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674531F1D20C1EB0028E45B /* YouBikeManager.swift */; };
+		267453221D20C2070028E45B /* YouBikeManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267453211D20C2070028E45B /* YouBikeManagerHelper.swift */; };
 		26C053AA1D1A3BDF00E26E9B /* PublicToiletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C053A91D1A3BDF00E26E9B /* PublicToiletManager.swift */; };
 		26C053AC1D1A3C2B00E26E9B /* PublicToiletModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C053AB1D1A3C2B00E26E9B /* PublicToiletModel.swift */; };
 		26C053AE1D1A3C5B00E26E9B /* PublicToiletModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C053AD1D1A3C5B00E26E9B /* PublicToiletModelHelper.swift */; };
@@ -69,6 +73,7 @@
 		2611F1E41CFD887B0027EB70 /* CalorieCalulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalorieCalulator.swift; sourceTree = "<group>"; };
 		261330461D0917F5000C88CC /* HistoryTableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableHeader.swift; sourceTree = "<group>"; };
 		261330481D091817000C88CC /* HistoryTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableHeader.xib; sourceTree = "<group>"; };
+		261B94E81D1BDF1B00BB88A6 /* MyAnnotaion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAnnotaion.swift; sourceTree = "<group>"; };
 		262473C51D17902C004ABB0D /* InformationMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationMapViewController.swift; sourceTree = "<group>"; };
 		2673868E1CF2C8D9000D53E3 /* Mr Ride.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mr Ride.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		267386911CF2C8D9000D53E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +87,9 @@
 		267386B61CF2FD66000D53E3 /* SideBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarViewController.swift; sourceTree = "<group>"; };
 		267386B91CF30309000D53E3 /* UIColor+MRAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+MRAdditions.swift"; sourceTree = "<group>"; };
 		267386BA1CF30309000D53E3 /* UIFont+MRAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+MRAdditions.swift"; sourceTree = "<group>"; };
+		2674531D1D20C1D70028E45B /* YouBikeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouBikeModel.swift; sourceTree = "<group>"; };
+		2674531F1D20C1EB0028E45B /* YouBikeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouBikeManager.swift; sourceTree = "<group>"; };
+		267453211D20C2070028E45B /* YouBikeManagerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouBikeManagerHelper.swift; sourceTree = "<group>"; };
 		26C053A91D1A3BDF00E26E9B /* PublicToiletManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicToiletManager.swift; sourceTree = "<group>"; };
 		26C053AB1D1A3C2B00E26E9B /* PublicToiletModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicToiletModel.swift; sourceTree = "<group>"; };
 		26C053AD1D1A3C5B00E26E9B /* PublicToiletModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicToiletModelHelper.swift; sourceTree = "<group>"; };
@@ -127,9 +135,13 @@
 		2611F1D91CFBDF1F0027EB70 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				26C053A91D1A3BDF00E26E9B /* PublicToiletManager.swift */,
+				261B94E81D1BDF1B00BB88A6 /* MyAnnotaion.swift */,
 				26C053AB1D1A3C2B00E26E9B /* PublicToiletModel.swift */,
+				26C053A91D1A3BDF00E26E9B /* PublicToiletManager.swift */,
 				26C053AD1D1A3C5B00E26E9B /* PublicToiletModelHelper.swift */,
+				2674531D1D20C1D70028E45B /* YouBikeModel.swift */,
+				2674531F1D20C1EB0028E45B /* YouBikeManager.swift */,
+				267453211D20C2070028E45B /* YouBikeManagerHelper.swift */,
 				26CEF54D1D0010B900355E8C /* RideHistory.swift */,
 				26CEF54F1D0010B900355E8C /* Locations.swift */,
 				2611F1E41CFD887B0027EB70 /* CalorieCalulator.swift */,
@@ -368,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				267453221D20C2070028E45B /* YouBikeManagerHelper.swift in Sources */,
 				2611F1E31CFD71AA0027EB70 /* MapViewController.swift in Sources */,
 				2673869A1CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld in Sources */,
 				2611F1C51CF4330E0027EB70 /* TrackingViewController.swift in Sources */,
@@ -378,8 +391,10 @@
 				267386921CF2C8D9000D53E3 /* AppDelegate.swift in Sources */,
 				2611F1D31CFBCCE90027EB70 /* HistoryTableViewCell.swift in Sources */,
 				26C053AE1D1A3C5B00E26E9B /* PublicToiletModelHelper.swift in Sources */,
+				2674531E1D20C1D70028E45B /* YouBikeModel.swift in Sources */,
 				262473C61D17902C004ABB0D /* InformationMapViewController.swift in Sources */,
 				267386B71CF2FD66000D53E3 /* HomePageViewController.swift in Sources */,
+				267453201D20C1EB0028E45B /* YouBikeManager.swift in Sources */,
 				2611F1E51CFD887B0027EB70 /* CalorieCalulator.swift in Sources */,
 				267386B81CF2FD66000D53E3 /* SideBarViewController.swift in Sources */,
 				2611F1C71CF5940F0027EB70 /* StatisticViewController.swift in Sources */,
@@ -388,6 +403,7 @@
 				26C053AC1D1A3C2B00E26E9B /* PublicToiletModel.swift in Sources */,
 				26CEF5511D0010B900355E8C /* RideHistory.swift in Sources */,
 				267386BC1CF30309000D53E3 /* UIColor+MRAdditions.swift in Sources */,
+				261B94E91D1BDF1B00BB88A6 /* MyAnnotaion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,7 @@ import CoreLocation
 
 struct PublicToiletModel{
     
-    let district: String
+    let Category: String
     let coordinate: CLLocationCoordinate2D
     let name: String
     let address: String

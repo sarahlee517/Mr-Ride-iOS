@@ -20,7 +20,10 @@ class PublicToiletManager{
         
         let URL = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=008ed7cf-2340-4bc4-89b0-e258a5573be2"
         
-        var publicToilets: [PublicToiletModel] = []
+        if publicToilets.count > 0 {
+            completion(self.publicToilets)
+            return
+        }
         
         Alamofire.request(.GET, URL, encoding: .JSON).validate().responseData{
             response in
@@ -37,17 +40,15 @@ class PublicToiletManager{
                 do{
                     let publicToilet = try PublicToiletModelHelper().parsePublicToilet(json: data)
                     
-                    publicToilets.append(publicToilet)
+                    self.publicToilets.append(publicToilet)
                 }
                 catch{
                     print(error)
                 }
                 
             }
-            
-            print("PublicToilets\(publicToilets)")
             dispatch_async(dispatch_get_main_queue()) {
-                completion(publicToilets)
+                completion(self.publicToilets)
             }
 
         }
