@@ -183,7 +183,7 @@ extension InformationMapViewController{
         
         for station in data{
             
-            let numberOfRemainingBikesString = String(format: "%02d bike(s) left", station.numberOfRemainingBikes)
+            let numberOfRemainingBikesString = String(format: "%d bike(s) left", station.numberOfRemainingBikes)
             
             let annotation = MyAnnotaion(type: "station",
                                          address: station.address,
