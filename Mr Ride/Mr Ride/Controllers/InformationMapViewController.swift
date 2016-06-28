@@ -62,6 +62,7 @@ extension InformationMapViewController{
         setupUserLocation()
         PublicToiletManager.sharedManager.getPublicToilet(){ data in
             self.addToiletAnnotations(data)
+            self.setupUserLocation()
         }
         
         //location manager delegate
@@ -77,12 +78,19 @@ extension InformationMapViewController{
         self.pickerView.delegate = self
         setupPickerView()
     }
+    
 }
 
 
 
 //MARK: - Custom Annotations
 extension InformationMapViewController{
+    
+//    
+//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        print("didUpdateLocations")
+//    }
+    
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -248,6 +256,10 @@ extension InformationMapViewController{
         
         if let userLocation = self.locationManager.location?.coordinate{
             let newRegion = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpanMake(0.005, 0.005))
+            self.detailMapView.setRegion(newRegion, animated: true)
+        }
+        else{
+            let newRegion = MKCoordinateRegion(center: detailMapView.userLocation.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
             self.detailMapView.setRegion(newRegion, animated: true)
         }
         
