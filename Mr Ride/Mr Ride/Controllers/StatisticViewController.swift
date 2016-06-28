@@ -34,6 +34,8 @@ class StatisticViewController: UIViewController {
     var distance = 0.0
     var location = [CLLocation]()
     
+    var bkColor = UIColor.clearColor()
+    
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +47,7 @@ class StatisticViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        view.backgroundColor = UIColor.clearColor()
+        view.backgroundColor = bkColor
     }
     
     func setupNavigationBar(selectedMode:Mode){
