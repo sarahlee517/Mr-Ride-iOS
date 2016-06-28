@@ -172,7 +172,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         statisticViewController.setupNavigationBar(.backMode)
-        
+        statisticViewController.bkColor = UIColor.mrLightblueColor()
         self.navigationController?.pushViewController(statisticViewController, animated: true)
         
     }
