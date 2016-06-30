@@ -65,6 +65,12 @@ class TrackingViewController: UIViewController{
         timer.invalidate()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        GAManager.sharedManager.createScreenView("view_in_record_creating")
+    }
+    
     private var mapViewController: MapViewController!
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -86,10 +92,13 @@ extension TrackingViewController{
     func stopwatch(){
         
         if !timer.valid{
+            
+            
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             mapViewController.myLocations.removeAll()
             mapViewController.currentLocation = mapViewController.locationManager.location
         }else{
+            
             timer.invalidate()
         }
     }
@@ -144,12 +153,15 @@ extension TrackingViewController{
     
     func clickedCancel(){
         
+        GAManager.sharedManager.addEvent("record_creating", action: "select_cancel_in_record_creating")
         self.delegate?.showHomaPages()
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
     
     func clickedFinish(){
+        GAManager.sharedManager.addEvent("record_creating", action: "select_finish_in_record_creating")
+        
         saveRide()
         
         do {

@@ -20,8 +20,9 @@ class SideBarViewController: UITableViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        GAManager.sharedManager.createScreenView("view_in_menu")
     }
     
     
@@ -108,6 +109,7 @@ class SideBarViewController: UITableViewController {
             appDelegate.homePageContainer.centerViewController = homePageViewNavController
             appDelegate.homePageContainer.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
             
+            GAManager.sharedManager.addEvent("menu", action: "select_home_in_menu")
             
         case 2:
             
@@ -120,6 +122,8 @@ class SideBarViewController: UITableViewController {
             appDelegate.homePageContainer.centerViewController = historyViewNavController
             appDelegate.homePageContainer.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
             
+            GAManager.sharedManager.addEvent("menu", action: "select_history_in_menu")
+            
         default:
             let informationMapViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InformationMapViewController") as! InformationMapViewController
             
@@ -129,6 +133,8 @@ class SideBarViewController: UITableViewController {
             
             appDelegate.homePageContainer.centerViewController = informationMapNavController
             appDelegate.homePageContainer.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+            
+            GAManager.sharedManager.addEvent("menu", action: "select_map_in_menu")
         }
         
         tableView.reloadData()

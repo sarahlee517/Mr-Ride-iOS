@@ -25,6 +25,8 @@ class HomePageViewController: UIViewController, ChartViewDelegate {
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.homePageContainer?.toggleDrawerSide(.Left, animated: true, completion: nil)
         
+        GAManager.sharedManager.addEvent("Home", action: "select_menu_in_home")
+        
     }
     
     @IBAction func letsRideButtonDidClicked(sender: AnyObject) {
@@ -34,6 +36,10 @@ class HomePageViewController: UIViewController, ChartViewDelegate {
         trackingViewController.delegate = self
         trackingViewController.navigationController?.modalPresentationStyle = .OverCurrentContext
         self.navigationController?.presentViewController(trackingNavController, animated: true, completion: nil)
+        
+        
+        // [Google Analysis]
+        GAManager.sharedManager.addEvent("Home", action: "select_ride_in_home")
         
     }
     
@@ -58,6 +64,12 @@ extension HomePageViewController{
         getDataFromCoreData()
         setChart(dateForChart, values: distanceForChart)
     
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    
+        GAManager.sharedManager.createScreenView("view_in_home")
     }
 }
 

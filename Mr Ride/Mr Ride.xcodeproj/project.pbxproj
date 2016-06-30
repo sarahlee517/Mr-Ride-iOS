@@ -30,6 +30,7 @@
 		261330491D091817000C88CC /* HistoryTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 261330481D091817000C88CC /* HistoryTableHeader.xib */; };
 		261B94E91D1BDF1B00BB88A6 /* MyAnnotaion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261B94E81D1BDF1B00BB88A6 /* MyAnnotaion.swift */; };
 		262473C61D17902C004ABB0D /* InformationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262473C51D17902C004ABB0D /* InformationMapViewController.swift */; };
+		262D9C181D23B4E00011E0FD /* TrackingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262D9C171D23B4E00011E0FD /* TrackingManager.swift */; };
 		267386921CF2C8D9000D53E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267386911CF2C8D9000D53E3 /* AppDelegate.swift */; };
 		267386971CF2C8D9000D53E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 267386951CF2C8D9000D53E3 /* Main.storyboard */; };
 		2673869A1CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 267386981CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld */; };
@@ -42,6 +43,7 @@
 		2674531E1D20C1D70028E45B /* YouBikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674531D1D20C1D70028E45B /* YouBikeModel.swift */; };
 		267453201D20C1EB0028E45B /* YouBikeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674531F1D20C1EB0028E45B /* YouBikeManager.swift */; };
 		267453221D20C2070028E45B /* YouBikeManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267453211D20C2070028E45B /* YouBikeManagerHelper.swift */; };
+		268D1FD51D239BAA00DB13E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 268D1FD31D23778600DB13E3 /* GoogleService-Info.plist */; };
 		26C053AA1D1A3BDF00E26E9B /* PublicToiletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C053A91D1A3BDF00E26E9B /* PublicToiletManager.swift */; };
 		26C053AC1D1A3C2B00E26E9B /* PublicToiletModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C053AB1D1A3C2B00E26E9B /* PublicToiletModel.swift */; };
 		26C053AE1D1A3C5B00E26E9B /* PublicToiletModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C053AD1D1A3C5B00E26E9B /* PublicToiletModelHelper.swift */; };
@@ -75,6 +77,7 @@
 		261330481D091817000C88CC /* HistoryTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableHeader.xib; sourceTree = "<group>"; };
 		261B94E81D1BDF1B00BB88A6 /* MyAnnotaion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAnnotaion.swift; sourceTree = "<group>"; };
 		262473C51D17902C004ABB0D /* InformationMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationMapViewController.swift; sourceTree = "<group>"; };
+		262D9C171D23B4E00011E0FD /* TrackingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingManager.swift; sourceTree = "<group>"; };
 		2673868E1CF2C8D9000D53E3 /* Mr Ride.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mr Ride.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		267386911CF2C8D9000D53E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		267386961CF2C8D9000D53E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -90,6 +93,7 @@
 		2674531D1D20C1D70028E45B /* YouBikeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouBikeModel.swift; sourceTree = "<group>"; };
 		2674531F1D20C1EB0028E45B /* YouBikeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouBikeManager.swift; sourceTree = "<group>"; };
 		267453211D20C2070028E45B /* YouBikeManagerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouBikeManagerHelper.swift; sourceTree = "<group>"; };
+		268D1FD31D23778600DB13E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		26C053A91D1A3BDF00E26E9B /* PublicToiletManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicToiletManager.swift; sourceTree = "<group>"; };
 		26C053AB1D1A3C2B00E26E9B /* PublicToiletModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicToiletModel.swift; sourceTree = "<group>"; };
 		26C053AD1D1A3C5B00E26E9B /* PublicToiletModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicToiletModelHelper.swift; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 				2673869B1CF2C8D9000D53E3 /* Assets.xcassets */,
 				2673869D1CF2C8D9000D53E3 /* LaunchScreen.storyboard */,
 				267386A01CF2C8D9000D53E3 /* Info.plist */,
+				268D1FD31D23778600DB13E3 /* GoogleService-Info.plist */,
 				267386981CF2C8D9000D53E3 /* Mr_Ride.xcdatamodeld */,
 			);
 			path = "Mr Ride";
@@ -214,6 +219,7 @@
 		267386BB1CF30309000D53E3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				262D9C171D23B4E00011E0FD /* TrackingManager.swift */,
 				2611F1AB1CF322A30027EB70 /* Roboto_Mono */,
 				267386B91CF30309000D53E3 /* UIColor+MRAdditions.swift */,
 				267386BA1CF30309000D53E3 /* UIFont+MRAdditions.swift */,
@@ -318,6 +324,7 @@
 				2673869C1CF2C8D9000D53E3 /* Assets.xcassets in Resources */,
 				261330491D091817000C88CC /* HistoryTableHeader.xib in Resources */,
 				267386971CF2C8D9000D53E3 /* Main.storyboard in Resources */,
+				268D1FD51D239BAA00DB13E3 /* GoogleService-Info.plist in Resources */,
 				2611F1BD1CF322A30027EB70 /* RobotoMono-Medium.ttf in Resources */,
 				2611F1BF1CF322A30027EB70 /* RobotoMono-Regular.ttf in Resources */,
 				2611F1C01CF322A30027EB70 /* RobotoMono-Thin.ttf in Resources */,
@@ -401,6 +408,7 @@
 				2611F1C31CF329810027EB70 /* HistoryViewController.swift in Sources */,
 				26C053AA1D1A3BDF00E26E9B /* PublicToiletManager.swift in Sources */,
 				26C053AC1D1A3C2B00E26E9B /* PublicToiletModel.swift in Sources */,
+				262D9C181D23B4E00011E0FD /* TrackingManager.swift in Sources */,
 				26CEF5511D0010B900355E8C /* RideHistory.swift in Sources */,
 				267386BC1CF30309000D53E3 /* UIColor+MRAdditions.swift in Sources */,
 				261B94E91D1BDF1B00BB88A6 /* MyAnnotaion.swift in Sources */,

@@ -10,4 +10,6 @@ target 'Mr Ride' do
   pod 'Charts', '~> 2.2.5'
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON', '~> 2.3'
+  pod 'Google/Analytics'
+  pod 'Amplitude-iOS', '~> 3.7.0'
 end
