@@ -21,6 +21,12 @@ class HomePageViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var letsRideButton: UIButton!
     @IBOutlet weak var lineChartView: LineChartView!
     
+    @IBOutlet weak var totalDIstanceLabel: UILabel!
+    
+    @IBOutlet weak var totalCountLabel: UILabel!
+    
+    @IBOutlet weak var avgSpeedLabel: UILabel!
+    
     @IBAction func sideBarButtonDidClicked(sender: AnyObject) {
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.homePageContainer?.toggleDrawerSide(.Left, animated: true, completion: nil)
@@ -41,10 +47,12 @@ class HomePageViewController: UIViewController, ChartViewDelegate {
     
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
-    var distanceForChart = [Double]()
-    var dateForChart = [String]()
+    var distanceArray = [Double]()
+    var dateArray = [String]()
+    var timeArray = [Int]()
+    
+    
 }
-
 
 
 
@@ -58,8 +66,8 @@ extension HomePageViewController{
         setupNavigationBar()
         setupButton()
         getDataFromCoreData()
-        setChart(dateForChart, values: distanceForChart)
-    
+        setChart(dateArray, values: distanceArray)
+        setupLabels()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -82,17 +90,19 @@ extension HomePageViewController{
             for result in results {
                 
                 if let distance = result.distance as? Double,
+                    let time = result.totalTime as? Int,
                     let date = result.date{
-                    distanceForChart.append(distance)
-                    dateForChart.append(dateString(date))
+                    distanceArray.append(distance)
+                    dateArray.append(dateString(date))
+                    timeArray.append(time)
                 }
             }
         }catch{
             fatalError("Failed to fetch data: \(error)")
         }
         
-        distanceForChart = distanceForChart.reverse()
-        dateForChart = dateForChart.reverse()
+        distanceArray = distanceArray.reverse()
+        dateArray = dateArray.reverse()
     }
     
     func dateString(date: NSDate) -> String{
@@ -192,6 +202,15 @@ extension HomePageViewController{
         }
         letsRideButton.hidden = true
     }
+    
+    func setupLabels(){
+        totalCountLabel.text = String(format: "%d times", distanceArray.count)
+        let distanceSum = distanceArray.reduce(0, combine: +)
+        let timeSum = timeArray.reduce(0, combine: +)
+        totalDIstanceLabel.text = String(format: "%.1f km", distanceSum/1000)
+        let avgSpeedKmh = (distanceSum / Double(timeSum))*360
+        avgSpeedLabel.text = String(format: "%.1f km / h", avgSpeedKmh)
+    }
 }
 
 
@@ -200,10 +219,10 @@ extension HomePageViewController{
 extension HomePageViewController: DismissDelegate{
     func showHomaPages(){
         
-        distanceForChart.removeAll()
-        dateForChart.removeAll()
+        distanceArray.removeAll()
+        dateArray.removeAll()
         getDataFromCoreData()
-        setChart(dateForChart, values: distanceForChart)
+        setChart(dateArray, values: distanceArray)
         for subview in view.subviews where subview is UILabel{
             subview.hidden = false
         }

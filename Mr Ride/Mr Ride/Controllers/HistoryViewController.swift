@@ -13,24 +13,79 @@ import MMDrawerController
 import Charts
 
 
-
-
 class HistoryViewController: UIViewController {
-    let gradientLayer = CAGradientLayer()
     
     @IBOutlet weak var lineChart: LineChartView!
     @IBOutlet weak var gradientView: UIView!
-    
     @IBOutlet weak var tableView: UITableView!
+    
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
     let ride = [RideData]()
     var myCoordinate = [MyLocation]()
 
     var distanceForChart = [Double]()
     var dateForChart = [String]()
     
+    let gradientLayer = CAGradientLayer()
     
-    //MARK: - View Lifecycle
+    // MARK: - FetchedResultsController
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        
+        // Initialize Fetch Request
+        let fetchRequest = NSFetchRequest(entityName: "RideHistory")
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        // Initialize Fetched Results Controller
+        let fetchedResultsController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: self.moc,
+            sectionNameKeyPath: "getMonth",
+            cacheName: nil
+        )
+        
+        // Configure Fetched Results Controller
+        fetchedResultsController.delegate = self
+        
+        return fetchedResultsController
+    }()
+}
+
+// MARK: Fetched Results Controller Delegate Methods
+extension HistoryViewController: NSFetchedResultsControllerDelegate{
+
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.endUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch (type) {
+        case .Insert:
+            if let indexPath = newIndexPath {
+                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }
+        default: break
+        }
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        switch type {
+        case .Insert:
+            tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        default: break
+        }
+    }
+}
+
+
+
+//MARK: - Lifecycle
+extension HistoryViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,63 +119,8 @@ class HistoryViewController: UIViewController {
         super.viewWillAppear(animated)
         TrackingManager.sharedManager.createTrackingScreenView("view_in_history")
     }
-    
-    // MARK: - FetchedResultsController
-    lazy var fetchedResultsController: NSFetchedResultsController = {
-        
-        // Initialize Fetch Request
-        let fetchRequest = NSFetchRequest(entityName: "RideHistory")
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        
-        
-        // Initialize Fetched Results Controller
-        let fetchedResultsController = NSFetchedResultsController(
-            fetchRequest: fetchRequest,
-            managedObjectContext: self.moc,
-            sectionNameKeyPath: "getMonth",
-            cacheName: nil
-        )
-        
-        // Configure Fetched Results Controller
-        fetchedResultsController.delegate = self
-        
-        return fetchedResultsController
-    }()
-    
-
 }
 
-// MARK: Fetched Results Controller Delegate Methods
-extension HistoryViewController: NSFetchedResultsControllerDelegate{
-
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        tableView.endUpdates()
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        switch (type) {
-        case .Insert:
-            if let indexPath = newIndexPath {
-                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            }
-        default: break
-        }
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-        switch type {
-        case .Insert:
-            tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        default: break
-        }
-    }
-}
 
 
 //MARK: - Implement TableView
@@ -320,10 +320,6 @@ extension HistoryViewController: ChartViewDelegate{
 
 
 }
-
-
-
-
 
 
 

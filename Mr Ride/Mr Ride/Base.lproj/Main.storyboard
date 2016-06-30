@@ -150,9 +150,12 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="avgSpeedLabel" destination="Vfk-ry-ZIU" id="PgD-1W-kTL"/>
                         <outlet property="letsRideButton" destination="eYJ-Xo-AGN" id="xKL-TY-gPS"/>
                         <outlet property="letsRideLabel" destination="B5Q-BF-vzK" id="zFA-Bj-KnC"/>
                         <outlet property="lineChartView" destination="3ty-i4-Xr9" id="Gkq-JY-tT9"/>
+                        <outlet property="totalCountLabel" destination="noU-r7-kai" id="fkl-NS-cdL"/>
+                        <outlet property="totalDIstanceLabel" destination="iIe-KG-i2c" id="cdf-NG-Yy7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
