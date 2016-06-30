@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        // [Google Analysis]
+        // [Google Analytics]
         // Configure tracker from GoogleService-Info.plist.
         var configureError:NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
         gai.logger.logLevel = GAILogLevel.Verbose  // remove before app release
         
+        // [Amplitude]
+        Amplitude.instance().initializeApiKey("f490afa3fec9acbf774012cf8ae14963")
+        
         
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -40,8 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sideBarPageViewController = mainStoryboard.instantiateViewControllerWithIdentifier("SideBarViewController")
 
         let homePageNav = UINavigationController(rootViewController: homePageViewController)
-//        let sideBarNav = UINavigationController(rootViewController: sideBarPageViewController)
-//        sideBarNav.navigationBar.translucent = false
+
         // create instance of MMDrawerController
         homePageContainer = MMDrawerController(centerViewController: homePageNav, leftDrawerViewController: sideBarPageViewController)
         homePageContainer.maximumLeftDrawerWidth = Common.screenWidth * 0.70
@@ -56,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     var shouldSupportAllOrientation = false
+    
     func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
         if (shouldSupportAllOrientation == true){
             return UIInterfaceOrientationMask.All

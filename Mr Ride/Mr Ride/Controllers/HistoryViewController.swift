@@ -60,7 +60,11 @@ class HistoryViewController: UIViewController {
         fetchDataForChart()
     }
     
-    //
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        TrackingManager.sharedManager.createTrackingScreenView("view_in_history")
+    }
+    
     // MARK: - FetchedResultsController
     lazy var fetchedResultsController: NSFetchedResultsController = {
         
@@ -158,6 +162,8 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        TrackingManager.sharedManager.createTrackingEvent("history", action: "select_record_result_in_history")
         
         let statisticViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StatisticViewController") as! StatisticViewController
         

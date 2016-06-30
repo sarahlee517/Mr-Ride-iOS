@@ -10,7 +10,6 @@ import UIKit
 import MMDrawerController
 import MapKit
 
-//todo: 3. home page with real data, 4. connect crash analysis services
 
 class InformationMapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
     @IBOutlet weak var areaLabel: UIView!
@@ -26,23 +25,25 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
     @IBOutlet weak var pickerViewToolBar: UIView!
     
     @IBAction func pickerButton(sender: AnyObject) {
+        TrackingManager.sharedManager.createTrackingScreenView("view_in_look_for_picker")
+        
         ButtonTitleLabel.userInteractionEnabled = false
         pickerView.hidden = false
         pickerViewToolBar.hidden = false
     }
     
     @IBAction func pickerCancelButton(sender: AnyObject) {
+        TrackingManager.sharedManager.createTrackingEvent("look_for_picker", action: "select_cancel_in_look_for_picker")
         
         self.pickerView.hidden = true
         self.pickerViewToolBar.hidden = true
-        
     }
     
     @IBAction func pickerViewDoneButton(sender: AnyObject) {
+        TrackingManager.sharedManager.createTrackingEvent("look_for_picker", action: "select_done_in_look_for_picker")
         
         self.pickerView.hidden = true
         self.pickerViewToolBar.hidden = true
-        
     }
     
     let locationManager = CLLocationManager()
@@ -79,18 +80,17 @@ extension InformationMapViewController{
         setupPickerView()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        TrackingManager.sharedManager.createTrackingScreenView("view_in_toilet_map")
+    }
+    
 }
 
 
 
 //MARK: - Custom Annotations
 extension InformationMapViewController{
-    
-//    
-//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        print("didUpdateLocations")
-//    }
-    
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -109,22 +109,9 @@ extension InformationMapViewController{
             }
         }
         
+        let customAnnitationView = customAnnotationView(imageName)
         
-        let annotationView = MKAnnotationView()
-        annotationView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        annotationView.layer.cornerRadius = annotationView.frame.width / 2
-        annotationView.backgroundColor = UIColor.whiteColor()
-        annotationView.layer.shadowColor = UIColor.blackColor().CGColor
-        annotationView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        annotationView.layer.shadowOpacity = 0.5
-        annotationView.canShowCallout = true
-        
-        let toiletView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        toiletView.center = CGPointMake(annotationView.frame.width / 2, annotationView.frame.height / 2 )
-        toiletView.backgroundColor = UIColor(patternImage: UIImage(named: imageName)!)
-        annotationView.addSubview(toiletView)
-        
-        return annotationView
+        return customAnnitationView
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
@@ -141,10 +128,12 @@ extension InformationMapViewController{
         if let annotation = view.annotation as? MyAnnotaion{
             switch annotation.type! {
             case "toilet":
+                TrackingManager.sharedManager.createTrackingScreenView("view_in_toilet_map")
                 titleLabel.text = annotation.title
                 AddressLabel.text = annotation.address
                 categoryLabel.text = annotation.category
             default:
+                TrackingManager.sharedManager.createTrackingScreenView("view_in_ubike_station_map")
                 titleLabel.text = annotation.title
                 AddressLabel.text = annotation.address
                 categoryLabel.text = annotation.category
@@ -183,7 +172,6 @@ extension InformationMapViewController{
         
     }
     
-    
     func addStationAnnotations(data: [YouBikeModel]){
         
         detailMapView.removeAnnotations(detailMapView.annotations)
@@ -206,8 +194,28 @@ extension InformationMapViewController{
         detailMapView.addAnnotations(annotations)
         
     }
+    
+    func customAnnotationView(imageName: String) -> MKAnnotationView{
+        
+        let annotationView = MKAnnotationView()
+        annotationView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        annotationView.layer.cornerRadius = annotationView.frame.width / 2
+        annotationView.backgroundColor = UIColor.whiteColor()
+        annotationView.layer.shadowColor = UIColor.blackColor().CGColor
+        annotationView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        annotationView.layer.shadowOpacity = 0.5
+        annotationView.canShowCallout = true
+        
+        let toiletView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        toiletView.center = CGPointMake(annotationView.frame.width / 2, annotationView.frame.height / 2 )
+        toiletView.backgroundColor = UIColor(patternImage: UIImage(named: imageName)!)
+        annotationView.addSubview(toiletView)
+        
+        return annotationView
+    }
 
 }
+
 
 
 
@@ -229,6 +237,7 @@ extension InformationMapViewController: UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
         switch row {
         case 0:
             ButtonTitleLabel.text = pickerData[row]

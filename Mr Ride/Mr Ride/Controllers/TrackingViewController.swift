@@ -68,7 +68,7 @@ class TrackingViewController: UIViewController{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        GAManager.sharedManager.createScreenView("view_in_record_creating")
+        TrackingManager.sharedManager.createTrackingScreenView("view_in_record_creating")
     }
     
     private var mapViewController: MapViewController!
@@ -153,14 +153,16 @@ extension TrackingViewController{
     
     func clickedCancel(){
         
-        GAManager.sharedManager.addEvent("record_creating", action: "select_cancel_in_record_creating")
+        TrackingManager.sharedManager.createTrackingEvent("record_creating", action: "select_cancel_in_record_creating")
+        
         self.delegate?.showHomaPages()
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
     
     func clickedFinish(){
-        GAManager.sharedManager.addEvent("record_creating", action: "select_finish_in_record_creating")
+
+        TrackingManager.sharedManager.createTrackingEvent("record_creating", action: "select_finish_in_record_creating")
         
         saveRide()
         
@@ -174,7 +176,7 @@ extension TrackingViewController{
         statisticViewController.navigationController?.modalPresentationStyle = .OverCurrentContext
         statisticViewController.delegate = delegate
         
-//
+
         statisticViewController.setupNavigationBar(Mode.closeMode)
         
         statisticViewController.distance = distance
@@ -182,8 +184,6 @@ extension TrackingViewController{
         statisticViewController.location = location
         
         mapViewController.locationManager.stopUpdatingLocation()
-        
-//        statisticViewController.view.backgroundColor = UIColor.clearColor()
         
         self.navigationController?.pushViewController(statisticViewController, animated: true)
     }

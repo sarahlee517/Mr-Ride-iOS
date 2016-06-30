@@ -220,9 +220,9 @@
 			isa = PBXGroup;
 			children = (
 				262D9C171D23B4E00011E0FD /* TrackingManager.swift */,
-				2611F1AB1CF322A30027EB70 /* Roboto_Mono */,
 				267386B91CF30309000D53E3 /* UIColor+MRAdditions.swift */,
 				267386BA1CF30309000D53E3 /* UIFont+MRAdditions.swift */,
+				2611F1AB1CF322A30027EB70 /* Roboto_Mono */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";

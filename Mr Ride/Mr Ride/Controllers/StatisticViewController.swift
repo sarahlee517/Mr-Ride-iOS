@@ -45,6 +45,11 @@ class StatisticViewController: UIViewController {
         setupMap(location)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        TrackingManager.sharedManager.createTrackingScreenView("view_in_record_result")
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         view.backgroundColor = bkColor
@@ -61,6 +66,8 @@ class StatisticViewController: UIViewController {
     }
     
     func clickedClose(){
+        TrackingManager.sharedManager.createTrackingEvent("record_result", action: "select_close_in_record_result")
+        
         self.delegate?.showHomaPages()
         self.dismissViewControllerAnimated(true, completion: nil)
         
