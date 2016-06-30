@@ -4,6 +4,9 @@ PODS:
   - Charts (2.2.5):
     - Charts/Core (= 2.2.5)
   - Charts/Core (2.2.5)
+  - Crashlytics (3.7.2):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.7)
   - FirebaseAnalytics (3.2.0):
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
@@ -39,6 +42,8 @@ DEPENDENCIES:
   - Alamofire (~> 3.4)
   - Amplitude-iOS (~> 3.7.0)
   - Charts (~> 2.2.5)
+  - Crashlytics
+  - Fabric
   - Google/Analytics
   - MMDrawerController (~> 0.6)
   - SwiftyJSON (~> 2.3)
@@ -47,6 +52,8 @@ SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   Amplitude-iOS: 4c49e5b00ebe5bf3800f219aaba8a55cf667c6c9
   Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
+  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   FirebaseAnalytics: 6f75b04e6bfb8e0b6e9ef298e04c24eea3b13863
   FirebaseInstanceID: d014d574053a2fe84478f12f7bae96979e7051bb
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
@@ -57,6 +64,6 @@ SPEC CHECKSUMS:
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: b58188c0db43c00c589384edc49e222943ae38f9
+PODFILE CHECKSUM: bb993c9c0c9bbae38a4171774ccf4d481e878a38
 
 COCOAPODS: 1.0.0.rc.1

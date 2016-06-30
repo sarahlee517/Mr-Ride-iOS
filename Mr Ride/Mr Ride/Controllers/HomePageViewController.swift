@@ -209,7 +209,10 @@ extension HomePageViewController{
         let timeSum = timeArray.reduce(0, combine: +)
         totalDIstanceLabel.text = String(format: "%.1f km", distanceSum/1000)
         let avgSpeedKmh = (distanceSum / Double(timeSum))*360
-        avgSpeedLabel.text = String(format: "%.1f km / h", avgSpeedKmh)
+        if avgSpeedKmh > 0 {
+            avgSpeedLabel.text = String(format: "%.1f km / h", avgSpeedKmh)
+        }else{ avgSpeedLabel.text = "0 km / h" }
+        
     }
 }
 

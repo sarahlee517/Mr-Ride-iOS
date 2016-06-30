@@ -10,6 +10,9 @@ import UIKit
 import CoreData
 import MMDrawerController
 import Amplitude_iOS
+import Fabric
+import Crashlytics
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var homePageContainer: MMDrawerController!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        // [Crashlytics]
+        Fabric.with([Crashlytics.self])
         
         // [Google Analytics]
         // Configure tracker from GoogleService-Info.plist.

@@ -30,6 +30,7 @@ class TrackingViewController: UIViewController{
         showFinish()
         stopwatch()
     }
+    @IBOutlet weak var pauseShapeView: UIView!
     
     weak var delegate: DismissDelegate?
     
@@ -52,12 +53,10 @@ class TrackingViewController: UIViewController{
     //MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
-        setupRecordButton()
-        setupRecordLabel()
-        setupGradientView()
+        setupUI()
         mapViewController.myLocations.removeAll()
         mapViewController.showUserLocation()
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -92,13 +91,12 @@ extension TrackingViewController{
     func stopwatch(){
         
         if !timer.valid{
-            
-            
+            startButtonStyle()
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             mapViewController.myLocations.removeAll()
             mapViewController.currentLocation = mapViewController.locationManager.location
         }else{
-            
+            pauseButtonStyle()
             timer.invalidate()
         }
     }
@@ -188,6 +186,13 @@ extension TrackingViewController{
         self.navigationController?.pushViewController(statisticViewController, animated: true)
     }
     
+    func setupUI(){
+        setupNavigationBar()
+        setupRecordButton()
+        setupRecordLabel()
+        setupGradientView()
+    }
+    
     
     func setupRecordButton(){
         recordButton.layer.cornerRadius = recordButton.frame.width / 2
@@ -195,7 +200,8 @@ extension TrackingViewController{
         buttonRingView.layer.cornerRadius = buttonRingView.frame.width / 2
         buttonRingView.layer.borderWidth = 4
         buttonRingView.layer.borderColor = UIColor.whiteColor().CGColor
-        
+        pauseShapeView.hidden = true
+        pauseShapeView.userInteractionEnabled = false
     }
     
     func setupRecordLabel(){
@@ -243,6 +249,16 @@ extension TrackingViewController{
         date = dateFormatter.stringFromDate(currentDate)
         self.navigationItem.title = date
         
+    }
+    
+    func startButtonStyle(){
+        pauseShapeView.hidden = false
+        recordButton.backgroundColor = UIColor.clearColor()
+    }
+    
+    func pauseButtonStyle(){
+        pauseShapeView.hidden = true
+        recordButton.backgroundColor = UIColor.redColor()
     }
     
 }
