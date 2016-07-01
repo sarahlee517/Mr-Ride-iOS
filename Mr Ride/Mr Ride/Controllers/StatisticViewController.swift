@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import MapKit
+import Social
 
 enum Mode{
     case closeMode
@@ -19,11 +20,14 @@ enum Mode{
 
 class StatisticViewController: UIViewController {
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var gradient: UIView!
     @IBOutlet weak var recordTimeLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var avgSpeedLabel: UILabel!
     @IBOutlet weak var caloriesLabel: UILabel!
+    @IBOutlet weak var fbButton: UIButton!
+    @IBOutlet weak var fbImage: UIImageView!
     
     weak var delegate: DismissDelegate?
     
@@ -42,6 +46,7 @@ class StatisticViewController: UIViewController {
         setupLabel(totalTime: totalTime, distance: distance)
         setupGradientView()
         setupNavigationBar()
+        setupButton()
         setupMap(location)
     }
     
@@ -124,6 +129,17 @@ extension StatisticViewController{
         
     }
     
+    func setupButton(){
+        
+        fbImage.image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        fbImage.tintColor = UIColor.whiteColor()
+        fbButton.layer.borderWidth = 2.0
+        fbButton.layer.borderColor = UIColor.whiteColor().CGColor
+        fbButton.layer.cornerRadius = 10.0
+        fbButton.layer.masksToBounds = true
+        fbButton.titleLabel?.tintColor = UIColor.whiteColor()
+        fbImage.userInteractionEnabled = false
+    }
     
     func setupGradientView(){
         
@@ -156,10 +172,28 @@ extension StatisticViewController{
         date = dateFormatter.stringFromDate(currentDate)
         self.navigationItem.title = date
         
+    }   
+}
+
+
+//MARK: - FB Share Button
+extension StatisticViewController{
+
+    @IBAction func faShareButton(sender: AnyObject) {
+        
+        guard let navHeight = self.navigationController?.navigationBar.frame.height else{ return }
+        let screenshotSize = CGSize(width: view.bounds.width , height: containerView.frame.origin.y + containerView.frame.height + 10)
+        UIGraphicsBeginImageContext(screenshotSize)
+        self.view.drawViewHierarchyInRect(CGRectMake(0,-navHeight,view.frame.size.width,view.frame.size.height), afterScreenUpdates: true)
+        self.view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let screenShot = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let facebookSharingController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        facebookSharingController.addImage(screenShot)
+        self.presentViewController(facebookSharingController, animated: true, completion: nil)
     }
-    
-    
-    
+
 }
 
 

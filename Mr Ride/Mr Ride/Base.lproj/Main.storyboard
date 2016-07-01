@@ -490,6 +490,27 @@
                                     <segue destination="mMM-Jn-sDV" kind="embed" identifier="EmbedSegue" id="GxV-2y-r8m"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JTP-d7-yyn">
+                                <rect key="frame" x="105" y="531" width="166" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="166" id="jgr-iK-CUi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="    Share">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="faShareButton:" destination="Tcl-Cr-maF" eventType="touchUpInside" id="ist-so-Iqd"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Facebook" translatesAutoresizingMaskIntoConstraints="NO" id="Kw7-v3-Vla">
+                                <rect key="frame" x="125" y="536" width="30" height="30"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ESS-go-sbK"/>
+                                    <constraint firstAttribute="width" constant="30" id="QKh-sM-JrE"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.38823530077934265" green="0.84313726425170898" blue="0.96470588445663452" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
@@ -499,6 +520,7 @@
                             <constraint firstItem="n0c-wc-Dc2" firstAttribute="centerX" secondItem="SrE-hG-gsy" secondAttribute="centerX" id="2tg-yz-ScU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Z4w-ZW-gCG" secondAttribute="trailing" constant="36" id="4p4-3T-zQx"/>
                             <constraint firstItem="gBf-lX-MDT" firstAttribute="top" secondItem="guv-1g-AtK" secondAttribute="bottom" id="5l3-gO-nEh"/>
+                            <constraint firstItem="JTP-d7-yyn" firstAttribute="centerX" secondItem="n0c-wc-Dc2" secondAttribute="centerX" id="8Jn-30-KCH"/>
                             <constraint firstAttribute="trailing" secondItem="c11-b0-qpD" secondAttribute="trailing" constant="38" id="9K2-ej-d6e"/>
                             <constraint firstItem="IWW-TA-8oa" firstAttribute="leading" secondItem="SrE-hG-gsy" secondAttribute="leading" constant="38" id="AUP-be-Ifj"/>
                             <constraint firstAttribute="trailing" secondItem="fQQ-yO-Cvf" secondAttribute="trailing" constant="38" id="D7D-aL-085"/>
@@ -508,6 +530,7 @@
                             <constraint firstItem="ga5-8o-wYI" firstAttribute="leading" secondItem="SrE-hG-gsy" secondAttribute="leading" constant="38" id="LpY-28-HdO"/>
                             <constraint firstItem="Wsx-La-Fsa" firstAttribute="leading" secondItem="SrE-hG-gsy" secondAttribute="leading" constant="15" id="MKV-PZ-Jzn"/>
                             <constraint firstAttribute="trailing" secondItem="1G4-DJ-JHn" secondAttribute="trailing" constant="38" id="NRY-Kj-UgN"/>
+                            <constraint firstItem="Kw7-v3-Vla" firstAttribute="centerY" secondItem="JTP-d7-yyn" secondAttribute="centerY" id="OFS-s6-0Q1"/>
                             <constraint firstItem="Wsx-La-Fsa" firstAttribute="top" secondItem="RPO-rt-5vi" secondAttribute="bottom" constant="30" id="Qmx-RH-Jhr"/>
                             <constraint firstItem="lsU-Fh-dVY" firstAttribute="leading" secondItem="SrE-hG-gsy" secondAttribute="leading" constant="38" id="Rru-x8-bYF"/>
                             <constraint firstItem="c11-b0-qpD" firstAttribute="top" secondItem="fQQ-yO-Cvf" secondAttribute="bottom" constant="15" id="S0m-fJ-EgA"/>
@@ -521,10 +544,12 @@
                             <constraint firstItem="n0c-wc-Dc2" firstAttribute="width" secondItem="SrE-hG-gsy" secondAttribute="width" id="nji-xb-rU8"/>
                             <constraint firstItem="IWW-TA-8oa" firstAttribute="top" secondItem="lsU-Fh-dVY" secondAttribute="bottom" constant="15" id="oqc-7H-SVd"/>
                             <constraint firstItem="RPO-rt-5vi" firstAttribute="top" secondItem="1G4-DJ-JHn" secondAttribute="bottom" constant="15" id="rj0-yI-4hQ"/>
+                            <constraint firstItem="JTP-d7-yyn" firstAttribute="top" secondItem="Wsx-La-Fsa" secondAttribute="bottom" constant="30" id="sQM-ge-J1S"/>
                             <constraint firstItem="fQQ-yO-Cvf" firstAttribute="leading" secondItem="SrE-hG-gsy" secondAttribute="leading" constant="38" id="sjG-ap-yFf"/>
                             <constraint firstAttribute="trailing" secondItem="IWW-TA-8oa" secondAttribute="trailing" constant="38" id="tKo-Lt-qMp"/>
                             <constraint firstAttribute="trailing" secondItem="lsU-Fh-dVY" secondAttribute="trailing" constant="38" id="uzD-RA-lZi"/>
                             <constraint firstItem="n0c-wc-Dc2" firstAttribute="height" secondItem="SrE-hG-gsy" secondAttribute="height" id="wxZ-Ey-lMb"/>
+                            <constraint firstItem="JTP-d7-yyn" firstAttribute="leading" secondItem="Kw7-v3-Vla" secondAttribute="trailing" constant="-50" id="yla-LG-kKE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="T6c-S0-kjy"/>
@@ -532,7 +557,10 @@
                     <connections>
                         <outlet property="avgSpeedLabel" destination="lsU-Fh-dVY" id="wt6-D2-luC"/>
                         <outlet property="caloriesLabel" destination="1G4-DJ-JHn" id="h29-Fk-7nZ"/>
+                        <outlet property="containerView" destination="Wsx-La-Fsa" id="n5i-fr-D4K"/>
                         <outlet property="distanceLabel" destination="fQQ-yO-Cvf" id="3c2-is-qKT"/>
+                        <outlet property="fbButton" destination="JTP-d7-yyn" id="PZH-xN-ork"/>
+                        <outlet property="fbImage" destination="Kw7-v3-Vla" id="WuT-6V-LGb"/>
                         <outlet property="gradient" destination="n0c-wc-Dc2" id="3cg-n0-fZy"/>
                         <outlet property="recordTimeLabel" destination="RPO-rt-5vi" id="bDp-0T-yog"/>
                     </connections>
@@ -816,7 +844,7 @@
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="mMM-Jn-sDV" customClass="MapViewController" customModule="Mr_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="xai-LV-zJT">
-                        <rect key="frame" x="0.0" y="0.0" width="340" height="205"/>
+                        <rect key="frame" x="0.0" y="0.0" width="345" height="200"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </mapView>
                     <connections>
@@ -829,12 +857,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Facebook" width="512" height="512"/>
         <image name="icon-arrow-down" width="14" height="14"/>
         <image name="icon-menu" width="30" height="30"/>
         <image name="image-history-background" width="1536" height="1021"/>
         <image name="image-medal" width="55" height="85"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eX9-CC-eD2"/>
+        <segue reference="GxV-2y-r8m"/>
     </inferredMetricsTieBreakers>
 </document>
