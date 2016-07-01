@@ -17,7 +17,8 @@ class InformationMapViewController: UIViewController, CLLocationManagerDelegate,
     @IBOutlet weak var ButtonTitleLabel: UILabel!
     @IBOutlet weak var AddressLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var minsLabel: UIView!
+    @IBOutlet weak var minsLabel: UILabel!
+
     @IBOutlet weak var detailMapView: MKMapView!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var dashboard: UIView!
@@ -132,11 +133,13 @@ extension InformationMapViewController{
                 titleLabel.text = annotation.title
                 AddressLabel.text = annotation.address
                 categoryLabel.text = annotation.category
+                getTravelTime(annotation.coordinate, label: minsLabel)
             default:
                 TrackingManager.sharedManager.createTrackingScreenView("view_in_ubike_station_map")
                 titleLabel.text = annotation.title
                 AddressLabel.text = annotation.address
                 categoryLabel.text = annotation.category
+                getTravelTime(annotation.coordinate, label: minsLabel)
             }
             
         }
@@ -162,7 +165,8 @@ extension InformationMapViewController{
             
             let annotation = MyAnnotaion(type: "toilet",
                                          address: toilet.address,
-                                         category: toilet.Category)
+                                         category: toilet.Category,
+                                         travelTime: "")
             annotation.title = toilet.name
             annotation.coordinate = toilet.coordinate
             annotations.append(annotation)
@@ -183,7 +187,8 @@ extension InformationMapViewController{
             
             let annotation = MyAnnotaion(type: "station",
                                          address: station.address,
-                                         category: station.district)
+                                         category: station.district,
+                                         travelTime:  "")
             annotation.title = station.name
             annotation.subtitle = String(station.numberOfRemainingBikes)
             annotation.coordinate = station.coordinate
@@ -213,7 +218,29 @@ extension InformationMapViewController{
         
         return annotationView
     }
-
+    
+    func getTravelTime(annotationLocation: CLLocationCoordinate2D, label: UILabel){
+        print("getTravelTime")
+        var travelTime = ""
+        
+        let request = MKDirectionsRequest()
+        request.source = MKMapItem.mapItemForCurrentLocation()
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: annotationLocation, addressDictionary: nil))
+        request.transportType = .Any
+        
+        let directions = MKDirections(request: request)
+        directions.calculateDirectionsWithCompletionHandler{
+            (response, error) -> Void in
+            if let routes = response?.routes where response?.routes.count > 0 && error == nil{
+                print("test")
+                let route : MKRoute = routes[0]
+                print("route.expectedTravelTime\(route.expectedTravelTime)")
+                travelTime = String(format: "%.1f mins", route.expectedTravelTime/60)
+                label.text = travelTime
+            }
+        }
+    }
+    
 }
 
 

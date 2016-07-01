@@ -674,7 +674,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000 mins" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3G-ru-zNb" userLabel="Min">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="5 mins" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3G-ru-zNb" userLabel="Min">
                                         <rect key="frame" x="261" y="20" width="50" height="12"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -782,7 +782,7 @@
                         <outlet property="categoryLabel" destination="tHZ-oj-hw9" id="3fi-tm-aUh"/>
                         <outlet property="dashboard" destination="jLG-rE-DPO" id="hVv-Tf-B5o"/>
                         <outlet property="detailMapView" destination="QE3-IR-fpl" id="73N-m8-H51"/>
-                        <outlet property="minsLabel" destination="jLG-rE-DPO" id="E59-zp-w12"/>
+                        <outlet property="minsLabel" destination="c3G-ru-zNb" id="nzD-wg-arx"/>
                         <outlet property="pickerView" destination="heg-jA-E4I" id="J62-Ag-IXV"/>
                         <outlet property="pickerViewToolBar" destination="YUK-7Q-4eI" id="ZGf-IF-V3X"/>
                         <outlet property="titleLabel" destination="m7k-RC-lXe" id="dmE-9U-73U"/>

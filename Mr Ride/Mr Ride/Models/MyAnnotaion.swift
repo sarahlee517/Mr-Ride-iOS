@@ -14,11 +14,13 @@ class MyAnnotaion: MKPointAnnotation{
     var type: String?
     var address: String?
     var category: String?
+    var travelTime: String?
     
-    init(type: String, address: String, category: String){
+    init(type: String, address: String, category: String, travelTime:String){
         self.type = type
         self.address = address
         self.category = category
+        self.travelTime = travelTime
     }
     
 }
