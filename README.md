@@ -37,7 +37,7 @@
 ![](http://i.imgur.com/fdDnF9O.png)
 ![](http://i.imgur.com/BK1b4bf.png)
 ![](http://i.imgur.com/u1Ylhuy.png)
-![](http://i.imgur.com/ZHmFmQj.png)
+![](http://i.imgur.com/ZSTStBx.png)
 
 # Requirement
   * iOS 9.0+
