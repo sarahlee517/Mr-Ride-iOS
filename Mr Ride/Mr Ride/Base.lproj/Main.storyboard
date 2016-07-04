@@ -496,7 +496,7 @@
                                     <constraint firstAttribute="width" constant="166" id="jgr-iK-CUi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="    Share">
+                                <state key="normal" title="        Share">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -504,7 +504,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Facebook" translatesAutoresizingMaskIntoConstraints="NO" id="Kw7-v3-Vla">
-                                <rect key="frame" x="125" y="536" width="30" height="30"/>
+                                <rect key="frame" x="129" y="536" width="30" height="30"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ESS-go-sbK"/>
@@ -549,7 +549,7 @@
                             <constraint firstAttribute="trailing" secondItem="IWW-TA-8oa" secondAttribute="trailing" constant="38" id="tKo-Lt-qMp"/>
                             <constraint firstAttribute="trailing" secondItem="lsU-Fh-dVY" secondAttribute="trailing" constant="38" id="uzD-RA-lZi"/>
                             <constraint firstItem="n0c-wc-Dc2" firstAttribute="height" secondItem="SrE-hG-gsy" secondAttribute="height" id="wxZ-Ey-lMb"/>
-                            <constraint firstItem="JTP-d7-yyn" firstAttribute="leading" secondItem="Kw7-v3-Vla" secondAttribute="trailing" constant="-50" id="yla-LG-kKE"/>
+                            <constraint firstItem="JTP-d7-yyn" firstAttribute="leading" secondItem="Kw7-v3-Vla" secondAttribute="trailing" constant="-54" id="yla-LG-kKE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="T6c-S0-kjy"/>
