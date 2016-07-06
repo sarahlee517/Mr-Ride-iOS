@@ -1,5 +1,5 @@
 ## Mr.Ride iOS
-> Mr. Ride app is a a user friendly application for bikers tracking their ridding time, distance, route and calories burn in realtime. It also keep detailed records of each ride to let bikers monitor progress over time and share with friends on Facebook. Bikers can also find public toilets and YouBike stations nearby easily in Map page.
+> Mr. Ride is a a user friendly application for bikers tracking their ridding time, distance, route and calories burn in real-time. It also keep detailed records of each ride to let bikers monitor progress over time and share with friends on Facebook. Bikers can also find public toilets and YouBike stations nearby easily in Map page.
 
 # Feature
   * Home
