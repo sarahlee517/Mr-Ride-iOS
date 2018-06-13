@@ -46,5 +46,4 @@
 
 # Contacts
 Sarah Lee
-<br>https://tw.linkedin.com/in/sarah-lee-17846883
 <br>sarahlee517@gmail.com
